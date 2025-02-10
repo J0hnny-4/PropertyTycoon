@@ -1,11 +1,49 @@
-public class Ownable : Square
+public abstract class Ownable : Square
 {
-    public int cost { get; }
-    public bool mortgaged { get; private set; } = false;
-    private Player owner = null;
+    private int cost { get; }
+    private bool mortgaged { get; set; } = false;
+    protected Player owner { get; set; } = null;
 
-    public Ownable(string name, int cost) : base(name)
+    
+    protected Ownable(string name, int cost) : base(name)
     {
         this.cost = cost;
+    }
+    
+    private void buy()
+    {
+        //TODO menu options
+        if(true)
+        {
+            GameState.currentPlayer.payMoney(cost);
+            owner = GameState.currentPlayer;
+            GameState.currentPlayer.addProperty(this);
+        }
+        else auction();
+    }
+    private void auction()
+    {
+        //TODO Auction should return the player who won the auction
+        Player winner = GameState.currentPlayer;
+        owner = winner;
+        winner.addProperty(this);
+    }
+    public override void playerLands()
+    {
+        if (owner == null)
+        {
+            buy();
+        }
+        else if (owner != GameState.currentPlayer && !mortgaged)
+        {
+            chargeRent();
+        }
+    }
+
+    protected abstract void chargeRent();
+    public void mortgage()
+    {
+        mortgaged = true;
+        owner.addMoney(cost / 2);
     }
 }

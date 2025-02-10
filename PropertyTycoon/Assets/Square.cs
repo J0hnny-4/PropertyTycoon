@@ -1,13 +1,15 @@
 public class Square
 {
-    public string name { get; }
+    private string name { get; }
 
     public Square(string name)
     {
         this.name = name;
     }
-    public void playerLands(Player player)
-    {
-        //TODO implement
-    }
+    
+    /// <summary>
+    /// Action to take when a player lands on this square.
+    /// Base class is a blank square such as Go with no effect
+    /// </summary>
+    public virtual void playerLands() { }
 }

@@ -3,11 +3,13 @@ using System;
 public class Card
 {
     public string name { get; }
-    public Func<Player> effect { get; }
+    public string description { get; }
+    public Action effect { get; }
 
-    public Card(string name, Func<Player> effect)
+    public Card(string name, string description, Action effect)
     {
         this.name = name;
+        this.description = description;
         this.effect = effect;
     }
 }
