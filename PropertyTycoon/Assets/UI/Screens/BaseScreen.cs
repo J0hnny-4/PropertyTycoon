@@ -1,3 +1,4 @@
+using UI.Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,38 +10,50 @@ namespace UI.Screens
     /// </summary>
     public abstract class BaseScreen : MonoBehaviour
     {
-        private BaseUIManager _manager;
-        private VisualElement _root;
+        protected VisualElement Root;
 
         /// <summary>
-        /// Called by the UIManager when setting up, which passes itself as the argument.
-        /// It initialises the Screen attributes. Concrete derivations should use this to initialise additional fields,
-        /// register callbacks, etc.
+        /// Grabs a reference to the root visual element.
         /// </summary>
-        /// <param name="manager">Reference to UIManager, in order to facilitate navigation between screens.</param>
-        public void Initialise(BaseUIManager manager)
+        public void Awake()
         {
-            _manager = manager;
-            _root = GetComponent<UIDocument>().rootVisualElement;
+            Root = GetComponent<UIDocument>().rootVisualElement;
         }
+        
+        /// <summary>
+        /// Concrete derivations should use this method to initialise additional fields, register callbacks, etc.
+        /// </summary>
+        public abstract void Initialise();
+
+        /// <summary>
+        /// Used to un-register callbacks to interactive components (such as buttons).
+        /// </summary>
+        protected abstract void CleanUp();
     
         /// <summary>
         /// Shows the screen.
         /// </summary>
         public void Show()
         {
-            _root.style.display = DisplayStyle.Flex;
+            Root.style.display = DisplayStyle.Flex;
         }
     
         /// <summary>
-        /// Hides the screen.
+        /// Hides the screen.<br/>
         /// NOTE: The screen is simply hidden, it will consume resources in the background. This allows to quickly switch
         /// between screens by avoiding multiple re-initialisation of the same screen.
         /// </summary>
         public void Hide()
         {
-            _root.style.display = DisplayStyle.None;
+            Root.style.display = DisplayStyle.None;
         }
-    
+
+        /// <summary>
+        /// Default call to <c>CleanUp</c> to remove event callbacks when object is destroyed.
+        /// </summary>
+        private void OnDestroy()
+        {
+            CleanUp();
+        }
     }
 }
