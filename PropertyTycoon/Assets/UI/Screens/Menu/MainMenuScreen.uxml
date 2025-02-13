@@ -2,12 +2,14 @@
     <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
     <engine:VisualElement name="background">
         <engine:VisualElement name="header">
-            <engine:VisualElement name="banner" />
+            <engine:VisualElement name="banner" style="width: 1100px;">
+                <engine:Label text="PROPERTY TYCOON" name="screen-title" />
+            </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="content">
             <engine:VisualElement name="menu-button-container">
-                <engine:Button text="Start" name="start-button" />
-                <engine:Button text="Quit" name="quit-button" />
+                <engine:Button text="START" name="start-button" />
+                <engine:Button text="QUIT" name="quit-button" />
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="footer" />
