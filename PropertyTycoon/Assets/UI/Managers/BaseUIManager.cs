@@ -30,8 +30,10 @@ namespace UI.Managers
             Screens = new Dictionary<Type, BaseScreen>();
             foreach (BaseScreen screen in GetComponentsInChildren<BaseScreen>())
             {
+                screen.BaseSetup(this);
                 screen.Initialise();
                 Screens.Add(screen.GetType(), screen);
+                screen.Hide();
             }
         }
         

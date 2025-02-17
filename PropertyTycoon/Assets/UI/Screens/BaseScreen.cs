@@ -11,13 +11,16 @@ namespace UI.Screens
     public abstract class BaseScreen : MonoBehaviour
     {
         protected VisualElement Root;
+        protected BaseUIManager UIManager;
 
         /// <summary>
-        /// Grabs a reference to the root visual element.
+        /// Initialises base fields. Serves a similar purpose to <c>Initialise</c>, but having this separate avoid
+        /// having to explicitly call the base method in all derivation of this class.
         /// </summary>
-        public void Awake()
+        public void BaseSetup(BaseUIManager uiManager)
         {
             Root = GetComponent<UIDocument>().rootVisualElement;
+            UIManager = uiManager;
         }
         
         /// <summary>
