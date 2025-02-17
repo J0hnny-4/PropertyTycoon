@@ -28,11 +28,13 @@ namespace UI.Screens.Menu
         private void OnStartClicked(ClickEvent e)
         {
             Debug.Log("START clicked");
+            UIManager.NavigateTo<GameModeScreen>();
         }
 
         private void OnQuitClicked(ClickEvent e)
         {
             Debug.Log("QUIT clicked");
+            Application.Quit();
         }
     }
 }

@@ -66,7 +66,6 @@ namespace UI.Screens.Menu
         /// <param name="panel">The newly clicked panel</param>
         private void OnPanelClicked(GameModePanel panel)
         {
-            Debug.Log($"GameMode panel clicked: {panel}");
             _selectedPanel?.ToggleSelected(false);
             _selectedPanel = panel;
             _selectedPanel.ToggleSelected(true);
@@ -83,12 +82,14 @@ namespace UI.Screens.Menu
         
         private void OnContinueClicked(ClickEvent e)
         {
-            Debug.Log("CONTINUE clicked");
+            // todo: trigger logic to create game engine
+            // todo: add logic to setup timer
+            UIManager.NavigateTo<PlayersSetupScreen>();
         }
 
         private void OnBackClicked(ClickEvent e)
         {
-            Debug.Log("BACK clicked");
+            UIManager.NavigateTo<MainMenuScreen>();
         }
     }
 }
