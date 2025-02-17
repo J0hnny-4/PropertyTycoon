@@ -162,8 +162,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1589120356}
-  - {fileID: 527604102}
   - {fileID: 628625682}
+  - {fileID: 527604102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527604101
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527604101}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24e919db8aee4d08b6db453a4cb06784, type: 3}
   m_Name: 
@@ -294,6 +294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d4d7f38276458b95cdaf5e5fbdee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameModePanelTemplate: {fileID: 9197481963319205126, guid: 83858e833623f5c5e9c309dceb95f4b2, type: 3}
+  gameModesData:
+  - {fileID: 11400000, guid: f1621153366af7fe4902bbee047172ae, type: 2}
+  - {fileID: 11400000, guid: e1272832631dcdd92917989bf92dfa39, type: 2}
 --- !u!1 &1040145337
 GameObject:
   m_ObjectHideFlags: 0

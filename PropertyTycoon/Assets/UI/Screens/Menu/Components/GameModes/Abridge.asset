@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6adc341c7284465907341bf6b313da1, type: 3}
   m_Name: Abridge
   m_EditorClassIdentifier: 
-  gameMode: 0
-  image: {fileID: 2800000, guid: c948a391dafd4456daf9bfb38e816f76, type: 3}
-  description: Unlimited time, up to 6  players.
+  gameMode: 1
+  image: {fileID: 2800000, guid: 9556b9a4c4a30ddf5858dc23b698a188, type: 3}
+  description: Race against the clock!
