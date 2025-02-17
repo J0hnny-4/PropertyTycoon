@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.Screens.Menu.Components
+namespace UI.Screens.Menu.Components.GameModes
 {
     /// <summary>
     /// Define available game modes.
