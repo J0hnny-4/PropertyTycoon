@@ -1,5 +1,4 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="GameModeTemplate" src="project://database/Assets/UI/Screens/Menu/Components/GameModeTemplate.uxml?fileID=9197481963319205126&amp;guid=83858e833623f5c5e9c309dceb95f4b2&amp;type=3#GameModeTemplate" />
     <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
     <engine:VisualElement name="background">
         <engine:VisualElement name="header">
@@ -7,9 +6,7 @@
                 <engine:Label text="SELECT GAME" name="screen-title" />
             </engine:VisualElement>
         </engine:VisualElement>
-        <engine:VisualElement name="content">
-            <engine:Instance template="GameModeTemplate" />
-        </engine:VisualElement>
+        <engine:VisualElement name="content" />
         <engine:VisualElement name="footer" style="align-items: flex-start; justify-content: space-around;">
             <engine:Button text="BACK" name="back-button" />
             <engine:Button text="CONTINUE" name="continue-button" />
