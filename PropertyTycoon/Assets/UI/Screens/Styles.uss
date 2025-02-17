@@ -35,7 +35,7 @@
     margin: 0;
 }
 
-Button {
+Button.simple {
     border-radius: var(--radius-md);
     border-width: var(--spacing-xs);
     border-color: var(--border-color);
@@ -47,11 +47,11 @@ Button {
     transition: background-color 100ms ease-out;
 }
 
-Button:hover {
+Button.simple:hover {
     background-color: rgb(145, 33, 30);
 }
 
-Button:active {
+Button.simple:active {
     background-color: rgb(120, 13, 10);
 }
 

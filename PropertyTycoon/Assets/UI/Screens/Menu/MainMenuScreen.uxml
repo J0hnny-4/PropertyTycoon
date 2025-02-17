@@ -8,8 +8,8 @@
         </engine:VisualElement>
         <engine:VisualElement name="content">
             <engine:VisualElement name="menu-button-container">
-                <engine:Button text="START" name="start-button" />
-                <engine:Button text="QUIT" name="quit-button" />
+                <engine:Button text="START" name="start-button" class="simple" />
+                <engine:Button text="QUIT" name="quit-button" class="simple" />
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="footer" />

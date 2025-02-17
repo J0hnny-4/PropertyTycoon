@@ -8,8 +8,8 @@
         </engine:VisualElement>
         <engine:VisualElement name="content" />
         <engine:VisualElement name="footer" style="align-items: flex-start; justify-content: space-around;">
-            <engine:Button text="BACK" name="back-button" />
-            <engine:Button text="CONTINUE" name="continue-button" />
+            <engine:Button text="BACK" name="back-button" class="simple" />
+            <engine:Button text="CONTINUE" name="continue-button" class="simple" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
