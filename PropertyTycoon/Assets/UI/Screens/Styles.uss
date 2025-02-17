@@ -86,12 +86,10 @@ Button.simple:active {
     justify-content: space-evenly;
 }
 
-
-/* Main menu screen */
-
 #banner {
-    width: 800px;
+    width: auto;
     height: 170px;
+    padding: 0 var(--spacing-lg);
     border-color: white;
     background-color: var(--primary-color);
     border-width: var(--spacing-sm);
@@ -104,10 +102,31 @@ Button.simple:active {
     flex-grow: 1;
 }
 
+/* Main menu screen */
+
 #menu-button-container {
     width: 500px;
 }
 
 #menu-button-container > Button {
     margin-bottom: var(--spacing-xl);
+}
+
+/* Players setup screen */
+
+#players-grid {
+    width: 1400px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: stretch;
+}
+
+.grid-cell {
+    height: 50%;
+    min-width: 33%;
+    flex-grow: 1;
+    flex-basis: 0.5;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
 }
