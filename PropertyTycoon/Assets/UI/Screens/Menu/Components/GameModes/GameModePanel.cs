@@ -26,7 +26,7 @@ namespace UI.Screens.Menu.Components.GameModes
             _selectedToggle.value = false;
             
             // adjust UI
-            this.Q<Label>("title").text = nameof(data.gameMode);
+            this.Q<Label>("title").text = data.gameMode.ToString();
             this.Q<VisualElement>("image").style.backgroundImage = data.image;
             this.Q<Label>("description").text = data.description;
 
