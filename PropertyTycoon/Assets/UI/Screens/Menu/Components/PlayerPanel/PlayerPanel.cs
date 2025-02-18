@@ -9,12 +9,12 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         private Toggle _aiToggle;
         private TextField _playerName;
         private EnumField _tokenDropdown;
+        public event Action<PlayerPanel> OnPlayerRemovedClicked;
         
         /// <summary>
         /// Constructs a Player panel.
         /// </summary>
         /// <param name="template">The uxml reference.</param>
-        /// <param name="id">ID to assign to the player</param>
         public PlayerPanel(VisualTreeAsset template)
         {
             // clone template & set id
@@ -27,21 +27,30 @@ namespace UI.Screens.Menu.Components.PlayerPanel
             _tokenDropdown = this.Q<EnumField>("token-dropdown");
             
             // register callbacks
-            _removePlayerButton.RegisterCallback<ClickEvent>(OnRemovePlayerClicked);
+            _removePlayerButton.RegisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
         }
 
         public void CleanUp()
         {
-            _removePlayerButton.UnregisterCallback<ClickEvent>(OnRemovePlayerClicked);
+            _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
+        }
+
+        /// <summary>
+        /// Enable/disables the remove button. Hiding it prevents the player from being removed.
+        /// </summary>
+        /// <param name="enable">State to be assigned to the button.</param>
+        public void ToggleRemovePlayerButton(bool enable)
+        {
+            _removePlayerButton.SetEnabled(enable);
         }
         
         /// <summary>
-        /// Removes the player by setting it to inactive and hiding its panel.
+        /// Trigger the <c>OnPlayerRemovedClicked</c> event, when 
         /// </summary>
         /// <param name="e">IGNORE - Click event, passed by default.</param>
-        private void OnRemovePlayerClicked(ClickEvent e)
+        private void TriggerPayerRemovedClicked(ClickEvent e)
         {
-            this.RemoveFromHierarchy();
+            OnPlayerRemovedClicked?.Invoke(this);
         }
     }
 }

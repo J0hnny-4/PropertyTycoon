@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UI.Screens.Menu.Components.GameModes;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace UI.Screens.Menu
             foreach (var panel in _gameModePanels)
             {
                 panel.OnClicked -= OnPanelClicked;
+                panel.CleanUp();
             }
         }
 

@@ -7,5 +7,4 @@
         <engine:TextField placeholder-text="name" name="name-input" />
         <engine:EnumField label="Token" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="token-dropdown" />
     </engine:VisualElement>
-    <engine:Button text="+" name="add-player-button" />
 </engine:UXML>

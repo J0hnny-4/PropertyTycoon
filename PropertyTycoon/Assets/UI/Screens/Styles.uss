@@ -124,7 +124,8 @@ Button.simple:active {
 
 #spacer {
     flex-grow: 1;
-    /* debugging only */
+    /* debugging only 
     background-color: rgba(236, 129, 236, 0.77);
+    */
     height: 100px;
 }

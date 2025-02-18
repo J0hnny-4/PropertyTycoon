@@ -47,7 +47,7 @@ namespace UI.Screens.Menu.Components.GameModes
         /// <summary>
         /// Used to un-register the click event.
         /// </summary>
-        private void CleanUp()
+        public void CleanUp()
         {
             this.UnregisterCallback<ClickEvent>(_callback);
         }
