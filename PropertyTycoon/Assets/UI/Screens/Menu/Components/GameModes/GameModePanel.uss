@@ -1,0 +1,37 @@
+.game-mode-panel {
+    width: 500px;
+    height: 600px;
+    border-radius: var(--radius-md);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+    padding: var(--spacing-lg);
+    background-color: var(--box-see-through);
+    margin: 0 var(--spacing-lg);
+    -unity-text-align: lower-center;
+}
+
+#image {
+    height: 250px;
+    border-radius: var(--radius-md);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+    background-color: violet; /* todo replace color with image*/
+}
+
+#title {
+    font-size: var(--font-xl);
+    padding: 0;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+#description {
+    padding: 0;
+    margin: 0;
+}
+
+#selected-toggle {
+    position: absolute;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+}
