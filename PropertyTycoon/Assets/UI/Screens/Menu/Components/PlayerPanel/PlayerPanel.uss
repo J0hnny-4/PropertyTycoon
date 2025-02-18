@@ -1,3 +1,12 @@
+PlayerPanel {
+    height: 50%;
+    min-width: 33%;
+    flex-basis: 0;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+}
+
 #player-panel {
     width: 400px;
     height: 270px;

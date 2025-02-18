@@ -121,12 +121,10 @@ Button.simple:active {
     align-self: stretch;
 }
 
-.grid-cell {
-    height: 50%;
-    min-width: 33%;
+
+#spacer {
     flex-grow: 1;
-    flex-basis: 0.5;
-    align-self: stretch;
-    align-items: center;
-    justify-content: center;
+    /* debugging only */
+    background-color: rgba(236, 129, 236, 0.77);
+    height: 100px;
 }
