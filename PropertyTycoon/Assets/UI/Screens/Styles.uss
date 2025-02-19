@@ -4,6 +4,7 @@
     --header-height: 200px;
     --footer-height: 150px;
     
+    --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
     --font-xl: 40px;
@@ -134,6 +135,7 @@ Button.simple:active {
     border-width: var(--spacing-xs);
     height: 120px;
     width: 120px;
+    font-size: var(--font-xl);
 }
 
 #spacer {

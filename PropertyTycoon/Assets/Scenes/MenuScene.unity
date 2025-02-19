@@ -232,6 +232,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenType: 2
+  defaultNames:
+  - Seg Faultman
+  - Al Gorithm
+  - Mike Rooptimisation
+  - Buffer The Vampire Slayer
+  - Ray Caster
+  - Sir Render
+  - Count Bitwise
+  - Dr Max Heap
+  - Chris Cross
+  - Luke Warm
+  - Paige Turner
   playerPanelTemplate: {fileID: 9197481963319205126, guid: 90c05f1ed047c7255beb1494a3f3b70a, type: 3}
   minPlayers: 2
   maxPlayers: 6

@@ -1,21 +1,28 @@
 using System;
+using Objects.Tokens;
 using UnityEngine.UIElements;
 
 namespace UI.Screens.Menu.Components.PlayerPanel
 {
     public class PlayerPanel : VisualElement
     {
-        private Button _removePlayerButton;
-        private Toggle _aiToggle;
-        private TextField _playerName;
-        private EnumField _tokenDropdown;
+        // todo: add reference to player element -- directly update player through input fields
+        private readonly Token[] _tokens;
+        private int _currentTokenIndex;
+        private Token CurrentToken => _tokens[_currentTokenIndex];
+        private readonly Button _removePlayerButton;
+        private readonly Toggle _aiToggle;
+        public readonly TextField _playerName;
+        private readonly VisualElement _tokenPreview;
         public event Action<PlayerPanel> OnPlayerRemovedClicked;
-        
+
         /// <summary>
         /// Constructs a Player panel.
         /// </summary>
         /// <param name="template">The uxml reference.</param>
-        public PlayerPanel(VisualTreeAsset template)
+        /// <param name="name">Default name of the player.</param>
+        /// <param name="tokens">A reference to the array of tokens available.</param>
+        public PlayerPanel(VisualTreeAsset template, string name, Token[] tokens)
         {
             // clone template & set its class
             template.CloneTree(this);
@@ -25,7 +32,13 @@ namespace UI.Screens.Menu.Components.PlayerPanel
             _removePlayerButton = this.Q<Button>("remove-player-button");
             _aiToggle = this.Q<Toggle>("ai-toggle");
             _playerName = this.Q<TextField>("name-input");
-            _tokenDropdown = this.Q<EnumField>("token-dropdown");
+            _tokenPreview = this.Q<VisualElement>("token-preview");
+            
+            // Set default name & takes the first token from the available ones
+            _playerName.value = name;
+            _tokens = tokens;
+            _currentTokenIndex = 0;
+            MoveToNextToken();
             
             // register callbacks
             _removePlayerButton.RegisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
@@ -33,9 +46,32 @@ namespace UI.Screens.Menu.Components.PlayerPanel
 
         public void CleanUp()
         {
+            RemoveFromToken();
             _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
         }
 
+        /// <summary>
+        /// Removes itself as owner of the token, if it currently is.
+        /// </summary>
+        private void RemoveFromToken()
+        {
+            if (CurrentToken?.Owner == this) { CurrentToken.Owner = null; }
+        }
+        
+        /// <summary>
+        /// Does up to a full loop around <c>_tokens</c>, and updates <c>_currentTokenIndex</c> to reflect the next
+        /// available token. It also updates the tokens owner in the process.
+        /// </summary>
+        private void MoveToNextToken()
+        {
+            RemoveFromToken();
+            var i = (_currentTokenIndex + 1) % _tokens.Length;
+            while (i != _currentTokenIndex && _tokens[i].HasOwner) { i = (i + 1) % _tokens.Length; }
+            _currentTokenIndex = i;
+            _tokenPreview.style.backgroundImage = CurrentToken.icon;
+            CurrentToken.Owner = this;
+        }
+        
         /// <summary>
         /// Enable/disables the remove button. Hiding it prevents the player from being removed.
         /// </summary>
@@ -46,7 +82,7 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         }
         
         /// <summary>
-        /// Trigger the <c>OnPlayerRemovedClicked</c> event, when 
+        /// Trigger the <c>OnPlayerRemovedClicked</c> event. 
         /// </summary>
         /// <param name="e">IGNORE - Click event, passed by default.</param>
         private void TriggerPayerRemovedClicked(ClickEvent e)

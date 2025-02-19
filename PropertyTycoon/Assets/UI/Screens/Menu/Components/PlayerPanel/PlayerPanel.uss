@@ -4,16 +4,44 @@
     border-radius: var(--radius-md);
     border-width: var(--spacing-xs);
     border-color: var(--border-color);
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
     background-color: var(--box-see-through);
     -unity-text-align: lower-center;
-    justify-content: space-around;
+    justify-content: flex-start;
+}
+
+#top-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 #remove-player-button {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    height: 30px;
-    width: 30px;
+    width: 35px;
+    height: 35px;
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+    border-radius: var(--spacing-lg);
+    background-color: var(--primary-color);
+}
+
+#ai-toggle > Label {
+    margin-right: 20px;
+    min-width: auto;
+}
+
+#name-input {
+    margin: var(--spacing-md) 0;
+    height: 50px;
+}
+
+#token-container {
+    justify-content: center;
+    align-items: center;
+}
+
+#token-preview {
+    -unity-background-scale-mode: scale-to-fit;
+    width: 110px;
+    height: 110px;
 }

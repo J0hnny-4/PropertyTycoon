@@ -2,9 +2,13 @@
     <Style src="project://database/Assets/UI/Screens/Menu/Components/PlayerPanel/PlayerPanel.uss?fileID=7433441132597879392&amp;guid=5bd1bd7c066e28ab0a467c109c66179d&amp;type=3#PlayerPanel" />
     <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
     <engine:VisualElement name="player-panel">
-        <engine:Button text="X" name="remove-player-button" />
-        <engine:Toggle label="AI" name="ai-toggle" value="false" />
-        <engine:TextField placeholder-text="name" name="name-input" />
-        <engine:EnumField label="Token" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="token-dropdown" />
+        <engine:VisualElement name="top-row" style="flex-grow: 1;">
+            <engine:Toggle label="AI" name="ai-toggle" value="false" />
+            <engine:Button text="X" name="remove-player-button" />
+        </engine:VisualElement>
+        <engine:TextField name="name-input" />
+        <engine:VisualElement name="token-container" style="flex-grow: 1;">
+            <engine:VisualElement name="token-preview" style="background-image: url(&quot;project://database/Assets/UI/Screens/UnityDefaultRuntimeTheme.tss?fileID=5923138177525885446&amp;guid=83d0cc6ed05d870359d7d8dfb337bb99&amp;type=3#Remove@2x&quot;);" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
