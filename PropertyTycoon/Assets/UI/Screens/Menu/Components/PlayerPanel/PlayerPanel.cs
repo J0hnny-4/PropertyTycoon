@@ -17,8 +17,9 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         /// <param name="template">The uxml reference.</param>
         public PlayerPanel(VisualTreeAsset template)
         {
-            // clone template & set id
+            // clone template & set its class
             template.CloneTree(this);
+            this.AddToClassList("players-grid-cell");
             
             // get reference to UI elements
             _removePlayerButton = this.Q<Button>("remove-player-button");

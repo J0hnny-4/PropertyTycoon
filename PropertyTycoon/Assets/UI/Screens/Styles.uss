@@ -121,11 +121,22 @@ Button.simple:active {
     align-self: stretch;
 }
 
+.players-grid-cell {
+    height: 50%;
+    width: 33%;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-player-button {
+    border-radius: 100%;
+    border-color: black;
+    border-width: var(--spacing-xs);
+    height: 120px;
+    width: 120px;
+}
 
 #spacer {
     flex-grow: 1;
-    /* debugging only 
-    background-color: rgba(236, 129, 236, 0.77);
-    */
     height: 100px;
 }

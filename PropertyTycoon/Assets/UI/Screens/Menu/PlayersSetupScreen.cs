@@ -25,10 +25,12 @@ namespace UI.Screens.Menu
             _readyButton = Root.Q<Button>("ready-button");
             _backButton = Root.Q<Button>("back-button");
             _playersGrid = Root.Q<VisualElement>("players-grid");
+            _addPlayerButton = Root.Q<Button>("add-player-button");
             
             // register button actions
             _readyButton.RegisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
+            _addPlayerButton.clicked += AddNewPlayer;
 
             _currentPlayers = 0;
             GeneratePlayersPanels();
@@ -64,7 +66,7 @@ namespace UI.Screens.Menu
             playerPanel.OnPlayerRemovedClicked += RemovePlayer;
             _playersGrid.hierarchy.Insert(_currentPlayers, playerPanel);
             _currentPlayers++;
-            UpdatePanels();
+            UpdateGrid();
         }
         
         /// <summary>
@@ -78,13 +80,13 @@ namespace UI.Screens.Menu
             playerPanel.OnPlayerRemovedClicked -= RemovePlayer;
             playerPanel.CleanUp();
             playerPanel.RemoveFromHierarchy();
-            UpdatePanels();
+            UpdateGrid();
         }
 
         /// <summary>
         /// Updates all panels. Called when a player is added/removed.
         /// </summary>
-        private void UpdatePanels()
+        private void UpdateGrid()
         {
             var canBeRemoved = _currentPlayers > minPlayers;
             for (var i = 0; i < _currentPlayers; i++)
@@ -93,6 +95,21 @@ namespace UI.Screens.Menu
                 Debug.Assert(panel != null);
                 panel.ToggleRemovePlayerButton(canBeRemoved);
             }
+            
+            var canBeAdded = _currentPlayers < maxPlayers;
+            ToggleAddPlayerButton(canBeAdded);
+        }
+
+        /// <summary>
+        /// Toggles the add player button by simply hiding its container. This is because the button itself takes a slot
+        /// in the 'players grid', therefore we want to hide this slot when we have reached the maximum number of
+        /// players.
+        /// </summary>
+        /// <param name="enable">The state to set the button to.</param>
+        private void ToggleAddPlayerButton(bool enable)
+        {
+            var buttonContainer = _addPlayerButton.parent;
+            buttonContainer.style.display = enable ? DisplayStyle.Flex : DisplayStyle.None;
         }
         
         private void OnReadyClicked(ClickEvent e)
