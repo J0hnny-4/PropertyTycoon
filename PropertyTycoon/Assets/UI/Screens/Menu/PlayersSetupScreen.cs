@@ -1,10 +1,10 @@
+using UI.Managers;
 using UI.Screens.Menu.Components.PlayerPanel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Screens.Menu
 {
-    public class PlayersSetupScreen : BaseScreen
     public class PlayersSetupScreen : BaseScreen<MenuScreen>
     {
         [SerializeField]
