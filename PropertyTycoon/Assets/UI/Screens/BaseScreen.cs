@@ -8,16 +8,18 @@ namespace UI.Screens
     /// Generic screen, to be added to the scene as a GameObject (as a child of UIManager).
     /// Part of the same GameObject should be the corresponding UXML document.
     /// </summary>
-    public abstract class BaseScreen : MonoBehaviour
+    public abstract class BaseScreen<T> : MonoBehaviour
     {
+        [SerializeField] 
+        protected T screenType;
         protected VisualElement Root;
-        protected BaseUIManager UIManager;
+        protected BaseUIManager<T> UIManager;
 
         /// <summary>
         /// Initialises base fields. Serves a similar purpose to <c>Initialise</c>, but having this separate avoid
         /// having to explicitly call the base method in all derivation of this class.
         /// </summary>
-        public void BaseSetup(BaseUIManager uiManager)
+        public void BaseSetup(BaseUIManager<T> uiManager)
         {
             Root = GetComponent<UIDocument>().rootVisualElement;
             UIManager = uiManager;
@@ -32,7 +34,18 @@ namespace UI.Screens
         /// Used to un-register callbacks to interactive components (such as buttons).
         /// </summary>
         protected abstract void CleanUp();
-    
+
+        /// <summary>
+        /// Get the screen's type. This is defined in the Generic <c>T</c> used to build the class.<br/>
+        /// For example: a screen derived from <c>BaseScreen&lt;MenuScreen&gt;</c>  would return an entry from the Enum
+        /// <c>MenuScreen</c>.
+        /// </summary>
+        /// <returns>The type associated to the screen.</returns>
+        public T GetScreenType()
+        {
+            return screenType;
+        }
+        
         /// <summary>
         /// Shows the screen.
         /// </summary>

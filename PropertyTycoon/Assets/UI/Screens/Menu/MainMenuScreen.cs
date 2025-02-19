@@ -1,9 +1,10 @@
+using UI.Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Screens.Menu
 {
-    public class MainMenuScreen : BaseScreen
+    public class MainMenuScreen : BaseScreen<MenuScreen>
     {
         private Button _startButton;
         private Button _quitButton;
@@ -28,7 +29,7 @@ namespace UI.Screens.Menu
         private void OnStartClicked(ClickEvent e)
         {
             Debug.Log("START clicked");
-            UIManager.NavigateTo<GameModeScreen>();
+            UIManager.NavigateTo(MenuScreen.GameMode);
         }
 
         private void OnQuitClicked(ClickEvent e)

@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 namespace UI.Screens.Menu
 {
     public class PlayersSetupScreen : BaseScreen
+    public class PlayersSetupScreen : BaseScreen<MenuScreen>
     {
         [SerializeField]
         private VisualTreeAsset playerPanelTemplate;
@@ -102,7 +103,7 @@ namespace UI.Screens.Menu
 
         private void OnBackClicked(ClickEvent e)
         {
-            UIManager.NavigateTo<GameModeScreen>();
+            UIManager.NavigateTo(MenuScreen.GameMode);
         }
     }
 }

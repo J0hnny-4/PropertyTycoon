@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
+using UI.Managers;
 using UI.Screens.Menu.Components.GameModes;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Screens.Menu
 {
-    public class GameModeScreen : BaseScreen
+    public class GameModeScreen : BaseScreen<MenuScreen>
     {
         [SerializeField]
         private VisualTreeAsset gameModePanelTemplate;
@@ -86,12 +86,12 @@ namespace UI.Screens.Menu
         {
             // todo: trigger logic to create game engine
             // todo: add logic to setup timer
-            UIManager.NavigateTo<PlayersSetupScreen>();
+            UIManager.NavigateTo(MenuScreen.PlayerSetup);
         }
 
         private void OnBackClicked(ClickEvent e)
         {
-            UIManager.NavigateTo<MainMenuScreen>();
+            UIManager.NavigateTo(MenuScreen.MainMenu);
         }
     }
 }

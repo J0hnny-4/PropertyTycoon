@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using UI.Screens;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI.Managers
 {
     /// <summary>
     /// Acts as a link between all screens in the scene.
     /// </summary>
-    public abstract class BaseUIManager : MonoBehaviour
+    public abstract class BaseUIManager<T> : MonoBehaviour
     {
-        protected BaseScreen CurrentScreen;
-        protected Dictionary<Type, BaseScreen> Screens;
+        [SerializeField]
+        protected T defaultScreen;
+        protected BaseScreen<T> CurrentScreen;
+        protected Dictionary<T, BaseScreen<T>> Screens;
         
         /// <summary>
         /// Base class registers screens on awake. Additional functionality to be implemented by concrete derivation. 
@@ -27,25 +30,25 @@ namespace UI.Managers
         /// </summary>
         private void RegisterScreens()
         {
-            Screens = new Dictionary<Type, BaseScreen>();
-            foreach (BaseScreen screen in GetComponentsInChildren<BaseScreen>())
+            Screens = new Dictionary<T, BaseScreen<T>>();
+            foreach (var screen in GetComponentsInChildren<BaseScreen<T>>())
             {
                 screen.BaseSetup(this);
                 screen.Initialise();
-                Screens.Add(screen.GetType(), screen);
+                Screens.Add(screen.GetScreenType(), screen);
                 screen.Hide();
             }
         }
-        
+
         /// <summary>
         /// Navigate to a new screen: current screen is hidden, new screen is shown.
         /// </summary>
-        /// <typeparam name="T">The type of the screen to navigate to.</typeparam>
-        public void NavigateTo<T>() where T : BaseScreen
+        /// <param name="screenType">The type of the screen to navigate to.</param>`
+        public void NavigateTo(T screenType)
         {
             CurrentScreen?.Hide();
-            Screens.TryGetValue(typeof(T), out BaseScreen screen);
-            Debug.Assert(screen != null, nameof(screen) + " != null");
+            Screens.TryGetValue(screenType, out BaseScreen<T> screen);
+            Debug.Assert(screen != null, $"{screenType} not found."); // debug
             screen.Show();
             CurrentScreen = screen;
         }
