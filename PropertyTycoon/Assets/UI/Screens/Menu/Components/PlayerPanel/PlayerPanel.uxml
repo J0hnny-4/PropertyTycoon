@@ -4,11 +4,13 @@
     <engine:VisualElement name="player-panel">
         <engine:VisualElement name="top-row" style="flex-grow: 1;">
             <engine:Toggle label="AI" name="ai-toggle" value="false" />
-            <engine:Button text="X" name="remove-player-button" />
+            <engine:Button name="remove-player-button" />
         </engine:VisualElement>
         <engine:TextField name="name-input" />
-        <engine:VisualElement name="token-container" style="flex-grow: 1;">
-            <engine:VisualElement name="token-preview" style="background-image: url(&quot;project://database/Assets/UI/Screens/UnityDefaultRuntimeTheme.tss?fileID=5923138177525885446&amp;guid=83d0cc6ed05d870359d7d8dfb337bb99&amp;type=3#Remove@2x&quot;);" />
+        <engine:VisualElement name="bottom-row" style="flex-grow: 1;">
+            <engine:Button name="left-arrow" class="arrow" />
+            <engine:VisualElement name="token-preview" style="background-image: resource(&apos;Images/Tokens/smartphone&apos;);" />
+            <engine:Button name="right-arrow" class="arrow" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

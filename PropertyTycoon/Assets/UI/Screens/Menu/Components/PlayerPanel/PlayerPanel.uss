@@ -8,6 +8,7 @@
     background-color: var(--box-see-through);
     -unity-text-align: lower-center;
     justify-content: flex-start;
+    transition: scale 0.1s ease-in-out;
 }
 
 #top-row {
@@ -19,10 +20,10 @@
 #remove-player-button {
     width: 35px;
     height: 35px;
-    border-width: var(--spacing-xs);
-    border-color: var(--border-color);
-    border-radius: var(--spacing-lg);
+    background-image: resource("Images/Icons/cross");
     background-color: var(--primary-color);
+    border-radius: 100%;
+    border-width: 0;
 }
 
 #ai-toggle > Label {
@@ -35,13 +36,39 @@
     height: 50px;
 }
 
-#token-container {
-    justify-content: center;
+#bottom-row {
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 #token-preview {
-    -unity-background-scale-mode: scale-to-fit;
     width: 110px;
     height: 110px;
 }
+
+.arrow {
+    background-image: resource("Images/Icons/down-chevron");
+    height: 60px;
+    width: 60px;
+    background-color: transparent;
+    border-width: 0;
+}
+
+.arrow:hover, #remove-player-button:hover {
+    scale: 1.1;
+}
+
+.arrow:active {
+    opacity: 0.6;
+}
+
+#right-arrow {
+    rotate: 270deg;
+}
+
+#left-arrow {
+    rotate: 90deg;
+}
+
+

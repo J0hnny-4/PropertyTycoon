@@ -34,6 +34,7 @@
     white-space: normal;
     padding: 0;
     margin: 0;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 Button.simple {
@@ -131,11 +132,11 @@ Button.simple:active {
 
 #add-player-button {
     border-radius: 100%;
-    border-color: black;
+    background-image: resource("Images/Icons/cross");
     border-width: var(--spacing-xs);
     height: 120px;
     width: 120px;
-    font-size: var(--font-xl);
+    rotate: 45deg;
 }
 
 #spacer {
