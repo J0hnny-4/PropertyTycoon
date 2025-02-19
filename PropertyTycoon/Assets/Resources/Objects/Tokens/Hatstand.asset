@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71a2de425ea1d09fa51f6aac3276fbd, type: 3}
+  m_Name: Hatstand
+  m_EditorClassIdentifier: 
+  sprite3D: {fileID: 0}
+  icon: {fileID: 2800000, guid: cd855640a3c3856c6bdd87b709548239, type: 3}
