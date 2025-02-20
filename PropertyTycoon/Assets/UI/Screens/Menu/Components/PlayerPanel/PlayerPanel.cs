@@ -12,8 +12,10 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         private Token CurrentToken => _tokens[_currentTokenIndex];
         private readonly Button _removePlayerButton;
         private readonly Toggle _aiToggle;
-        public readonly TextField _playerName;
+        private readonly TextField _playerName;
         private readonly VisualElement _tokenPreview;
+        private readonly Button _leftArrowButton;
+        private readonly Button _rightArrowButton;
         public event Action<PlayerPanel> OnPlayerRemovedClicked;
 
         /// <summary>
@@ -33,6 +35,8 @@ namespace UI.Screens.Menu.Components.PlayerPanel
             _aiToggle = this.Q<Toggle>("ai-toggle");
             _playerName = this.Q<TextField>("name-input");
             _tokenPreview = this.Q<VisualElement>("token-preview");
+            _leftArrowButton = this.Q<Button>("left-arrow");
+            _rightArrowButton = this.Q<Button>("right-arrow");
             
             // Set default name & takes the first token from the available ones
             _playerName.value = name;
@@ -42,11 +46,15 @@ namespace UI.Screens.Menu.Components.PlayerPanel
             
             // register callbacks
             _removePlayerButton.RegisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
+            _leftArrowButton.clicked += MoveToPreviousToken;
+            _rightArrowButton.clicked += MoveToNextToken;
         }
 
         public void CleanUp()
         {
             RemoveFromToken();
+            _leftArrowButton.clicked -= MoveToPreviousToken;
+            _rightArrowButton.clicked -= MoveToNextToken;
             _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
         }
 
@@ -57,16 +65,32 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         {
             if (CurrentToken?.Owner == this) { CurrentToken.Owner = null; }
         }
+
+        private void MoveToPreviousToken()
+        {
+            FindAndUpdateToken(forward:false);
+        }
+        
+        private void MoveToNextToken()
+        {
+            FindAndUpdateToken(forward:true);
+        }
         
         /// <summary>
         /// Does up to a full loop around <c>_tokens</c>, and updates <c>_currentTokenIndex</c> to reflect the next
         /// available token. It also updates the tokens owner in the process.
         /// </summary>
-        private void MoveToNextToken()
+        /// <param name="forward">Decided the direction to follow. Set to <c>true</c> by default, setting it to
+        /// <c>false</c> would instead find the previous available token.</param>>
+        private void FindAndUpdateToken(bool forward)
         {
             RemoveFromToken();
-            var i = (_currentTokenIndex + 1) % _tokens.Length;
-            while (i != _currentTokenIndex && _tokens[i].HasOwner) { i = (i + 1) % _tokens.Length; }
+            var increment = forward ? 1 : -1;
+            var i = (_currentTokenIndex + increment + _tokens.Length) % _tokens.Length;
+            while (i != _currentTokenIndex && _tokens[i].HasOwner)
+            {
+                i = (i + increment + _tokens.Length) % _tokens.Length;
+            }
             _currentTokenIndex = i;
             _tokenPreview.style.backgroundImage = CurrentToken.icon;
             CurrentToken.Owner = this;
