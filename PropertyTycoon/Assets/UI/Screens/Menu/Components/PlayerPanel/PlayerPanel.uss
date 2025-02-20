@@ -4,7 +4,7 @@
     border-radius: var(--radius-md);
     border-width: var(--spacing-xs);
     border-color: var(--border-color);
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-md);
     background-color: var(--box-see-through);
     -unity-text-align: lower-center;
     justify-content: flex-start;
@@ -27,12 +27,35 @@
 }
 
 #ai-toggle > Label {
-    margin-right: 20px;
+    margin-right: var(--spacing-md);
     min-width: auto;
 }
 
-#name-input {
+#ai-toggle .unity-toggle__checkmark,
+#ai-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    border-width: var(--spacing-xxs);
+    border-color: var(--border-color);
+    border-radius: var(--spacing-xs);
+    background-color: beige;
+    -unity-background-image-tint-color: beige;
+}
+
+#ai-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    background-image: resource("Images/Icons/check");
+    background-color: var(--positive-color);
+    background-size: 70%;
+}
+
+#name-input .unity-text-element--inner-input-field-component{
+    font-size: var(--font-sm);
+}
+
+#name-input .unity-base-text-field__input{
+    border-width: var(--spacing-xxs);
+    border-color: var(--border-color);
+    border-radius: var(--spacing-md);
     margin: var(--spacing-md) 0;
+    padding: 0 var(--spacing-sm);
     height: 50px;
 }
 

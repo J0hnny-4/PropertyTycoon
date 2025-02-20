@@ -10,6 +10,7 @@
     --font-xl: 40px;
     --font-xxl: 90px;
     
+    --spacing-xxs: 2px;
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
@@ -20,7 +21,8 @@
     
     --font-light: white;
     --font-dark: black;
-    
+
+    --positive-color: rgb(4, 180, 4);
     --primary-color: rgba(214, 48, 45, 1);
     --border-color: rgba(0, 0, 0, 1);
     --box-solid: rgba(217, 217, 217, 1);
@@ -35,6 +37,7 @@
     padding: 0;
     margin: 0;
     -unity-background-scale-mode: scale-to-fit;
+    background-size: cover;
 }
 
 Button.simple {
@@ -131,12 +134,13 @@ Button.simple:active {
 }
 
 #add-player-button {
+    border-width: 0;
     border-radius: 100%;
     background-image: resource("Images/Icons/cross");
-    border-width: var(--spacing-xs);
     height: 120px;
     width: 120px;
     rotate: 45deg;
+    background-color: var(--positive-color);
 }
 
 #spacer {

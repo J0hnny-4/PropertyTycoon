@@ -6,7 +6,7 @@
             <engine:Toggle label="AI" name="ai-toggle" value="false" />
             <engine:Button name="remove-player-button" />
         </engine:VisualElement>
-        <engine:TextField name="name-input" />
+        <engine:TextField name="name-input" placeholder-text="Enter player&apos;s name" />
         <engine:VisualElement name="bottom-row" style="flex-grow: 1;">
             <engine:Button name="left-arrow" class="arrow" />
             <engine:VisualElement name="token-preview" style="background-image: resource(&apos;Images/Tokens/smartphone&apos;);" />
