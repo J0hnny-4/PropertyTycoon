@@ -8,6 +8,9 @@
         </engine:VisualElement>
         <engine:VisualElement name="content">
             <engine:VisualElement name="players-grid">
+                <engine:VisualElement name="add-player-grid-cell" class="players-grid-cell">
+                    <engine:Button name="add-player-button" />
+                </engine:VisualElement>
                 <engine:VisualElement name="spacer" />
             </engine:VisualElement>
         </engine:VisualElement>
