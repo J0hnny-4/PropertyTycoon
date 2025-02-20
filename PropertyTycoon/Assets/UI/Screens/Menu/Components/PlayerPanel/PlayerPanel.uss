@@ -8,6 +8,9 @@
     background-color: var(--box-see-through);
     -unity-text-align: lower-center;
     justify-content: flex-start;
+}
+
+#player-panel * {
     transition: scale 0.1s ease-in-out;
 }
 
@@ -78,7 +81,9 @@
     border-width: 0;
 }
 
-.arrow:hover, #remove-player-button:hover {
+.arrow:hover:enabled, 
+#remove-player-button:hover:enabled, 
+#ai-toggle:hover:enabled {
     scale: 1.1;
 }
 

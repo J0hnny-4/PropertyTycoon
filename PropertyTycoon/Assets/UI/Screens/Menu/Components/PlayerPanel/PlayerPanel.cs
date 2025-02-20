@@ -97,12 +97,22 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         }
         
         /// <summary>
-        /// Enable/disables the remove button. Hiding it prevents the player from being removed.
+        /// Enable/disables the remove button. This stops the user from removing the player.
         /// </summary>
         /// <param name="enable">State to be assigned to the button.</param>
         public void ToggleRemovePlayerButton(bool enable)
         {
             _removePlayerButton.SetEnabled(enable);
+        }
+        
+        /// <summary>
+        /// Enable/disables the token arrow buttons. This stops the user from being able to switch token.
+        /// </summary>
+        /// <param name="enable">State to be assigned to the arrow buttons.</param>
+        public void ToggleTokenArrows(bool enable)
+        {
+            _leftArrowButton.SetEnabled(enable);
+            _rightArrowButton.SetEnabled(enable);
         }
         
         /// <summary>
@@ -113,5 +123,6 @@ namespace UI.Screens.Menu.Components.PlayerPanel
         {
             OnPlayerRemovedClicked?.Invoke(this);
         }
+
     }
 }

@@ -100,11 +100,13 @@ namespace UI.Screens.Menu
         private void UpdateGrid()
         {
             var canBeRemoved = _currentPlayers > minPlayers;
+            var canSwitchToken = _currentPlayers < _tokens.Length;
             for (var i = 0; i < _currentPlayers; i++)
             {
                 var panel = _playersGrid.hierarchy[i] as PlayerPanel;
                 Debug.Assert(panel != null);
                 panel.ToggleRemovePlayerButton(canBeRemoved);
+                panel.ToggleTokenArrows(canSwitchToken);
             }
             var canBeAdded = _currentPlayers < maxPlayers;
             ToggleAddPlayerButton(canBeAdded);
