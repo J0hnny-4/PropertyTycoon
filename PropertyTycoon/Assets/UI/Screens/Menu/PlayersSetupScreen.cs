@@ -1,19 +1,16 @@
-using Objects.Tokens;
-using UI.Managers;
-using UI.Screens.Menu.Components.PlayerPanel;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Screens.Menu
+namespace UI.Menu
 {
     public class PlayersSetupScreen : BaseScreen<MenuScreen>
     {
-        [SerializeField] private string[] defaultNames;
+        [SerializeField] private List<string> defaultNames;
         [SerializeField] private VisualTreeAsset playerPanelTemplate;
         [SerializeField] private int minPlayers = 2;
         [SerializeField] private int maxPlayers = 6;
-        private Token[] _tokens;
-        private int _currentPlayers;
+        private PlayerSetupController _controller;
         private VisualElement _playersGrid;
         private Button _addPlayerButton;
         private Button _readyButton;
@@ -21,39 +18,31 @@ namespace UI.Screens.Menu
         
         public override void Initialise()
         {
+            // creates controller and listen to changes made by it
+            _controller = new PlayerSetupController(minPlayers, maxPlayers, defaultNames);
+            
             // get reference to UI elements
             _readyButton = Root.Q<Button>("ready-button");
             _backButton = Root.Q<Button>("back-button");
-            _playersGrid = Root.Q<VisualElement>("players-grid");
             _addPlayerButton = Root.Q<Button>("add-player-button");
+            _playersGrid = Root.Q<VisualElement>("players-grid");
             
-            // register button actions
+            // register listeners
             _readyButton.RegisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
             _addPlayerButton.clicked += AddNewPlayer;
-
-            _tokens = Resources.LoadAll<Token>("Objects/Tokens");
-            _currentPlayers = 0;
-            GeneratePlayersPanels();
+            _controller.OnPlayersChanged += ToggleAddPlayerButton;
+            
+            // initialise players
+            for (var i = 0; i < minPlayers; i++) { AddNewPlayer(); }
         }
 
         protected override void CleanUp()
         {
             _readyButton.UnregisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.UnregisterCallback<ClickEvent>(OnBackClicked);
-            for (var i = 0; i < _currentPlayers; i++)
-            {
-                var panel = _playersGrid.hierarchy[i] as PlayerPanel;
-                UnregisterPlayer(panel);
-            }
-        }
-        
-        /// <summary>
-        /// Generates the player panels elements, according to the minimum number of players needed.
-        /// </summary>
-        private void GeneratePlayersPanels()
-        {
-            for (var i = 0; i < minPlayers; i++) { AddNewPlayer(); }
+            _addPlayerButton.clicked -= AddNewPlayer;
+            _controller.OnPlayersChanged -= ToggleAddPlayerButton;
         }
 
         /// <summary>
@@ -62,66 +51,19 @@ namespace UI.Screens.Menu
         /// </summary>
         private void AddNewPlayer()
         {
-            Debug.Assert(_currentPlayers < maxPlayers, "Current players cannot be more than minimum players.");
-            var randomName = defaultNames[Random.Range(0, defaultNames.Length)];
-            var playerPanel = new PlayerPanel(playerPanelTemplate, randomName, _tokens);
-            playerPanel.OnPlayerRemovedClicked += RemovePlayer;
-            _playersGrid.hierarchy.Insert(_currentPlayers, playerPanel);
-            _currentPlayers++;
-            UpdateGrid();
-        }
-        
-        /// <summary>
-        /// Removes a player panel, un-registering related events/callbacks in the process.
-        /// </summary>
-        /// <param name="playerPanel">The panel to be removed.</param>
-        private void RemovePlayer(PlayerPanel playerPanel)
-        {
-            Debug.Assert(_currentPlayers > minPlayers, "Current players cannot be less than minimum players.");
-            _currentPlayers--;
-            UnregisterPlayer(playerPanel);
-            playerPanel.RemoveFromHierarchy();
-            UpdateGrid();
-        }
-        
-        /// <summary>
-        ///  Removes events and callbacks from the given player's panel.
-        /// </summary>
-        /// <param name="playerPanel">The panel to be removed.</param>
-        private void UnregisterPlayer(PlayerPanel playerPanel)
-        {
-            playerPanel.OnPlayerRemovedClicked -= RemovePlayer;
-            playerPanel.CleanUp();
+            var newPlayer = _controller.AddPlayer();
+            var playerPanel = new PlayerPanel(playerPanelTemplate, newPlayer, _controller);
+            var index = _controller.PlayersCount - 1;
+            _playersGrid.hierarchy.Insert(index, playerPanel);
         }
 
         /// <summary>
-        /// Updates all panels. Called when a change is made that might impact other panels (such as add/remove panels).
+        /// Hide/show the add player button based on the controller's state.
         /// </summary>
-        private void UpdateGrid()
-        {
-            var canBeRemoved = _currentPlayers > minPlayers;
-            var canSwitchToken = _currentPlayers < _tokens.Length;
-            for (var i = 0; i < _currentPlayers; i++)
-            {
-                var panel = _playersGrid.hierarchy[i] as PlayerPanel;
-                Debug.Assert(panel != null);
-                panel.ToggleRemovePlayerButton(canBeRemoved);
-                panel.ToggleTokenArrows(canSwitchToken);
-            }
-            var canBeAdded = _currentPlayers < maxPlayers;
-            ToggleAddPlayerButton(canBeAdded);
-        }
-
-        /// <summary>
-        /// Toggles the add player button by simply hiding its container. This is because the button itself takes a slot
-        /// in the 'players grid', therefore we want to hide this slot when we have reached the maximum number of
-        /// players.
-        /// </summary>
-        /// <param name="enable">The state to set the button to.</param>
-        private void ToggleAddPlayerButton(bool enable)
+        private void ToggleAddPlayerButton()
         {
             var buttonContainer = _addPlayerButton.parent;
-            buttonContainer.style.display = enable ? DisplayStyle.Flex : DisplayStyle.None;
+            buttonContainer.style.display = _controller.CanAddPlayer ? DisplayStyle.Flex : DisplayStyle.None;
         }
         
         private void OnReadyClicked(ClickEvent e)
