@@ -1,4 +1,4 @@
-namespace UI.Managers
+namespace UI
 {
     public enum MenuScreen {
         MainMenu,

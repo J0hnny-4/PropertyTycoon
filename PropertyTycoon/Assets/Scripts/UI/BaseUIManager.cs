@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using UI.Screens;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace UI.Managers
+namespace UI
 {
     /// <summary>
     /// Acts as a link between all screens in the scene.

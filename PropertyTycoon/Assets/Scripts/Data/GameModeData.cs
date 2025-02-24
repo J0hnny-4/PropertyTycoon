@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.Screens.Menu.Components.GameModes
+namespace Data
 {
     /// <summary>
     /// Define available game modes.

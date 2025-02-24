@@ -1,8 +1,7 @@
-using UI.Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Screens
+namespace UI
 {
     /// <summary>
     /// Generic screen, to be added to the scene as a GameObject (as a child of UIManager).

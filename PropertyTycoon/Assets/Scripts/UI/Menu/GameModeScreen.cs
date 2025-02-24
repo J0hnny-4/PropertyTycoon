@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using UI.Managers;
-using UI.Screens.Menu.Components.GameModes;
+using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Screens.Menu
+namespace UI.Menu
 {
     public class GameModeScreen : BaseScreen<MenuScreen>
     {

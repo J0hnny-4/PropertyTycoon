@@ -1,8 +1,7 @@
-using UI.Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI.Screens.Menu
+namespace UI.Menu
 {
     public class MainMenuScreen : BaseScreen<MenuScreen>
     {

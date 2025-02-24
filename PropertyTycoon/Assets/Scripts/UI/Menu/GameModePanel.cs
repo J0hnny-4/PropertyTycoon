@@ -1,7 +1,8 @@
 using System;
+using Data;
 using UnityEngine.UIElements;
 
-namespace UI.Screens.Menu.Components.GameModes
+namespace UI.Menu
 {
     public class GameModePanel : VisualElement
     {
