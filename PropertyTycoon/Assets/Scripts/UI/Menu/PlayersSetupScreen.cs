@@ -34,7 +34,7 @@ namespace UI.Menu
             _addPlayerButton.clicked += AddNewPlayer;
             _controller.OnPlayersChanged += ToggleAddPlayerButton;
             
-            // initialise players
+            // initialise players to the minimum number allowed
             for (var i = 0; i < minPlayers; i++) { AddNewPlayer(); }
         }
 
@@ -48,7 +48,7 @@ namespace UI.Menu
 
         /// <summary>
         /// Adds a new player panel. The panel is inserted based on number of players, rather than just appended at the
-        /// end.
+        /// end, as some additional VisualElement are used within the grid.
         /// </summary>
         private void AddNewPlayer()
         {

@@ -1,15 +1,13 @@
-using System;
 using Data;
 using UI.Controllers;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 namespace UI.Menu
 {
     public class PlayerPanel : VisualElement
     {
-        private PlayerSetupController _controller;
-        private PlayerData _playerData;
+        private readonly PlayerSetupController _controller;
+        private readonly PlayerData _playerData;
         private readonly Button _removePlayerButton;
         private readonly Toggle _aiToggle;
         private readonly TextField _playerName;
@@ -25,9 +23,6 @@ namespace UI.Menu
         /// <param name="controller">Reference to controller.</param>
         public PlayerPanel(VisualTreeAsset template, PlayerData playerData, PlayerSetupController controller)
         {
-            // setup controller and register event listener
-            _controller = controller;
-            _controller.OnPlayersChanged += UpdateUI;
             
             // clone template & set its class
             template.CloneTree(this);
@@ -41,7 +36,8 @@ namespace UI.Menu
             _leftArrowButton = this.Q<Button>("left-arrow");
             _rightArrowButton = this.Q<Button>("right-arrow");
             
-            // links to PlayerData object
+            // setup variables
+            _controller = controller;
             _playerData = playerData;
             _playerName.value = playerData.Name;
             _aiToggle.value = playerData.IsAI;
@@ -53,47 +49,46 @@ namespace UI.Menu
             _removePlayerButton.RegisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
             _leftArrowButton.clicked += MoveToPreviousToken;
             _rightArrowButton.clicked += MoveToNextToken;
+            _controller.OnPlayersChanged += UpdateButtonsState;
             
-            UpdateUI();
+            UpdateButtonsState();
         }
 
         private void CleanUp()
         {
-            _controller.OnPlayersChanged -= UpdateUI;
+            _playerName.UnregisterCallback<ChangeEvent<string>>(UpdatePlayerName);
+            _aiToggle.UnregisterCallback<ChangeEvent<bool>>(UpdatePlayerAI);
+            _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
             _leftArrowButton.clicked -= MoveToPreviousToken;
             _rightArrowButton.clicked -= MoveToNextToken;
-            _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
-        }
-
-        private void UpdatePlayerName(ChangeEvent<string> evt)
-        {
-            _playerData.Name = evt.newValue;
-        }
-
-        private void UpdatePlayerAI(ChangeEvent<bool> evt)
-        {
-            _playerData.IsAI = evt.newValue;
+            _controller.OnPlayersChanged -= UpdateButtonsState;
         }
 
         /// <summary>
         /// Updates state of buttons based on controller state.
         /// </summary>
-        private void UpdateUI()
+        private void UpdateButtonsState()
         {
             _removePlayerButton.SetEnabled(_controller.CanRemovePlayer);
             _leftArrowButton.SetEnabled(_controller.CanSwitchToken);
             _rightArrowButton.SetEnabled(_controller.CanSwitchToken);
         }
 
-        private void MoveToPreviousToken()
-        {
-            _playerData.Token = _controller.GetNextAvailableToken(_playerData.Token, false);
-            _tokenPreview.style.backgroundImage = _playerData.Token.icon;
-        }
+        private void UpdatePlayerName(ChangeEvent<string> evt) => _playerData.Name = evt.newValue;
+
+        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAI = evt.newValue;
+
+        private void MoveToPreviousToken() => UpdateToken(false);
+
+        private void MoveToNextToken() => UpdateToken(true);
         
-        private void MoveToNextToken()
+        /// <summary>
+        /// Calls controller to update token with the next available one.
+        /// </summary>
+        /// <param name="forward">Whether to go forward or backward.</param>
+        private void UpdateToken(bool forward)
         {
-            _playerData.Token = _controller.GetNextAvailableToken(_playerData.Token, true);
+            _playerData.Token = _controller.GetNextAvailableToken(_playerData.Token, forward);
             _tokenPreview.style.backgroundImage = _playerData.Token.icon;
         }
         

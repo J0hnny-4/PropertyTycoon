@@ -1,4 +1,3 @@
-using UI.Menu;
 using UnityEngine;
 
 namespace Data

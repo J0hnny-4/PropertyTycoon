@@ -38,13 +38,10 @@ namespace UI.Controllers
         /// </exception>
         public PlayerData AddPlayer()
         {
-            if (!CanAddPlayer)
-            {
-                throw new InvalidOperationException("Cannot add new player, maximum reached.");
-            }
-            var token = GetNextAvailableToken();
+            if (!CanAddPlayer) { throw new InvalidOperationException("Cannot add new player, maximum reached."); }
+            
             var randomIndex = Random.Range(0, _defaultNames.Count);
-            var player = new PlayerData(_defaultNames[randomIndex], token);
+            var player = new PlayerData(_defaultNames[randomIndex], GetNextAvailableToken());
             _defaultNames.RemoveAt(randomIndex);
             _players.Add(player);
             OnPlayersChanged?.Invoke();
@@ -59,10 +56,8 @@ namespace UI.Controllers
         /// </exception>
         public void RemovePlayer(PlayerData player)
         {
-            if (!CanRemovePlayer)
-            {
-                throw new InvalidOperationException("Cannot remove player, current at minimum required.");
-            }
+            if (!CanRemovePlayer) { throw new InvalidOperationException("Cannot remove player, minimum reached."); }
+            
             _usedTokens.Remove(player.Token);
             _defaultNames.Add(player.Name);
             _players.Remove(player);
@@ -70,22 +65,25 @@ namespace UI.Controllers
         }
 
         /// <summary>
-        /// Gets next available token from the list.
+        /// Gets next available token, skipping already in use tokens.
         /// </summary>
         /// <returns>Next available token in the list</returns>
         /// <exception cref="InvalidOperationException">Thrown if no more tokens are available.</exception>
         public Token GetNextAvailableToken(Token prevToken = null, bool forward = true)
         {
             if (!CanSwitchToken) { throw new InvalidOperationException("No more tokens available."); }
+            
             // get starting index
             var index = prevToken == null ? 0 : Array.IndexOf(_allTokens, prevToken);
             var increment = forward ? +1 : -1;
             Token newToken;
+            
             // cycle through the list to find an unused token
             do {
                 index = (index + increment + _allTokens.Length) % _allTokens.Length;
                 newToken = _allTokens[index];
             } while (_usedTokens.Contains(newToken));
+            
             // update used set
             _usedTokens.Remove(prevToken);
             _usedTokens.Add(newToken);
