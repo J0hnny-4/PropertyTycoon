@@ -121,6 +121,20 @@ Button.simple:active {
     align-self: stretch;
 }
 
+#box{
+    width: 700px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    opacity: 0.9;
+    padding: 0 var(--spacing-lg);
+    border-color: white;
+    background-color: white;
+    border-width: var(--spacing-sm);
+}
+
+
 
 #spacer {
     flex-grow: 1;
