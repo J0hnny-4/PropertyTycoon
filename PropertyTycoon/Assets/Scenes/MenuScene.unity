@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720283e80e0c439e9252ec5e1cf62829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultScreen: 0
 --- !u!4 &173501946
 Transform:
   m_ObjectHideFlags: 0
@@ -230,7 +231,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e919db8aee4d08b6db453a4cb06784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenType: 2
+  defaultNames:
+  - Seg Faultman
+  - Al Gorithm
+  - Mike Rooptimisation
+  - Buffer The Vampire Slayer
+  - Ray Caster
+  - Sir Render
+  - Count Bitwise
+  - Dr Max Heap
+  - Chris Cross
+  - Luke Warm
+  - Paige Turner
+  - Fizz McBuzz
   playerPanelTemplate: {fileID: 9197481963319205126, guid: 90c05f1ed047c7255beb1494a3f3b70a, type: 3}
+  minPlayers: 2
+  maxPlayers: 6
 --- !u!1 &628625681
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d4d7f38276458b95cdaf5e5fbdee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenType: 1
   gameModePanelTemplate: {fileID: 9197481963319205126, guid: 83858e833623f5c5e9c309dceb95f4b2, type: 3}
   gameModesData:
   - {fileID: 11400000, guid: f1621153366af7fe4902bbee047172ae, type: 2}
@@ -455,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a4fd6f9fe2449fa9b5f41d41859319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenType: 0
 --- !u!1 &1745376989
 GameObject:
   m_ObjectHideFlags: 0
