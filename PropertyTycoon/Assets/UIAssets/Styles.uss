@@ -17,6 +17,7 @@
     --spacing-lg: 32px;
     --spacing-xl: 64px;
     
+    --radius-sm: 24px;
     --radius-md: 32px;
     
     --font-light: white;
@@ -146,4 +147,15 @@ Button.simple:active {
 #spacer {
     flex-grow: 1;
     height: 100px;
+}
+
+/* GAME SCENE ------------------------------------------------------------------------------------------------------- */
+
+
+#players-container {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
 }
