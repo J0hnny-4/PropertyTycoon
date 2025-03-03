@@ -39,7 +39,7 @@
     padding: 0;
     margin: 0;
     -unity-background-scale-mode: scale-to-fit;
-    background-size: cover;
+    background-size: contain;
 }
 
 Button.simple {
@@ -69,6 +69,7 @@ Button.simple:active {
     width: 100%;
     height: 100%;
     background-image: resource('Images/placeholder-menu-bg');
+    background-size: cover;
 }
 
 #header {
