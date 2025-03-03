@@ -1,0 +1,32 @@
+#players-container {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#control-buttons-container {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#leaderboard-button .--button-icon {
+    background-image: resource('Images/Icons/leaderboard');
+}
+
+#forfeit-button .--button-icon {
+    background-image: resource('Images/Icons/forfeit');
+}
+
+#end-turn-button .--button-icon {
+    background-image: resource('Images/Icons/end-turn');
+}
+
+.--button-icon {
+    background-image: resource('Images/Icons/leaderboard');
+}
