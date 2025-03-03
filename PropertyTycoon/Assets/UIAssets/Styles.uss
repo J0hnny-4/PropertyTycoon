@@ -4,6 +4,7 @@
     --header-height: 200px;
     --footer-height: 150px;
     
+    --font-xs: 12px;
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
@@ -17,6 +18,7 @@
     --spacing-lg: 32px;
     --spacing-xl: 64px;
     
+    --radius-xxs: 8px;
     --radius-xs: 16px;
     --radius-sm: 24px;
     --radius-md: 32px;
