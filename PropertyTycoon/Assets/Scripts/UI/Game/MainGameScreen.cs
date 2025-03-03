@@ -1,17 +1,21 @@
+using UnityEngine.UIElements;
+
 namespace UI.Game
 {
     public class MainGameScreen : BaseScreen<GameScreen>
     {
+        private VisualElement _playersContainer;
+        private VisualElement _controlButtonsContainer;
+        
         public override void Initialise()
         {
-            throw new System.NotImplementedException();
+            _playersContainer = Root.Q<VisualElement>("players-container");
+            _controlButtonsContainer = Root.Q<VisualElement>("control-buttons-container");
         }
 
         protected override void CleanUp()
         {
-            throw new System.NotImplementedException();
+            // no events to unsubscribe from yet
         }
-        
-        
     }
 }

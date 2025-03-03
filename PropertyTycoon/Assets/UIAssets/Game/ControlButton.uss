@@ -31,8 +31,8 @@
 
 .control-button {
     border-radius: 100%;
-    height: 100px;
-    width: 100px;
+    height: 130px;
+    width: 130px;
     padding: var(--spacing-md);
     margin: var(--spacing-lg);
     overflow: visible;
@@ -45,7 +45,7 @@
 }
 
 .control-button > #label-container {
-    height: 50px;
+    height: 60px;
     position: absolute;
     bottom: -4px; /* accounts for the border width, has to be set manually unfortunately */
     left: 50%;
