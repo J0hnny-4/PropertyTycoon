@@ -13,8 +13,8 @@
 }
 
 .control-button:active,
-.control-button:active,
-.control-button:hover > #mask  > #label-container {
+.control-button:active > #label-container,
+.control-button:active > #mask {
     background-color: var(--primary-active);
 }
 
