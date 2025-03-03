@@ -1,21 +1,28 @@
+/* GLOBAL ----------------------------------------------------------------------------------------------------------- */
+
 :root {
     --header-height: 200px;
     --footer-height: 150px;
+    
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
     --font-xl: 40px;
     --font-xxl: 90px;
+    
     --spacing-xxs: 2px;
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
+    
     --radius-sm: 24px;
     --radius-md: 32px;
+    
     --font-light: white;
     --font-dark: black;
+    
     --positive-color: rgb(4, 180, 4);
     --primary-color: rgb(214, 48, 45);
     --primary-hover: rgb(145, 33, 30);
@@ -54,6 +61,8 @@ Button.simple:hover {
 Button.simple:active {
     background-color: var(--primary-active);
 }
+
+/* MENU SCENE ------------------------------------------------------------------------------------------------------- */
 
 #background {
     padding: var(--spacing-lg) var(--spacing-xl);
@@ -136,6 +145,8 @@ Button.simple:active {
     flex-grow: 1;
     height: 100px;
 }
+
+/* GAME SCENE ------------------------------------------------------------------------------------------------------- */
 
 #players-container {
     position: absolute;
