@@ -30,6 +30,7 @@
     --primary-color: rgb(214, 48, 45);
     --primary-hover: rgb(145, 33, 30);
     --primary-active: rgb(120, 13, 10);
+    --disabled-color: rgb(95, 73, 73);
     --border-color: rgb(0, 0, 0);
     --off-white: rgb(245, 245, 220);
     --box-solid: rgb(217, 217, 217);
@@ -58,10 +59,14 @@ Button.simple {
     transition: background-color 100ms ease-out;
 }
 
-Button.simple:hover {
+Button.simple:enabled:hover {
     background-color: var(--primary-hover);
 }
 
-Button.simple:active {
+Button.simple:enabled:active {
     background-color: var(--primary-active);
+}
+
+Button.simple:disabled {
+    background-color: var(--disabled-color);
 }

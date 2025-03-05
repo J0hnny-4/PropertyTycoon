@@ -6,25 +6,32 @@
     border-color: var(--border-color);
 }
 
-.control-button:hover,
-.control-button:hover > #label-container,
-.control-button:hover > #mask  {
+.control-button:disabled,
+.control-button:disabled > #label-container,
+.control-button:disabled > #mask {
+    background-color: var(--disabled-color);
+}
+
+
+.control-button:enabled:hover,
+.control-button:enabled:hover > #label-container,
+.control-button:enabled:hover > #mask  {
     background-color: var(--primary-hover);
 }
 
-.control-button:active,
-.control-button:active > #label-container,
-.control-button:active > #mask {
+.control-button:enabled:active,
+.control-button:enabled:active > #label-container,
+.control-button:enabled:active > #mask {
     background-color: var(--primary-active);
 }
 
-.control-button:hover > #label-container,
-.control-button:active > #label-container {
+.control-button:enabled:hover > #label-container,
+.control-button:enabled:active > #label-container {
     scale: 1 1;
 }
 
-.control-button:hover > #label-container > #label,
-.control-button:active > #label-container > #label {
+.control-button:enabled:hover > #label-container > #label,
+.control-button:enabled:active > #label-container > #label {
     transition: opacity 0.2s ease 0.1s;
     opacity: 1;
 }
