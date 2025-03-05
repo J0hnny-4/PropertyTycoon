@@ -1,6 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:Template name="Player" src="project://database/Assets/UIAssets/Game/Player.uxml?fileID=9197481963319205126&amp;guid=94f89bb3f4fa1395db592a97eb11d62d&amp;type=3#Player" />
     <engine:Template name="ControlButton" src="project://database/Assets/UIAssets/Game/ControlButton.uxml?fileID=9197481963319205126&amp;guid=83ef4e8f46e59264db1ce3c71709d8f9&amp;type=3#ControlButton" />
+    <engine:Template name="PropertyCard" src="project://database/Assets/UIAssets/Game/PropertyCard.uxml?fileID=9197481963319205126&amp;guid=f545107653d82cda0b08fc8872f615d0&amp;type=3#PropertyCard" />
     <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
     <Style src="project://database/Assets/UIAssets/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=5e70fcf87ba467575a75b5e34721443c&amp;type=3#GameStyle" />
     <engine:VisualElement name="players-container">
@@ -19,5 +20,23 @@
         <engine:Instance template="ControlButton" name="end-turn-button">
             <AttributeOverrides element-name="label" text="End turn" />
         </engine:Instance>
+    </engine:VisualElement>
+    <engine:VisualElement name="owned-cards-container">
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card test" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card" />
+        <engine:Instance template="PropertyCard" name="TemplateContainer" class="owned-card last-child" />
     </engine:VisualElement>
 </engine:UXML>
