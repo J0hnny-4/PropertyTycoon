@@ -7,7 +7,11 @@ namespace Data
     public class SquareData
     {
         public string Name { get; }
-
+        
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name">Displayed name of piece.</param>
         public SquareData(string name)
         {
             this.Name = name;

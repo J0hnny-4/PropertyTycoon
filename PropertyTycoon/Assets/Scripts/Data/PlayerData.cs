@@ -25,6 +25,12 @@ namespace Data
 
         public bool IsAi { get; set; } = false;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name">Players username.</param>
+        /// <param name="token">Enum for the piece they are controlling.</param>
+        /// <param name="isAi">Bool for denoting a human or bot.</param>
         public PlayerData(string name, Token token, bool isAi = false)
         {
             this.Name = name;
