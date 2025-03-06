@@ -1,3 +1,6 @@
+/// <summary>
+/// Stations are an ownable square that charge rent based on the number of stations owned by the player.
+/// </summary>
 public class Station : Ownable
 {
     private int rent { get; }
@@ -5,6 +8,10 @@ public class Station : Ownable
     {
         this.rent = rent;
     }
+    
+    /// <summary>
+    /// Counts the number of stations owned by the player and charges rent based on that number.
+    /// </summary>
     protected override void chargeRent()
     {
         int noOfStationsOwned = 0;

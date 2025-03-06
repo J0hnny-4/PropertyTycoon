@@ -1,5 +1,8 @@
 using System;
 
+/// <summary>
+/// And ownable square that cheges rent based on the last dice roll and the number of utilities owned by the player.
+/// </summary>
 public class Utility : Ownable
 {
     private int[] rent { get; }
