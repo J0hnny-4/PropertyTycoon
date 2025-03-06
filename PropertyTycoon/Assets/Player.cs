@@ -1,6 +1,13 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// A class representing a player in the game.
+/// Stores data including name, piece, money, properties, and position.
+/// Provide functionality for taking turns, moving, and interacting with the board.
+/// This is an abstract class, and should be extended to create a specific player type, human or AI.
+/// </summary>
+
 public abstract class Player
 {
     private string name { get; }
@@ -54,15 +61,30 @@ public abstract class Player
         //TODO give options to leave jail
         --turnsLeftInJail;
     }
-
+    
+    /// <summary>
+    /// Used when a player gains money for any reason.
+    /// </summary>
+    /// <param name="amount">The amount of money to add to their total.</param>
     public void addMoney(int amount)
     {
         //TODO some nice animation
         money += amount;
     }
     
+    /// <summary>
+    /// Adds a property to the player's list of owned properties.
+    /// Used for purchases or trades.
+    /// </summary>
+    /// <param name="property">The property the plater gained</param>
     public void addProperty(Ownable property) { properties.Add(property); }
     
+    /// <summary>
+    /// Removes an amount of money from the player's total.
+    /// If they do not have enough money, the bankrupt process starts.
+    /// </summary>
+    /// <param name="amount">Amount of money needed to be paid</param>
+    /// <returns></returns>
     public int payMoney(int amount)
     {
         //TODO some nice animation, Possibly start bankrupt process here?
@@ -76,13 +98,22 @@ public abstract class Player
         return amount;
     }
 
+    /// <summary>
+    /// Sends the player to jail.
+    /// Sets their position to the jail square and sets the number of turns left in jail to the appropriate number.
+    /// </summary>
     public void goToJail()
     {
         //TODO Just a placeholder for now, remove magic numbers.
         position = 10;
         turnsLeftInJail = 3;
     }
-
+    
+    /// <summary>
+    /// Moves the player around the board based on a dice roll.
+    /// Takes any actions required when landing on a square.
+    /// </summary>
+    /// <returns></returns>
     private bool move()
     {
         int roll = rollDice();
@@ -103,7 +134,12 @@ public abstract class Player
         this.currentSquare.playerLands();
         return doublesRolled > 0;
     }
-
+    
+    /// <summary>
+    /// Performs the actions required for a player's turn.
+    /// Rolling the dice up to 3 times, moving around the board, and taking any actions required when landing on a square.
+    /// </summary>
+    //TODO: This functionality may need to be moved to a gamecontroller class
     public void takeTurn()
     {
         if (turnsLeftInJail > 0)
