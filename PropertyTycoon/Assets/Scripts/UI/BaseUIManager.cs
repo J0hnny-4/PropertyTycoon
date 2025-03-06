@@ -8,11 +8,10 @@ namespace UI
     /// </summary>
     public abstract class BaseUIManager<T> : MonoBehaviour
     {
-        [SerializeField]
-        protected T defaultScreen;
+        [SerializeField] protected T defaultScreen;
         protected BaseScreen<T> CurrentScreen;
         protected Dictionary<T, BaseScreen<T>> Screens;
-        
+
         /// <summary>
         /// Base class registers screens on awake. Additional functionality to be implemented by concrete derivation. 
         /// </summary>
@@ -20,7 +19,7 @@ namespace UI
         {
             RegisterScreens();
         }
-    
+
         /// <summary>
         /// Gets all screens for which this manager is responsible for and initialises them.<br/>
         /// NOTE: screens should be present in the scene as children of this GameObject.
@@ -44,7 +43,7 @@ namespace UI
         public void NavigateTo(T screenType)
         {
             CurrentScreen?.Hide();
-            Screens.TryGetValue(screenType, out BaseScreen<T> screen);
+            Screens.TryGetValue(screenType, out var screen);
             Debug.Assert(screen != null, $"{screenType} not found."); // debug
             screen.Show();
             CurrentScreen = screen;

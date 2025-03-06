@@ -1,12 +1,16 @@
-/// <summary>
-/// Holds data for a square on the board.
-/// functionality is defined by the Square class.
-/// </summary>
-public class SquareData
+namespace Data
 {
-    public string name { get; }
-    public SquareData(string name)
+    /// <summary>
+    /// Holds data for a square on the board.
+    /// functionality is defined by the Square class.
+    /// </summary>
+    public class SquareData
     {
-        this.name = name;
+        public string Name { get; }
+
+        public SquareData(string name)
+        {
+            this.Name = name;
+        }
     }
 }

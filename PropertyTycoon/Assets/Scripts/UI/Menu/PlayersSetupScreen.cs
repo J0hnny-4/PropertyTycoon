@@ -16,26 +16,26 @@ namespace UI.Menu
         private Button _addPlayerButton;
         private Button _readyButton;
         private Button _backButton;
-        
+
         public override void Initialise()
         {
             // creates controller and listen to changes made by it
             _controller = new PlayerSetupController(minPlayers, maxPlayers, defaultNames);
-            
+
             // get reference to UI elements
             _readyButton = Root.Q<Button>("ready-button");
             _backButton = Root.Q<Button>("back-button");
             _addPlayerButton = Root.Q<Button>("add-player-button");
             _playersGrid = Root.Q<VisualElement>("players-grid");
-            
+
             // register listeners
             _readyButton.RegisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
             _addPlayerButton.clicked += AddNewPlayer;
             _controller.OnPlayersChanged += ToggleAddPlayerButton;
-            
+
             // initialise players to the minimum number allowed
-            for (var i = 0; i < minPlayers; i++) { AddNewPlayer(); }
+            for (var i = 0; i < minPlayers; i++) AddNewPlayer();
         }
 
         protected override void CleanUp()
@@ -66,22 +66,23 @@ namespace UI.Menu
             var buttonContainer = _addPlayerButton.parent;
             buttonContainer.style.display = _controller.CanAddPlayer ? DisplayStyle.Flex : DisplayStyle.None;
         }
-        
+
         private void OnReadyClicked(ClickEvent e)
         {
             // todo: setup players
             // todo: move to game scene
             var playersData = _controller.GetPlayers();
-            
+
             Debug.Log($"Total players: {playersData.Count} ------------------------");
             for (var i = 0; i < playersData.Count; i++)
             {
                 var player = playersData[i];
-                Debug.Log($"Player {i+1} data: "
-                    + $"\nName: {player.Name} "
-                    + $"\nToken: {player.Token.name} "
-                    + $"\nisAI: {player.IsAI}\n");
+                Debug.Log($"Player {i + 1} data: "
+                          + $"\nName: {player.Name} "
+                          + $"\nToken: {player.Token.name} "
+                          + $"\nisAI: {player.IsAi}\n");
             }
+
             Debug.Log($"End of list -----------------------------------------------");
         }
 

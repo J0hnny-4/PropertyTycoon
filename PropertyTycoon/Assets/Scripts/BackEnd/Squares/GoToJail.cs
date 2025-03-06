@@ -1,19 +1,22 @@
 using Data;
 
-/// <summary>
-/// Upon landing the player is sent to jail.
-/// </summary>
-public class GoToJail : Square
+namespace BackEnd.Squares
 {
-    public GoToJail(SquareData data) : base(data)
-    {
-    }
-
     /// <summary>
-    /// Sends the player to jail.
+    /// Upon landing the player is sent to jail.
     /// </summary>
-    public override void PlayerLands()
+    public class GoToJail : Square
     {
-        //TODO: Implement sending the player to jail
+        public GoToJail(SquareData data) : base(data)
+        {
+        }
+
+        /// <summary>
+        /// Sends the player to jail.
+        /// </summary>
+        public override void PlayerLands()
+        {
+            //TODO: Implement sending the player to jail
+        }
     }
 }

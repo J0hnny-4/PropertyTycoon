@@ -23,11 +23,10 @@ namespace UI.Menu
         /// <param name="controller">Reference to controller.</param>
         public PlayerPanel(VisualTreeAsset template, PlayerData playerData, PlayerSetupController controller)
         {
-            
             // clone template & set its class
             template.CloneTree(this);
-            this.AddToClassList("players-grid-cell");
-            
+            AddToClassList("players-grid-cell");
+
             // get reference to UI elements
             _removePlayerButton = this.Q<Button>("remove-player-button");
             _aiToggle = this.Q<Toggle>("ai-toggle");
@@ -35,14 +34,14 @@ namespace UI.Menu
             _tokenPreview = this.Q<VisualElement>("token-preview");
             _leftArrowButton = this.Q<Button>("left-arrow");
             _rightArrowButton = this.Q<Button>("right-arrow");
-            
+
             // setup variables
             _controller = controller;
             _playerData = playerData;
             _playerName.value = playerData.Name;
-            _aiToggle.value = playerData.IsAI;
+            _aiToggle.value = playerData.IsAi;
             _tokenPreview.style.backgroundImage = _playerData.Token.icon;
-            
+
             // register callbacks
             _playerName.RegisterCallback<ChangeEvent<string>>(UpdatePlayerName);
             _aiToggle.RegisterCallback<ChangeEvent<bool>>(UpdatePlayerAI);
@@ -50,7 +49,7 @@ namespace UI.Menu
             _leftArrowButton.clicked += MoveToPreviousToken;
             _rightArrowButton.clicked += MoveToNextToken;
             _controller.OnPlayersChanged += UpdateButtonsState;
-            
+
             UpdateButtonsState();
         }
 
@@ -74,14 +73,26 @@ namespace UI.Menu
             _rightArrowButton.SetEnabled(_controller.CanSwitchToken);
         }
 
-        private void UpdatePlayerName(ChangeEvent<string> evt) => _playerData.Name = evt.newValue;
+        private void UpdatePlayerName(ChangeEvent<string> evt)
+        {
+            _playerData.Name = evt.newValue;
+        }
 
-        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAI = evt.newValue;
+        private void UpdatePlayerAI(ChangeEvent<bool> evt)
+        {
+            _playerData.IsAi = evt.newValue;
+        }
 
-        private void MoveToPreviousToken() => UpdateToken(false);
+        private void MoveToPreviousToken()
+        {
+            UpdateToken(false);
+        }
 
-        private void MoveToNextToken() => UpdateToken(true);
-        
+        private void MoveToNextToken()
+        {
+            UpdateToken(true);
+        }
+
         /// <summary>
         /// Calls controller to update token with the next available one.
         /// </summary>
@@ -91,7 +102,7 @@ namespace UI.Menu
             _playerData.Token = _controller.GetNextAvailableToken(_playerData.Token, forward);
             _tokenPreview.style.backgroundImage = _playerData.Token.icon;
         }
-        
+
         /// <summary>
         /// Sends command to remove player. It then deletes itself from the hierarchy.
         /// </summary>
@@ -100,8 +111,7 @@ namespace UI.Menu
         {
             _controller.RemovePlayer(_playerData);
             CleanUp();
-            this.hierarchy.parent.Remove(this);
+            hierarchy.parent.Remove(this);
         }
-
     }
 }

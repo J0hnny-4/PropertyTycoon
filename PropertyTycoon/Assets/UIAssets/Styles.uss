@@ -3,22 +3,22 @@
 :root {
     --header-height: 200px;
     --footer-height: 150px;
-    
+
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
     --font-xl: 40px;
     --font-xxl: 90px;
-    
+
     --spacing-xxs: 2px;
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
-    
+
     --radius-md: 32px;
-    
+
     --font-light: white;
     --font-dark: black;
 
@@ -27,7 +27,7 @@
     --border-color: rgba(0, 0, 0, 1);
     --box-solid: rgba(217, 217, 217, 1);
     --box-see-through: rgba(217, 217, 217, 0.95);
-    
+
 }
 
 * {

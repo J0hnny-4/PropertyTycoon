@@ -1,27 +1,28 @@
 using Data;
 
-/// <summary>
-/// Stations are an ownable square that charge rent based on the number of stations owned by the player.
-/// </summary>
-public class Station : Ownable
+namespace BackEnd.Squares
 {
-    private int Rent { get; }
-
-    public Station(string name, int cost, int rent) : base(name, cost)
-    {
-        this.Rent = rent;
-    }
-
     /// <summary>
-    /// Counts the number of stations owned by the player and charges rent based on that number.
+    /// Stations are an ownable square that charge rent based on the number of stations owned by the player.
     /// </summary>
-    protected override void ChargeRent()
+    public class Station : Ownable
     {
-        var noOfStationsOwned = 0;
-        foreach (var i in Owner.properties)
-            if (i is Station)
-                noOfStationsOwned++;
-        int money = GameState.ActivePlayer.payMoney(Rent * noOfStationsOwned);
-        Owner.addMoney(money);
+        private int Rent { get; }
+
+        public Station(StationData data) : base(data) { }
+
+        /// <summary>
+        /// Counts the number of stations owned by the player and charges rent based on that number.
+        /// </summary>
+        protected override void ChargeRent()
+        {
+            // TODO decouple
+            // var noOfStationsOwned = 0;
+            // foreach (var i in Owner.properties) 
+            //     if (i is Station)
+            //         noOfStationsOwned++;
+            // int money = GameState.ActivePlayer.payMoney(Rent * noOfStationsOwned);
+            // Owner.addMoney(money);
+        }
     }
 }

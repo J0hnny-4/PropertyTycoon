@@ -15,7 +15,7 @@ namespace UI.Controllers
         private readonly int _minPlayers;
         private readonly int _maxPlayers;
         public event Action OnPlayersChanged;
-    
+
         public bool CanAddPlayer => _players.Count < _maxPlayers;
         public bool CanRemovePlayer => _players.Count > _minPlayers;
         public bool CanSwitchToken => _usedTokens.Count < _allTokens.Length;
@@ -38,8 +38,8 @@ namespace UI.Controllers
         /// </exception>
         public PlayerData AddPlayer()
         {
-            if (!CanAddPlayer) { throw new InvalidOperationException("Cannot add new player, maximum reached."); }
-            
+            if (!CanAddPlayer) throw new InvalidOperationException("Cannot add new player, maximum reached.");
+
             var randomIndex = Random.Range(0, _defaultNames.Count);
             var player = new PlayerData(_defaultNames[randomIndex], GetNextAvailableToken());
             _defaultNames.RemoveAt(randomIndex);
@@ -56,8 +56,8 @@ namespace UI.Controllers
         /// </exception>
         public void RemovePlayer(PlayerData player)
         {
-            if (!CanRemovePlayer) { throw new InvalidOperationException("Cannot remove player, minimum reached."); }
-            
+            if (!CanRemovePlayer) throw new InvalidOperationException("Cannot remove player, minimum reached.");
+
             _usedTokens.Remove(player.Token);
             _defaultNames.Add(player.Name);
             _players.Remove(player);
@@ -71,31 +71,35 @@ namespace UI.Controllers
         /// <exception cref="InvalidOperationException">Thrown if no more tokens are available.</exception>
         public Token GetNextAvailableToken(Token prevToken = null, bool forward = true)
         {
-            if (!CanSwitchToken) { throw new InvalidOperationException("No more tokens available."); }
-            
+            if (!CanSwitchToken) throw new InvalidOperationException("No more tokens available.");
+
             // get starting index
             var index = prevToken == null ? 0 : Array.IndexOf(_allTokens, prevToken);
             var increment = forward ? +1 : -1;
             Token newToken;
-            
+
             // cycle through the list to find an unused token
-            do {
+            do
+            {
                 index = (index + increment + _allTokens.Length) % _allTokens.Length;
                 newToken = _allTokens[index];
             } while (_usedTokens.Contains(newToken));
-            
+
             // update used set
             _usedTokens.Remove(prevToken);
             _usedTokens.Add(newToken);
             return newToken;
         }
-    
+
         /// <summary>
         /// Gets the current list of players as a readonly list.
         /// </summary>
         /// <returns>The list of players.</returns>
-        public IReadOnlyList<PlayerData> GetPlayers() => _players.AsReadOnly();
-    
+        public IReadOnlyList<PlayerData> GetPlayers()
+        {
+            return _players.AsReadOnly();
+        }
+
         /// <summary>
         /// Returns the current number of players.
         /// </summary>

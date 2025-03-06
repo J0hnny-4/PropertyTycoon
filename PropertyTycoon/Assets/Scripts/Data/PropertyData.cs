@@ -1,26 +1,29 @@
-/// <summary>
-/// Specialized OwnableData for property squares.
-/// Stores the rent, colour, house cost and number of houses on the property.
-/// </summary>
-public class PropertyData : OwnableData
+namespace Data
 {
-    public int[] rent { get; }
-    public string colour { get; }
-    public int houseCost { get; }
-    public int houses { get; set; } = 0;
-    
     /// <summary>
-    /// 
+    /// Specialized OwnableData for property squares.
+    /// Stores the rent, colour, house cost and number of houses on the property.
     /// </summary>
-    /// <param name="name">Property Name</param>
-    /// <param name="cost">Cost to oourchase</param>
-    /// <param name="rent">Array of rents at levels of set ownership and houses</param>
-    /// <param name="color">Colour set of property</param>
-    /// <param name="houseCost">Cost to build a house or hotel</param>
-    public PropertyData(string name, int cost, int[] rent, string colour, int houseCost) : base(name, cost)
+    public class PropertyData : OwnableData
     {
-        this.rent = rent;
-        this.colour = colour;
-        this.houseCost = houseCost;
+        public int[] Rent { get; }
+        public string Colour { get; }
+        public int HouseCost { get; }
+        public int Houses { get; set; } = 0;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">Property Name</param>
+        /// <param name="cost">Cost to oourchase</param>
+        /// <param name="rent">Array of rents at levels of set ownership and houses</param>
+        /// <param name="color">Colour set of property</param>
+        /// <param name="houseCost">Cost to build a house or hotel</param>
+        public PropertyData(string name, int cost, int[] rent, string colour, int houseCost) : base(name, cost)
+        {
+            this.Rent = rent;
+            this.Colour = colour;
+            this.HouseCost = houseCost;
+        }
     }
 }
