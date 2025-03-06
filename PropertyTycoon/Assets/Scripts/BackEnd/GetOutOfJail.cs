@@ -8,15 +8,16 @@ using System.Collections.Generic;
 /// </summary>
 public class GetOutOfJail : Card
 {
-    private Queue<Card> homeDeck;
+    private Queue<Card> _homeDeck;
 
-    public GetOutOfJail(string name, string description, Action effect, Queue<Card> homeDeck) : base(name, description, effect)
+    public GetOutOfJail(string name, string description, Action effect, Queue<Card> homeDeck) : base(name, description,
+        effect)
     {
-        this.homeDeck = homeDeck;
+        this._homeDeck = homeDeck;
     }
-    
-    public void returnToDeck()
+
+    public void ReturnToDeck()
     {
-        homeDeck.Enqueue(this);
+        _homeDeck.Enqueue(this);
     }
 }

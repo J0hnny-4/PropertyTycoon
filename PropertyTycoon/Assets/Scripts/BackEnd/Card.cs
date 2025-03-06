@@ -6,14 +6,14 @@ using System;
 /// </summary>
 public class Card
 {
-    public string name { get; }
-    public string description { get; }
-    public Action effect { get; }
+    public string Name { get; }
+    public string Description { get; }
+    public Action Effect { get; }
 
     public Card(string name, string description, Action effect)
     {
-        this.name = name;
-        this.description = description;
-        this.effect = effect;
+        this.Name = name;
+        this.Description = description;
+        this.Effect = effect;
     }
 }

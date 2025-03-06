@@ -1,15 +1,19 @@
+using Data;
+
 /// <summary>
 /// Upon landing the player is sent to jail.
 /// </summary>
 public class GoToJail : Square
 {
-    public GoToJail(string name) : base(name) { }
-    
+    public GoToJail(SquareData data) : base(data)
+    {
+    }
+
     /// <summary>
     /// Sends the player to jail.
     /// </summary>
-    public override void playerLands()
+    public override void PlayerLands()
     {
-        GameState.currentPlayer.goToJail();
+        //TODO: Implement sending the player to jail
     }
 }

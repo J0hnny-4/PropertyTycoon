@@ -1,17 +1,21 @@
+using Data;
+
 /// <summary>
 /// Gives the player the money collected on free parking upon landing.
 /// Free parking money is stored in the GameState class.
 /// </summary>
 public class FreeParking : Square
 {
-    public FreeParking(string name) : base(name) { }
+    public FreeParking(SquareData data) : base(data)
+    {
+    }
 
     /// <summary>
     /// Gives the money in free parking to the player who lands on it.
     /// </summary>
-    public override void playerLands()
+    public override void PlayerLands()
     {
-        GameState.currentPlayer.addMoney(GameState.freeParkingMoney);
-        GameState.freeParkingReset();
+        // GameState.activePlayer.addMoney(GameState.freeParkingMoney); TODO: Implement addMoney
+        GameState.FreeParkingReset(); // Maybe con troll via GameRunner?
     }
 }

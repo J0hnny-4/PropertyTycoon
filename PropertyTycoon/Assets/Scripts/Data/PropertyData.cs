@@ -1,0 +1,26 @@
+/// <summary>
+/// Specialized OwnableData for property squares.
+/// Stores the rent, colour, house cost and number of houses on the property.
+/// </summary>
+public class PropertyData : OwnableData
+{
+    public int[] rent { get; }
+    public string colour { get; }
+    public int houseCost { get; }
+    public int houses { get; set; } = 0;
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name">Property Name</param>
+    /// <param name="cost">Cost to oourchase</param>
+    /// <param name="rent">Array of rents at levels of set ownership and houses</param>
+    /// <param name="color">Colour set of property</param>
+    /// <param name="houseCost">Cost to build a house or hotel</param>
+    public PropertyData(string name, int cost, int[] rent, string colour, int houseCost) : base(name, cost)
+    {
+        this.rent = rent;
+        this.colour = colour;
+        this.houseCost = houseCost;
+    }
+}
