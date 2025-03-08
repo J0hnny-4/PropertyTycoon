@@ -40,7 +40,7 @@ namespace UI.Menu
             _controller = controller;
             _playerData = playerData;
             _playerName.value = playerData.Name;
-            _aiToggle.value = playerData.IsAI;
+            _aiToggle.value = playerData.IsAi;
             _tokenPreview.style.backgroundImage = _playerData.Token.icon;
             
             // register callbacks
@@ -74,7 +74,7 @@ namespace UI.Menu
 
         private void UpdatePlayerName(ChangeEvent<string> evt) => _playerData.Name = evt.newValue;
 
-        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAI = evt.newValue;
+        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAi = evt.newValue;
 
         private void MoveToPreviousToken() => UpdateToken(false);
 

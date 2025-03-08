@@ -13,12 +13,12 @@ namespace UI.Menu
             // get reference to UI elements
             _startButton = Root.Q<Button>("start-button");
             _quitButton = Root.Q<Button>("quit-button");
-            
+
             // register button actions
             _startButton.RegisterCallback<ClickEvent>(OnStartClicked);
             _quitButton.RegisterCallback<ClickEvent>(OnQuitClicked);
         }
-        
+
         protected override void CleanUp()
         {
             _startButton.UnregisterCallback<ClickEvent>(OnStartClicked);
