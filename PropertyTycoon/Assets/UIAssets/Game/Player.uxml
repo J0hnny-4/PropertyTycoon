@@ -1,0 +1,18 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Game/Player.uss?fileID=7433441132597879392&amp;guid=268ebb4faf3c0fcbcbbe93090be4de7e&amp;type=3#Player" />
+    <engine:VisualElement name="player" class="player">
+        <engine:VisualElement name="top">
+            <engine:VisualElement name="leader-icon" style="background-image: resource(&apos;Images/Icons/crown&apos;);" />
+            <engine:Label text="PlayerName" name="name" style="text-overflow: ellipsis;" />
+            <engine:VisualElement name="token-container">
+                <engine:VisualElement name="token-icon" style="background-image: resource(&apos;Images/Tokens/cat&apos;);" />
+                <engine:VisualElement name="jail-icon" style="flex-grow: 1; background-image: resource(&apos;Images/Icons/jail&apos;);" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="bottom">
+            <engine:VisualElement name="ai-icon" />
+            <engine:Label text="$ 0000" name="money" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

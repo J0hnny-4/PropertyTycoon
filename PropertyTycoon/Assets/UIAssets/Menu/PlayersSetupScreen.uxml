@@ -1,24 +1,23 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements"
-             xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
-             editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles"/>
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Menu/MenuStyle.uss?fileID=7433441132597879392&amp;guid=de8d337629a2c002c8abc5536105503b&amp;type=3#MenuStyle" />
     <engine:VisualElement name="background">
         <engine:VisualElement name="header">
             <engine:VisualElement name="banner">
-                <engine:Label text="SELECT PLAYERS" name="screen-title"/>
+                <engine:Label text="SELECT PLAYERS" name="screen-title" />
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="content">
             <engine:VisualElement name="players-grid">
                 <engine:VisualElement name="add-player-grid-cell" class="players-grid-cell">
-                    <engine:Button name="add-player-button"/>
+                    <engine:Button name="add-player-button" />
                 </engine:VisualElement>
-                <engine:VisualElement name="spacer"/>
+                <engine:VisualElement name="spacer" />
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="footer" style="align-items: flex-start; justify-content: space-around;">
-            <engine:Button text="BACK" name="back-button" class="simple"/>
-            <engine:Button text="CONTINUE" name="ready-button" class="simple"/>
+            <engine:Button text="BACK" name="back-button" class="simple" />
+            <engine:Button text="CONTINUE" name="ready-button" class="simple" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
