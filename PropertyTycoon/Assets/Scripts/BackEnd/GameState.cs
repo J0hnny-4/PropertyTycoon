@@ -31,17 +31,7 @@ namespace BackEnd
         /// Sets up the board and players for a new game.
         /// Currently, creates a placeholder board and two placeholder players.
         /// </summary>
-        private GameState()
-        {
-            //TODO replace placholder board with actual squares
-
-            for (var i = 0; i < 40; i++)
-                if (i == 20) _board.Add(new SquareData("Free Parking"));
-                else if (i == 30) _board.Add(new SquareData("Go To Jail"));
-                else _board.Add(new SquareData("Square " + i));
-            _players.Add(new PlayerData("Player 1", ScriptableObject.CreateInstance<Token>()));
-            _players.Add(new PlayerData("Player 2", ScriptableObject.CreateInstance<Token>()));
-        }
+        private GameState() { }
 
         /// <summary>
         /// Restest the free parking money to 0.
@@ -49,7 +39,9 @@ namespace BackEnd
         /// </summary>
         public static void FreeParkingReset() { Instance._freeParkingMoney = 0; }
 
-        public static List<SquareData> Board => Instance._board;
+        public static List<SquareData> Board { get { return Instance._board; } set { Instance._board = value; } }
+        public static void addSquare(SquareData square) { Instance._board.Add(square); }
+        
         public static int BoardSize => Instance._board.Count;
 
         /// <summary>
