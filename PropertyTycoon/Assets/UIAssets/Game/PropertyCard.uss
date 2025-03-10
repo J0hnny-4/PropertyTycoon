@@ -1,0 +1,60 @@
+.card {
+    width: 250px;
+    height: 350px;
+    padding: var(--spacing-xs);
+    background-color: var(--off-white);
+    border-radius: var(--radius-xs);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.card > #content {
+    flex-grow: 1;
+    flex-direction: column;
+    background-color: var(--off-white);
+    border-radius: var(--radius-xxs);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.card > #content > #name {
+    height: 75px;
+    color: var(--font-light);
+    background-color: blueviolet; /* default color, to be replaced dynamically */
+    font-size: var(--font-sm);
+    -unity-text-align: middle-center;
+}
+
+.card > #content > #rent-section {
+    border-width: var(--spacing-xs) 0;
+    border-color: var(--border-color);
+    flex-grow: 1;
+}
+
+.section {
+    padding: var(--spacing-xs);
+    justify-content: space-evenly;
+}
+
+.card > #content .info {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card > #content .info * {
+    font-size: var(--font-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.card > #content .info > #text {
+    -unity-text-align: middle-left;
+}
+
+.card > #content .info > #value {
+    -unity-text-align: middle-right;
+}
+
+.card > #content .info.active * {
+    background-color: chartreuse;
+}

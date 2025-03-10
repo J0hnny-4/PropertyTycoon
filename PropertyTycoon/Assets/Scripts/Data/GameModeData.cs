@@ -10,7 +10,7 @@ namespace Data
         Classic,
         Abridged
     }
-    
+
     /// <summary>
     /// Scriptable object to store data specific to game modes.
     /// </summary>

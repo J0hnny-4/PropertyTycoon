@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data;
 using UI.Controllers;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +12,7 @@ namespace UI.Menu
         [SerializeField] private VisualTreeAsset playerPanelTemplate;
         [SerializeField] private int minPlayers = 2;
         [SerializeField] private int maxPlayers = 6;
+        private Dictionary<PlayerData, PlayerPanel> _panels = new ();
         private PlayerSetupController _controller;
         private VisualElement _playersGrid;
         private Button _addPlayerButton;
@@ -31,40 +33,59 @@ namespace UI.Menu
             // register listeners
             _readyButton.RegisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
-            _addPlayerButton.clicked += AddNewPlayer;
-            _controller.OnPlayersChanged += ToggleAddPlayerButton;
+            _addPlayerButton.clicked += _controller.AddPlayer;
+            _controller.OnPlayerAdded += HandlePlayerAdded;
+            _controller.OnPlayerRemoved += HandlePlayerRemoved;
             
-            // initialise players to the minimum number allowed
-            for (var i = 0; i < minPlayers; i++) { AddNewPlayer(); }
+            // initialises controller
+            _controller.InitialisePlayers();
         }
 
         protected override void CleanUp()
         {
             _readyButton.UnregisterCallback<ClickEvent>(OnReadyClicked);
             _backButton.UnregisterCallback<ClickEvent>(OnBackClicked);
-            _addPlayerButton.clicked -= AddNewPlayer;
-            _controller.OnPlayersChanged -= ToggleAddPlayerButton;
+            _addPlayerButton.clicked -= _controller.AddPlayer;
+            _controller.OnPlayerAdded -= HandlePlayerAdded;
+            _controller.OnPlayerRemoved -= HandlePlayerRemoved;
         }
 
         /// <summary>
-        /// Adds a new player panel. The panel is inserted based on number of players, rather than just appended at the
-        /// end, as some additional VisualElement are used within the grid.
+        /// When a new player is added, a new player panel is created and linked to the player. The panel is inserted
+        /// based on number of players, rather than just appended at the end, as some additional VisualElement are used
+        /// within the grid.
         /// </summary>
-        private void AddNewPlayer()
+        /// <param name="player">The player to be added.</param>
+        private void HandlePlayerAdded(PlayerData player)
         {
-            var newPlayer = _controller.AddPlayer();
-            var playerPanel = new PlayerPanel(playerPanelTemplate, newPlayer, _controller);
+            var playerPanel = new PlayerPanel(playerPanelTemplate, player, _controller);
             var index = _controller.PlayersCount - 1;
             _playersGrid.hierarchy.Insert(index, playerPanel);
+            _panels.Add(player, playerPanel);
+            UpdateButtonsState();
         }
 
         /// <summary>
-        /// Hide/show the add player button based on the controller's state.
+        /// When a player is removed, the corresponding panel is deleted and removed from the grid.
         /// </summary>
-        private void ToggleAddPlayerButton()
+        /// <param name="player"></param>
+        private void HandlePlayerRemoved(PlayerData player)
+        {
+            var panel = _panels[player];
+            panel.CleanUp();
+            _panels.Remove(player);
+            _playersGrid.hierarchy.Remove(panel);
+            UpdateButtonsState();
+        }
+
+        /// <summary>
+        /// Enable/disable buttons depending on the controller's state.
+        /// </summary>
+        private void UpdateButtonsState()
         {
             var buttonContainer = _addPlayerButton.parent;
             buttonContainer.style.display = _controller.CanAddPlayer ? DisplayStyle.Flex : DisplayStyle.None;
+            foreach (var panel in _panels.Values) { panel.UpdateButtonsState(); }
         }
         
         private void OnReadyClicked(ClickEvent e)
@@ -80,7 +101,7 @@ namespace UI.Menu
                 Debug.Log($"Player {i+1} data: "
                     + $"\nName: {player.Name} "
                     + $"\nToken: {player.Token.name} "
-                    + $"\nisAI: {player.IsAI}\n");
+                    + $"\nisAI: {player.IsAi}\n");
             }
             Debug.Log($"End of list -----------------------------------------------");
         }
