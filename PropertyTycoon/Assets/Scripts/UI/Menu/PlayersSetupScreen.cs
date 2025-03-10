@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using BackEnd;
 using Data;
 using UI.Controllers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI.Menu
@@ -88,22 +90,14 @@ namespace UI.Menu
             foreach (var panel in _panels.Values) { panel.UpdateButtonsState(); }
         }
         
+        /// <summary>
+        /// Save created players to the GameState, then proceeds to Game scene.
+        /// </summary>
+        /// <param name="e"></param>
         private void OnReadyClicked(ClickEvent e)
         {
-            // todo: setup players
-            // todo: move to game scene
-            var playersData = _controller.GetPlayers();
-            
-            Debug.Log($"Total players: {playersData.Count} ------------------------");
-            for (var i = 0; i < playersData.Count; i++)
-            {
-                var player = playersData[i];
-                Debug.Log($"Player {i+1} data: "
-                    + $"\nName: {player.Name} "
-                    + $"\nToken: {player.Token.name} "
-                    + $"\nisAI: {player.IsAi}\n");
-            }
-            Debug.Log($"End of list -----------------------------------------------");
+            GameState.Players = _controller.GetPlayers();
+            SceneManager.LoadScene("GameScene");
         }
 
         private void OnBackClicked(ClickEvent e)
