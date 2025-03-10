@@ -1,3 +1,4 @@
+using System;
 using Data;
 
 namespace BackEnd.Squares
@@ -10,16 +11,29 @@ namespace BackEnd.Squares
     {
         protected int Cost => (Data as OwnableData).Cost;
 
+        private int? _index;// Cache the index of the property on the board.
+        protected int Index
+        {
+            get
+            {
+                if (_index == null)
+                {
+                    _index = GameState.Board.IndexOf(Data);
+                }
+                return _index.Value;
+            }
+        }
+
         protected bool Mortgaged
         {
             get => (Data as OwnableData).Mortgaged;
-            set => (Data as OwnableData).Mortgaged = !Mortgaged;
+            set => (Data as OwnableData).Mortgaged = value;
         }
 
         protected int? Owner
         {
             get => (Data as OwnableData).Owner;
-            set => (Data as OwnableData).Owner = Owner;
+            set => (Data as OwnableData).Owner = value;
         }
 
 
@@ -35,9 +49,9 @@ namespace BackEnd.Squares
             //TODO menu options
             if (true)
             {
-                // GameState.activePlayer.payMoney(cost);
-                // owner = GameState.activePlayerIndex;
-                // GameState.activePlayer.addProperty(this); // TODO change to index
+                GameState.ActivePlayer.Money -= Cost;
+                Owner = GameState.ActivePlayerIndex;
+                GameState.ActivePlayer.Properties.Add(Index);
             }
             else
             {
@@ -51,9 +65,9 @@ namespace BackEnd.Squares
         private void Auction()
         {
             //TODO Auction should return the player who won the auction
-            var winner = 0;
+            var winner = GameState.ActivePlayerIndex;
             Owner = winner;
-            // winner.addProperty(this); // add winner to PlayerData
+            GameState.
         }
 
         /// <summary>
@@ -61,8 +75,7 @@ namespace BackEnd.Squares
         /// </summary>
         public override void PlayerLands()
         {
-            if (Owner == null)
-                Buy();
+            if (Owner == null) Buy();
             else if (Owner != GameState.ActivePlayerIndex && !Mortgaged) ChargeRent();
         }
 
