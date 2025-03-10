@@ -14,6 +14,7 @@ namespace BackEnd
         private int _activePlayerIndex = 0;
         private List<PlayerData> _players = new();
         private List<SquareData> _board = new();
+        private GameMode _gameMode;
         private int _freeParkingMoney = 0;
 
         /// <summary>
@@ -27,6 +28,8 @@ namespace BackEnd
 
         public static int FreeParkingMoney { get => Instance._freeParkingMoney; set => Instance._freeParkingMoney += value; }
 
+        public static GameMode GameMode { get => Instance._gameMode; set => Instance._gameMode = value; }
+        
         /// <summary>
         /// Sets up the board and players for a new game.
         /// Currently, creates a placeholder board and two placeholder players.
