@@ -49,11 +49,11 @@
     background-size: 70%;
 }
 
-#name-input .unity-text-element--inner-input-field-component{
+#name-input .unity-text-element--inner-input-field-component {
     font-size: var(--font-sm);
 }
 
-#name-input .unity-base-text-field__input{
+#name-input .unity-base-text-field__input {
     border-width: var(--spacing-xxs);
     border-color: var(--border-color);
     border-radius: var(--spacing-md);
@@ -81,8 +81,8 @@
     border-width: 0;
 }
 
-.arrow:hover:enabled, 
-#remove-player-button:hover:enabled, 
+.arrow:hover:enabled,
+#remove-player-button:hover:enabled,
 #ai-toggle:hover:enabled {
     scale: 1.1;
 }

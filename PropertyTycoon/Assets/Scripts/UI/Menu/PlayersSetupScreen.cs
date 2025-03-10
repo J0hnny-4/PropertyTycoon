@@ -101,7 +101,7 @@ namespace UI.Menu
                 Debug.Log($"Player {i+1} data: "
                     + $"\nName: {player.Name} "
                     + $"\nToken: {player.Token.name} "
-                    + $"\nisAI: {player.IsAI}\n");
+                    + $"\nisAI: {player.IsAi}\n");
             }
             Debug.Log($"End of list -----------------------------------------------");
         }

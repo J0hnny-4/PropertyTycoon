@@ -9,8 +9,7 @@ namespace UI
     /// </summary>
     public abstract class BaseScreen<T> : MonoBehaviour
     {
-        [SerializeField] 
-        protected T screenType;
+        [SerializeField] protected T screenType;
         protected VisualElement Root;
         protected BaseUIManager<T> UIManager;
 
@@ -23,7 +22,7 @@ namespace UI
             Root = GetComponent<UIDocument>().rootVisualElement;
             UIManager = uiManager;
         }
-        
+
         /// <summary>
         /// Concrete derivations should use this method to initialise additional fields, register callbacks, etc.
         /// </summary>
@@ -44,7 +43,7 @@ namespace UI
         {
             return screenType;
         }
-        
+
         /// <summary>
         /// Shows the screen.
         /// </summary>
@@ -52,7 +51,7 @@ namespace UI
         {
             Root.style.display = DisplayStyle.Flex;
         }
-    
+
         /// <summary>
         /// Hides the screen.<br/>
         /// NOTE: The screen is simply hidden, it will consume resources in the background. This allows to quickly switch
