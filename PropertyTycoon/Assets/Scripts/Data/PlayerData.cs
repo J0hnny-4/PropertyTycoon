@@ -1,4 +1,5 @@
 using BackEnd;
+using UnityEngine.Events;
 
 namespace Data
 {
@@ -24,6 +25,8 @@ namespace Data
             new(); //TODO maybe move to player class, replace with int
 
         public bool IsAi { get; set; } = false;
+        
+        public event Action OnUpdate;
 
         /// <summary>
         /// Constructor.
@@ -37,5 +40,7 @@ namespace Data
             this.Token = token;
             this.IsAi = isAi;
         }
+
+        public void TriggerOnUpdateEvent() => OnUpdate?.Invoke();
     }
 }
