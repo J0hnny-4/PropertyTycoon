@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenType: 0
+  playerTemplate: {fileID: 9197481963319205126, guid: 94f89bb3f4fa1395db592a97eb11d62d, type: 3}
 --- !u!1 &1777259698
 GameObject:
   m_ObjectHideFlags: 0
