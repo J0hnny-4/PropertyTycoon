@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
+using BackEnd;
+using Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace UI.Game
 {
     public class NewMonoBehaviourScript : MonoBehaviour
     {
-        [SerializeField] private float totalTime = 3600;
         [SerializeField] private int spinFrequency = 2000;
+        private TimeSpan _totalTime = Cons.TimeLimit;
         private VisualElement _hourglassIcon;
         private Label _countdownLabel;
         private Coroutine _countdownCoroutine;
@@ -18,10 +19,19 @@ namespace UI.Game
     
         private void Awake()
         {
+            // destroys itself if game mode is not Abridged
+            if (GameState.GameMode != GameMode.Abridged)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            
             // grab references to UI objects
             var root = GetComponent<UIDocument>().rootVisualElement;
             _countdownLabel = root.Q<Label>("countdown-label");
             _hourglassIcon = root.Q<VisualElement>("icon");
+            
+            // setup timer
             StarTimer();
         }
         
@@ -52,10 +62,10 @@ namespace UI.Game
         /// </summary>
         private IEnumerator RunTimer()
         {
-            while (totalTime > 0f)
+            while (_totalTime > TimeSpan.Zero)
             {
-                totalTime -= Time.deltaTime;
-                _countdownLabel.text = TimeSpan.FromSeconds(totalTime).ToString(@"hh\:mm\:ss");
+                _totalTime -= TimeSpan.FromSeconds(Time.deltaTime);
+                _countdownLabel.text = _totalTime.ToString(@"hh\:mm\:ss");
                 yield return null;
             }
             OnTimeUp?.Invoke();
