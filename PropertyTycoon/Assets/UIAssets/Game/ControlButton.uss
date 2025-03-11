@@ -1,0 +1,87 @@
+.control-button,
+.control-button > #label-container,
+.control-button > #mask {
+    background-color: var(--primary-color);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.control-button:disabled,
+.control-button:disabled > #label-container,
+.control-button:disabled > #mask {
+    background-color: var(--disabled-color);
+}
+
+
+.control-button:enabled:hover,
+.control-button:enabled:hover > #label-container,
+.control-button:enabled:hover > #mask  {
+    background-color: var(--primary-hover);
+}
+
+.control-button:enabled:active,
+.control-button:enabled:active > #label-container,
+.control-button:enabled:active > #mask {
+    background-color: var(--primary-active);
+}
+
+.control-button:enabled:hover > #label-container,
+.control-button:enabled:active > #label-container {
+    scale: 1 1;
+}
+
+.control-button:enabled:hover > #label-container > #label,
+.control-button:enabled:active > #label-container > #label {
+    transition: opacity 0.2s ease 0.1s;
+    opacity: 1;
+}
+
+.control-button {
+    border-radius: 100%;
+    height: 130px;
+    width: 130px;
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg);
+    overflow: visible;
+}
+
+.control-button > #icon {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+.control-button > #label-container {
+    height: 60px;
+    position: absolute;
+    bottom: -4px; /* accounts for the border width, has to be set manually unfortunately */
+    left: 50%;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    border-bottom-left-radius: 0;
+    padding-left: 50%;
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 0.2s ease;
+}
+
+/* used to cover the border between the icon and the label container */
+.control-button > #mask {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-color: transparent;
+    border-width: var(--spacing-xs);
+    border-radius: 100%;
+}
+
+.control-button > #label-container > #label {
+    opacity: 0;
+    height: 100%;
+    color: var(--font-light);
+    -unity-text-align: middle-left;
+    padding-right: var(--spacing-lg);
+    border-radius: var(--radius-sm);
+}

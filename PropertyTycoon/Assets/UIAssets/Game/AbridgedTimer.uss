@@ -1,0 +1,25 @@
+#abridged-timer {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: 50%;
+    translate: -50% 0;
+    flex-direction: row;
+}
+
+#abridged-timer > #icon {
+    height: 100%;
+    width: 100px;
+    margin-right: var(--spacing-lg);
+    transition: rotate 0.4s ease;
+}
+
+#abridged-timer > #countdown-label {
+    font-size: var(--font-xxl);
+    color: var(--font-light);
+    -unity-text-outline: var(--spacing-xxs) var(--font-dark);
+    -unity-text-align: middle-center;
+}
+
+#icon.flip {
+    rotate: 360deg;
+}

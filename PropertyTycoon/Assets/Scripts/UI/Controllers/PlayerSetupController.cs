@@ -110,10 +110,10 @@ namespace UI.Controllers
         }
     
         /// <summary>
-        /// Gets the current list of players as a readonly list.
+        /// Gets the current list.
         /// </summary>
         /// <returns>The list of players.</returns>
-        public IReadOnlyList<PlayerData> GetPlayers() => _players.AsReadOnly();
+        public List<PlayerData> GetPlayers() => _players;
         
         /// <summary>
         /// Get the current list of tokens.

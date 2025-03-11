@@ -39,8 +39,8 @@
     border-width: var(--spacing-xxs);
     border-color: var(--border-color);
     border-radius: var(--spacing-xs);
-    background-color: beige;
-    -unity-background-image-tint-color: beige;
+    background-color: var(--off-white);
+    -unity-background-image-tint-color: var(--off-white);
 }
 
 #ai-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {

@@ -14,6 +14,7 @@ namespace BackEnd
         private int _activePlayerIndex = 0;
         private List<PlayerData> _players = new();
         private List<SquareData> _board = new();
+        private GameMode _gameMode;
         private int _freeParkingMoney = 0;
 
         /// <summary>
@@ -27,6 +28,11 @@ namespace BackEnd
 
         public static int FreeParkingMoney { get => Instance._freeParkingMoney; set => Instance._freeParkingMoney += value; }
 
+        public static GameMode GameMode { get => Instance._gameMode; set => Instance._gameMode = value; }
+        
+        public static List<PlayerData> Players { get => Instance._players; set => Instance._players = value; }
+        
+        
         /// <summary>
         /// Sets up the board and players for a new game.
         /// Currently, creates a placeholder board and two placeholder players.
@@ -43,13 +49,6 @@ namespace BackEnd
         public static void addSquare(SquareData square) { Instance._board.Add(square); }
         
         public static int BoardSize => Instance._board.Count;
-
-        /// <summary>
-        /// Adds a player to the game.
-        /// Does not affect other players already added
-        /// </summary>
-        /// <param name="player">The player object to add to the lsit of players</param>
-        public static void NewPlayer(PlayerData player) { Instance._players.Add(player); }
 
         /// <summary>
         /// Resets the singleton instance to a new GameState object.
