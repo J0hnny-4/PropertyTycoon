@@ -67,7 +67,7 @@ namespace BackEnd.Squares
             //TODO Auction should return the player who won the auction
             var winner = GameState.ActivePlayerIndex;
             Owner = winner;
-            GameState.
+            GameState.Players[winner].Properties.Add(Index);
         }
 
         /// <summary>
