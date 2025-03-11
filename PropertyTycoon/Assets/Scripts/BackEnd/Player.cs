@@ -13,11 +13,12 @@ namespace BackEnd
     public abstract class Player
     {
         protected PlayerData Data { get; }
+        
 
         protected int Money
         {
             get => Data.Money;
-            set => Data.Money = value;
+            set {  Data.Money = value; Data.TriggerOnUpdateEvent(); }
         }
 
         protected int Position
@@ -41,7 +42,7 @@ namespace BackEnd
         protected int TurnsLeftInJail
         {
             get => Data.TurnsLeftInJail;
-            set => Data.TurnsLeftInJail = value;
+            set { Data.TurnsLeftInJail = value; Data.TriggerOnUpdateEvent(); }
         }
 
         protected List<GetOutOfJail> GetOutOfJailCards

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BackEnd;
 using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -81,8 +82,7 @@ namespace UI.Menu
 
         private void OnContinueClicked(ClickEvent e)
         {
-            // todo: trigger logic to create game engine
-            // todo: add logic to setup timer
+            GameState.GameMode = _selectedPanel.GameMode;
             UIManager.NavigateTo(MenuScreen.PlayerSetup);
         }
 
