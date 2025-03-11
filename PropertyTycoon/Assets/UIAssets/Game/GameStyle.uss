@@ -62,3 +62,11 @@
     flex-shrink: 0;
 }
 
+/* DialogBox  */
+
+#dialog-box-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
