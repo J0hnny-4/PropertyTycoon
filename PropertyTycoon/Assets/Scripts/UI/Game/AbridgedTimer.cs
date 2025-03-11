@@ -7,7 +7,11 @@ using UnityEngine.UIElements;
 
 namespace UI.Game
 {
-    public class NewMonoBehaviourScript : MonoBehaviour
+    /// <summary>
+    /// The timer used only in Abridge mode.
+    /// This class is responsible for handling the countdown logic and its UI representation.
+    /// </summary>
+    public class AbridgeTimer : MonoBehaviour
     {
         [SerializeField] private int spinFrequency = 2000;
         private TimeSpan _totalTime = Cons.TimeLimit;

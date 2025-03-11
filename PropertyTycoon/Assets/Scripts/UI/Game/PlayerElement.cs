@@ -3,14 +3,22 @@ using UnityEngine.UIElements;
 
 namespace UI.Game
 {
+    /// <summary>
+    /// Handles displaying player's info during the game.
+    /// It links the UI element (uxml template) to the PlayerData object to represent.
+    /// </summary>
     public class PlayerElement : VisualElement
     {
         private readonly PlayerData _data;
         private readonly Label _money;
         private readonly VisualElement _jailIcon;
         private readonly VisualElement _leaderIcon;
-            
-            
+        
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="template">The player's uxml document template.</param>
+        /// <param name="playerData">The PlayerData object to link to</param>
         public PlayerElement(VisualTreeAsset template, PlayerData playerData)
         {
             // clone template

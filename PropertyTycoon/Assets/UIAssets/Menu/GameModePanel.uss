@@ -16,6 +16,7 @@
     border-width: var(--spacing-xs);
     border-color: var(--border-color);
     background-color: violet; /* todo replace color with image*/
+    background-size: contain;
 }
 
 #title {
