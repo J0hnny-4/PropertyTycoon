@@ -13,6 +13,7 @@ namespace Tests.EditMode
         [SetUp]
         public void Setup()
         {
+            GameState.NewGame();
             List<PlayerData> players = new List<PlayerData>
             {
                 new PlayerData("A", ScriptableObject.CreateInstance<Token>()),
