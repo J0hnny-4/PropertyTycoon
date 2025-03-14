@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 namespace UI.Menu
@@ -15,6 +16,7 @@ namespace UI.Menu
             _startButton = Root.Q<Button>("start-button");
             _settingButon = Root.Q<Button>("setting-button");
             _quitButton = Root.Q<Button>("quit-button");
+            
             
             // register button actions
             _startButton.RegisterCallback<ClickEvent>(OnStartClicked);
@@ -37,7 +39,7 @@ namespace UI.Menu
 
         private void OnSettingsClicked(ClickEvent e){
             Debug.Log("Settings clicked"); 
-            UIManager.NavigateTo<SettingsScreen>();
+            UIManager.NavigateTo(MenuScreen.Settings);
         }
 
         private void OnQuitClicked(ClickEvent e)

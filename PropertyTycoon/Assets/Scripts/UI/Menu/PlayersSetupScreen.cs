@@ -69,20 +69,8 @@ namespace UI.Menu
         
         private void OnReadyClicked(ClickEvent e)
         {
-            // todo: setup players
-            // todo: move to game scene
-            var playersData = _controller.GetPlayers();
             
-            Debug.Log($"Total players: {playersData.Count} ------------------------");
-            for (var i = 0; i < playersData.Count; i++)
-            {
-                var player = playersData[i];
-                Debug.Log($"Player {i+1} data: "
-                    + $"\nName: {player.Name} "
-                    + $"\nToken: {player.Token.name} "
-                    + $"\nisAI: {player.IsAI}\n");
-            }
-            Debug.Log($"End of list -----------------------------------------------");
+            UIManager.NavigateTo(MenuScreen.Dice);
         }
 
         private void OnBackClicked(ClickEvent e)

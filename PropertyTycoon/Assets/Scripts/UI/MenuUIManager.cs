@@ -4,6 +4,8 @@ namespace UI
         MainMenu,
         GameMode,
         PlayerSetup,
+        Settings, 
+        Dice, 
     }
 
     /// <summary>
