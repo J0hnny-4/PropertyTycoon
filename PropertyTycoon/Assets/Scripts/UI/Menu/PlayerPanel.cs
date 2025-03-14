@@ -40,34 +40,32 @@ namespace UI.Menu
             _controller = controller;
             _playerData = playerData;
             _playerName.value = playerData.Name;
-            _aiToggle.value = playerData.IsAI;
+            _aiToggle.value = playerData.IsAi;
             _tokenPreview.style.backgroundImage = _playerData.Token.icon;
             
             // register callbacks
             _playerName.RegisterCallback<ChangeEvent<string>>(UpdatePlayerName);
             _aiToggle.RegisterCallback<ChangeEvent<bool>>(UpdatePlayerAI);
-            _removePlayerButton.RegisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
+            _removePlayerButton.RegisterCallback<ClickEvent>(HandleRemoveClicked);
             _leftArrowButton.clicked += MoveToPreviousToken;
             _rightArrowButton.clicked += MoveToNextToken;
-            _controller.OnPlayersChanged += UpdateButtonsState;
             
             UpdateButtonsState();
         }
 
-        private void CleanUp()
+        public void CleanUp()
         {
             _playerName.UnregisterCallback<ChangeEvent<string>>(UpdatePlayerName);
             _aiToggle.UnregisterCallback<ChangeEvent<bool>>(UpdatePlayerAI);
-            _removePlayerButton.UnregisterCallback<ClickEvent>(TriggerPayerRemovedClicked);
+            _removePlayerButton.UnregisterCallback<ClickEvent>(HandleRemoveClicked);
             _leftArrowButton.clicked -= MoveToPreviousToken;
             _rightArrowButton.clicked -= MoveToNextToken;
-            _controller.OnPlayersChanged -= UpdateButtonsState;
         }
 
         /// <summary>
         /// Updates state of buttons based on controller state.
         /// </summary>
-        private void UpdateButtonsState()
+        public void UpdateButtonsState()
         {
             _removePlayerButton.SetEnabled(_controller.CanRemovePlayer);
             _leftArrowButton.SetEnabled(_controller.CanSwitchToken);
@@ -76,7 +74,7 @@ namespace UI.Menu
 
         private void UpdatePlayerName(ChangeEvent<string> evt) => _playerData.Name = evt.newValue;
 
-        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAI = evt.newValue;
+        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAi = evt.newValue;
 
         private void MoveToPreviousToken() => UpdateToken(false);
 
@@ -93,15 +91,9 @@ namespace UI.Menu
         }
         
         /// <summary>
-        /// Sends command to remove player. It then deletes itself from the hierarchy.
+        /// Sends remove player command to controller.
         /// </summary>
         /// <param name="e">IGNORE - Click event, passed by default.</param>
-        private void TriggerPayerRemovedClicked(ClickEvent e)
-        {
-            _controller.RemovePlayer(_playerData);
-            CleanUp();
-            this.hierarchy.parent.Remove(this);
-        }
-
+        private void HandleRemoveClicked(ClickEvent e) => _controller.RemovePlayer(_playerData);
     }
 }

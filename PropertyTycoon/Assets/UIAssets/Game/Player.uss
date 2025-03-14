@@ -1,0 +1,83 @@
+.player {
+    height: 120px;
+    width: 300px;
+    margin: var(--spacing-md) 0;
+    align-items: flex-end;
+}
+
+.player * {
+    background-size: contain;
+}
+
+.player > #top {
+    height: 80px;
+    width: 100%;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    border-width: var(--spacing-xs);
+    border-right-width: 0;
+    border-color: black;
+    justify-content: center;
+    /* debugging only */
+    background-color: green;
+}
+
+.player > #bottom {
+    height: 40px;
+    width: 80%;
+    padding: 0 var(--spacing-md);
+    border-bottom-left-radius: var(--radius-sm);
+    border-width: 0 0 var(--spacing-xs) var(--spacing-xs);
+    border-color: black;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* debugging only */
+    background-color: aliceblue;
+}
+
+#ai-icon {
+    height: 100%;
+    width: 40px;
+    background-image: resource("Images/Icons/ai");
+}
+
+#name {
+    height: 60%;
+    width: 65%;
+    -unity-text-align: middle-left;
+    margin-left: var(--spacing-md);
+    color: var(--font-light);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#token-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 90px;
+    height: 90px;
+    margin: var(--spacing-xxs);
+    justify-content: center;
+    align-items: center;
+}
+
+#token-icon {
+    height: 95%;
+    width: 95%;
+    padding: var(--spacing-xxs);
+}
+
+#jail-icon {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#leader-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: -35px;
+    left: 5px;
+}

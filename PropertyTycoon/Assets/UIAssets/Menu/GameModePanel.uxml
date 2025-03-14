@@ -1,10 +1,12 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
-    <Style src="project://database/Assets/UI/Screens/Menu/Components/GameModePanel.uss?fileID=7433441132597879392&amp;guid=714377c9afa7de9518f9c6a7c87a0636&amp;type=3#GameModePanel" />
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements"
+             xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+             editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Screens/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles"/>
+    <Style src="project://database/Assets/UI/Screens/Menu/Components/GameModePanel.uss?fileID=7433441132597879392&amp;guid=714377c9afa7de9518f9c6a7c87a0636&amp;type=3#GameModePanel"/>
     <engine:VisualElement name="game-mode-panel" class="game-mode-panel">
-        <engine:VisualElement name="image" />
-        <engine:Label text="TITLE" name="title" />
-        <engine:Label text="Short description of game mode." name="description" />
-        <engine:Toggle name="selected-toggle" />
+        <engine:VisualElement name="image"/>
+        <engine:Label text="TITLE" name="title"/>
+        <engine:Label text="Short description of game mode." name="description"/>
+        <engine:Toggle name="selected-toggle"/>
     </engine:VisualElement>
 </engine:UXML>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BackEnd;
 using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,25 +8,23 @@ namespace UI.Menu
 {
     public class GameModeScreen : BaseScreen<MenuScreen>
     {
-        [SerializeField]
-        private VisualTreeAsset gameModePanelTemplate;
-        [SerializeField]
-        private List<GameModeData> gameModesData;
+        [SerializeField] private VisualTreeAsset gameModePanelTemplate;
+        [SerializeField] private List<GameModeData> gameModesData;
         private List<GameModePanel> _gameModePanels;
         private GameModePanel _selectedPanel;
         private Button _continueButton;
         private Button _backButton;
-        
+
         public override void Initialise()
         {
             // get reference to UI elements
             _continueButton = Root.Q<Button>("continue-button");
             _backButton = Root.Q<Button>("back-button");
-            
+
             // register button actions
             _continueButton.RegisterCallback<ClickEvent>(OnContinueClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
-            
+
             _gameModePanels = new List<GameModePanel>();
             UpdateContinueButtonState();
             GenerateGameModePanels();
@@ -50,16 +49,16 @@ namespace UI.Menu
         /// </summary>
         private void GenerateGameModePanels()
         {
-            var UIelement = Root.Q<VisualElement>("content");
+            var uIelement = Root.Q<VisualElement>("content");
             foreach (var data in gameModesData)
             {
                 var panel = new GameModePanel(gameModePanelTemplate, data);
                 panel.OnClicked += OnPanelClicked;
                 _gameModePanels.Add(panel);
-                UIelement.Add(panel);
+                uIelement.Add(panel);
             }
         }
-        
+
         /// <summary>
         /// Invoked when clicked on a game panel. It de-select the previous (if any) selected panel and selects the
         /// newly clicked one.
@@ -80,11 +79,10 @@ namespace UI.Menu
         {
             _continueButton.SetEnabled(_selectedPanel != null);
         }
-        
+
         private void OnContinueClicked(ClickEvent e)
         {
-            // todo: trigger logic to create game engine
-            // todo: add logic to setup timer
+            GameState.GameMode = _selectedPanel.GameMode;
             UIManager.NavigateTo(MenuScreen.PlayerSetup);
         }
 

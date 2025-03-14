@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data;
+using NUnit.Framework.Internal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,7 +16,10 @@ namespace UI.Controllers
         private readonly HashSet<Token> _usedTokens;
         private readonly int _minPlayers;
         private readonly int _maxPlayers;
-        public event Action OnPlayersChanged;
+        public event Action<PlayerData> OnPlayerRemoved;
+        public event Action<PlayerData> OnPlayerAdded;
+        
+        
     
         public bool CanAddPlayer => _players.Count < _maxPlayers;
         public bool CanRemovePlayer => _players.Count > _minPlayers;
@@ -28,6 +33,21 @@ namespace UI.Controllers
             _minPlayers = minPlayers;
             _maxPlayers = maxPlayers;
             _defaultNames = defaultNames;
+            
+            // error checking: can only be tested at runtime, as the list of names can only be accessed by the instance
+            // present in the scene.
+            if (defaultNames.Count < minPlayers)
+            {
+                throw new ArgumentException("List of names shorter than min number of players.");
+            }
+        }
+
+        /// <summary>
+        /// Initialise players to the minimum number allowed.
+        /// </summary>
+        public void InitialisePlayers()
+        {
+            for (var i = 0; i < _minPlayers; i++) { AddPlayer(); }
         }
 
         /// <summary>
@@ -36,7 +56,7 @@ namespace UI.Controllers
         /// <returns>Newly created player.</returns>
         /// <exception cref="InvalidOperationException">Thrown if maximum number of player has already been reached.
         /// </exception>
-        public PlayerData AddPlayer()
+        public void AddPlayer()
         {
             if (!CanAddPlayer) { throw new InvalidOperationException("Cannot add new player, maximum reached."); }
             
@@ -44,8 +64,7 @@ namespace UI.Controllers
             var player = new PlayerData(_defaultNames[randomIndex], GetNextAvailableToken());
             _defaultNames.RemoveAt(randomIndex);
             _players.Add(player);
-            OnPlayersChanged?.Invoke();
-            return player;
+            OnPlayerAdded?.Invoke(player);
         }
 
         /// <summary>
@@ -61,7 +80,7 @@ namespace UI.Controllers
             _usedTokens.Remove(player.Token);
             _defaultNames.Add(player.Name);
             _players.Remove(player);
-            OnPlayersChanged?.Invoke();
+            OnPlayerRemoved?.Invoke(player);
         }
 
         /// <summary>
@@ -91,14 +110,23 @@ namespace UI.Controllers
         }
     
         /// <summary>
-        /// Gets the current list of players as a readonly list.
+        /// Gets the current list.
         /// </summary>
         /// <returns>The list of players.</returns>
-        public IReadOnlyList<PlayerData> GetPlayers() => _players.AsReadOnly();
+        public List<PlayerData> GetPlayers() => _players;
+        
+        /// <summary>
+        /// Get the current list of tokens.
+        /// </summary>
+        /// <returns>The list of all tokens, used and available.</returns>
+        public Token[] GetAllTokens() => _allTokens;
+
+        public Token[] GetUsedTokens() => _usedTokens.ToArray();
     
         /// <summary>
         /// Returns the current number of players.
         /// </summary>
         public int PlayersCount => _players.Count;
+        
     }
 }

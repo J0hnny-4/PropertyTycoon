@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Game/AbridgedTimer.uss?fileID=7433441132597879392&amp;guid=9d00844e4a21157ee94917d4ee59e739&amp;type=3#AbridgedTimer" />
+    <engine:VisualElement name="abridged-timer">
+        <engine:VisualElement name="icon" style="background-image: resource(&apos;Images/Icons/hourglass&apos;); background-size: contain;" />
+        <engine:Label text="00:00:00" name="countdown-label" />
+    </engine:VisualElement>
+</engine:UXML>

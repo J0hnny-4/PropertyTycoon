@@ -1,0 +1,64 @@
+/* PLAYERS COMPONENT ------------------------------------------------------------------------------------------------ */
+
+#players-container {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* BUTTONS COMPONENT ------------------------------------------------------------------------------------------------ */
+
+#control-buttons-container {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#leaderboard-button .--button-icon {
+    background-image: resource('Images/Icons/leaderboard');
+}
+
+#forfeit-button .--button-icon {
+    background-image: resource('Images/Icons/forfeit');
+}
+
+#end-turn-button .--button-icon {
+    background-image: resource('Images/Icons/end-turn');
+}
+
+/* OWNED CARDS COMPONENT -------------------------------------------------------------------------------------------- */
+
+#owned-cards-container {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    bottom: 0;
+    translate: -50% 60%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#owned-cards-container > .owned-card.last-child {
+    flex-shrink: 0;
+}
+
+#owned-cards-container,
+#owned-cards-container > .owned-card {
+    transition: translate 0.2s ease, width 0.2s ease;
+}
+
+#owned-cards-container:hover {
+    translate: -50% 40%;
+    width: 65%;
+}
+
+#owned-cards-container > .owned-card:hover {
+    translate: 0 -30%;
+    flex-shrink: 0;
+}
+

@@ -10,7 +10,7 @@ namespace UI.Menu
         private readonly Toggle _selectedToggle;
         private readonly EventCallback<ClickEvent> _callback;
         public event Action<GameModePanel> OnClicked;
-        
+
         /// <summary>
         /// Constructs a GameMode panel. 
         /// </summary>
@@ -20,12 +20,12 @@ namespace UI.Menu
         {
             // clone template
             template.CloneTree(this);
-            
+
             // set attributes
             GameMode = data.gameMode;
             _selectedToggle = this.Q<Toggle>("selected-toggle");
             _selectedToggle.value = false;
-            
+
             // adjust UI
             this.Q<Label>("title").text = data.gameMode.ToString();
             this.Q<VisualElement>("image").style.backgroundImage = data.image;
@@ -33,9 +33,9 @@ namespace UI.Menu
 
             // set up on click event & callback
             _callback = evt => OnClicked.Invoke(this);
-            this.RegisterCallback<ClickEvent>(_callback);
+            RegisterCallback<ClickEvent>(_callback);
         }
-        
+
         /// <summary>
         /// Toggles whether the card is currently selected.
         /// </summary>
@@ -44,13 +44,13 @@ namespace UI.Menu
         {
             _selectedToggle.value = selected;
         }
-        
+
         /// <summary>
         /// Used to un-register the click event.
         /// </summary>
         public void CleanUp()
         {
-            this.UnregisterCallback<ClickEvent>(_callback);
+            UnregisterCallback<ClickEvent>(_callback);
         }
     }
 }
