@@ -1,10 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
-    public abstract class BaseDialogBox : MonoBehaviour
+    public abstract class BaseDialogBox<T> : MonoBehaviour
     {
         protected VisualElement Background;
         protected Label TitleLabel;
@@ -13,11 +14,13 @@ namespace UI.Game.DialogBoxes
         protected Button CancelBtn;
         protected Button ConfirmBtn;
         protected Button CloseBtn;
+        private T ReturnValueOnClose;
+        public event Action<T> OnChoiceMade;
 
         /// <summary>
         /// Grabs related UI document, and gets reference to all base elements.
         /// </summary>
-        public void Awake()
+        public virtual void Initialise()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             
@@ -33,15 +36,26 @@ namespace UI.Game.DialogBoxes
             CloseBtn.visible = false;
             ConfirmBtn.visible = false;
             CancelBtn.visible = false;
-            
-            CloseBtn.clicked += Close;
+
+            CloseBtn.clicked += HandleCloseClicked;
+            CancelBtn.clicked += HandleCancelClicked;
+            ConfirmBtn.clicked += HandleConfirmClicked;
         }
 
-
-        protected abstract void CleanUp();
+        protected virtual void CleanUp()
+        {
+            Debug.Log("BaseDialogBox cleaning up");
+            CloseBtn.clicked -= Close;
+            ConfirmBtn.clicked -= HandleConfirmClicked;
+            CancelBtn.clicked -= HandleCancelClicked;
+        }
         
+        /// <summary>
+        /// Return the default/current value of Choice before destroying itself. 
+        /// </summary>
         protected void Close()
         {
+            CleanUp();
             Destroy(gameObject);
         }
 
@@ -50,27 +64,48 @@ namespace UI.Game.DialogBoxes
         /// </summary>
         /// <param name="title">New title.</param>
         protected void SetTitle(string title) => TitleLabel.text = title;
-        
+
         /// <summary>
         /// Hides/shows the close button, effectively setting the ability to close the dialog box.
         /// </summary>
-        /// <param name="closable">Visibility value of the button.</param>
-        protected void SetClosable(bool closable) => CloseBtn.visible = closable;
+        /// <param name="toReturn">Value to 'return' (via event) in case the close button is pressed.</param>
+        /// 
+        protected void AllowClosing(T toReturn)
+        {
+            CloseBtn.visible = true;
+            ReturnValueOnClose = toReturn;
+        }
 
         /// <summary>
         /// Sets button text and action, and in the process un-hides it.
         /// </summary>
         /// <param name="button">The button to initialise.</param>
         /// <param name="text">Button text.</param>
-        /// <param name="callback">Button on-click action.</param>
-        protected void SetButton(Button button, string text, Action callback)
+        protected void SetButton(Button button, string text)
         {
-            CancelBtn.text = text;
-            CancelBtn.clicked += callback;
-            CancelBtn.visible = true;
+            button.text = text;
+            button.visible = true;
         }
+        
+        protected void SetCancelButton(string text) => SetButton(CancelBtn, text);
+        protected void SetConfirmButton(string text) => SetButton(ConfirmBtn, text);
+        
+        protected abstract void HandleCancelClicked();
+        protected abstract void HandleConfirmClicked();
 
-        protected void SetCancelButton(string text, Action callback) => SetButton(CancelBtn, text, callback);
-        protected void SetConfirmButton(string text, Action callback) => SetButton(ConfirmBtn, text, callback);
+        protected virtual void HandleCloseClicked()
+        {
+            RaiseOnChoiceMade(ReturnValueOnClose);
+            Close();
+        }
+        
+        protected void RaiseOnChoiceMade(T value) => OnChoiceMade?.Invoke(value);
+
+        public virtual Task<T> AsTask()
+        {
+            var tcs = new TaskCompletionSource<T>();
+            OnChoiceMade += (t) => tcs.SetResult(t);
+            return tcs.Task;
+        }
     }
 }

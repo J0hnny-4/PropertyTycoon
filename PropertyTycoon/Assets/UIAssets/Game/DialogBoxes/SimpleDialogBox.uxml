@@ -14,8 +14,8 @@
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="bottom-button-container">
-                <engine:Button text="Confirm" name="confirm" class="simple" />
-                <engine:Button text="Cancel" name="cancel" class="simple" />
+                <engine:Button text="Confirm" name="confirm-button" class="simple" />
+                <engine:Button text="Cancel" name="cancel-button" class="simple" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
