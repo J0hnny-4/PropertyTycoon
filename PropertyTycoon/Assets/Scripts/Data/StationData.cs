@@ -6,7 +6,7 @@ namespace Data
     /// </summary>
     public class StationData : OwnableData
     {
-        public int Rent { get; }
+        public int Rent {  get; }
         
         /// <summary>
         /// Constructor.
