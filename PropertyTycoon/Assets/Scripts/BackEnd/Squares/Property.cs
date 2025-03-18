@@ -47,7 +47,7 @@ namespace BackEnd.Squares
             var rentDue = Rent[Houses];
             if (Houses == 0 && OwnerHasSet) rentDue *= 2;
             // int money = GameState.activePlayer.payMoney(rentDue); //TODO decouple from player
-            // owner.addMoney(money);
+            // .addMoney(rentDue);
         }
 
         /// <summary>
