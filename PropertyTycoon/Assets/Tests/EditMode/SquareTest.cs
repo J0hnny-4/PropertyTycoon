@@ -26,7 +26,7 @@ namespace Tests.EditMode
             GameState.AddSquare(new SquareData("Go"));;
             GameState.AddSquare(new SquareData("Community Chest"));
             GameState.AddSquare(new SquareData("Income Tax"));
-            GameState.AddSquare(new PropertyData("Old Kent Road", 60, new []{1,10,20,30,40}, "Brown", 100));
+            GameState.AddSquare(new PropertyData("Old Kent Road", 60, new []{1,10,20,30,40}, Colour.Brown, 100));
             
             TestProperty = new Property((PropertyData)GameState.Board[3]);
         }
