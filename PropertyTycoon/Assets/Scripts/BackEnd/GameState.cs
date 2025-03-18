@@ -46,7 +46,7 @@ namespace BackEnd
         public static void FreeParkingReset() { Instance._freeParkingMoney = 0; }
 
         public static List<SquareData> Board { get { return Instance._board; } set { Instance._board = value; } }
-        public static void addSquare(SquareData square) { Instance._board.Add(square); }
+        public static void AddSquare(SquareData square) { Instance._board.Add(square); }
         
         public static int BoardSize => Instance._board.Count;
 

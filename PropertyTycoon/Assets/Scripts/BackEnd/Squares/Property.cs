@@ -10,7 +10,7 @@ namespace BackEnd.Squares
     public class Property : Ownable
     {
         public int[] Rent => (Data as PropertyData).Rent;
-        public string Colour => (Data as PropertyData).Colour;
+        public Colour Colour => (Data as PropertyData).Colour;
         public int HouseCost => (Data as PropertyData).HouseCost;
 
         public int Houses
@@ -47,7 +47,7 @@ namespace BackEnd.Squares
             var rentDue = Rent[Houses];
             if (Houses == 0 && OwnerHasSet) rentDue *= 2;
             // int money = GameState.activePlayer.payMoney(rentDue); //TODO decouple from player
-            // owner.addMoney(money);
+            // .addMoney(rentDue);
         }
 
         /// <summary>

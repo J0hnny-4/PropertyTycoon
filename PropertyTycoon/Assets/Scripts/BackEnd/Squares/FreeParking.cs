@@ -17,8 +17,8 @@ namespace BackEnd.Squares
         /// </summary>
         public override void PlayerLands()
         {
-            // GameState.activePlayer.addMoney(GameState.freeParkingMoney); TODO: Implement addMoney
-            GameState.FreeParkingReset(); // Maybe con troll via GameRunner?
+            GameState.ActivePlayer.Money += GameState.FreeParkingMoney;
+            GameState.FreeParkingReset();
         }
     }
 }
