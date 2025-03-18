@@ -16,7 +16,8 @@ namespace BackEnd.Squares
         /// </summary>
         public override void PlayerLands()
         {
-            //TODO: Implement sending the player to jail
+            GameState.ActivePlayer.TurnsLeftInJail = 3; //TODO: Magic number
+            GameState.ActivePlayer.Position = 10; //TODO: Magic number
         }
     }
 }

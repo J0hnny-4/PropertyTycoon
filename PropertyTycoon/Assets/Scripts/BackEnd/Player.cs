@@ -64,7 +64,7 @@ namespace BackEnd
         /// If doubles are rolled, doublesRolled is incremented.
         /// </summary>
         /// <returns> The sum of two d6 dice rolls </returns>
-        protected int RollDice()
+        public int RollDice()
         {
             var rand = new Random();
             var die1 = rand.Next(1, 7);
@@ -74,18 +74,23 @@ namespace BackEnd
                 DoublesRolled++;
             else
                 DoublesRolled = 0;
-
             return die1 + die2;
         }
 
         /// <summary>
         /// Performs the actions required when a player is in jail.
         /// </summary>
-        /// <returns></returns>
-        protected void HandleJAil()
+        /// <returns>True if player has left jail, false otherwise</returns>
+        protected bool HandleJAil()
         {
-            //TODO give options to leave jail
-            --TurnsLeftInJail;
+            if(TurnsLeftInJail == 0) return true;
+            if(DoublesRolled > 0)
+            {
+                TurnsLeftInJail = 0;
+                DoublesRolled = 0;
+                return true;
+            }
+            return --TurnsLeftInJail == 0;
         }
 
         /// <summary>
@@ -116,7 +121,6 @@ namespace BackEnd
         /// <param name="amount">The amount of money to add to their total.</param>
         public void AddMoney(int amount)
         {
-            //TODO some nice animation
             Money += amount;
         }
 
@@ -128,7 +132,7 @@ namespace BackEnd
         /// <returns></returns>
         public int PayMoney(int amount)
         {
-            //TODO some nice animation, Possibly start bankrupt process here?
+            //TODO Possibly start bankrupt process here?
             if (Money < amount)
             {
                 var ret = Money;
@@ -149,6 +153,7 @@ namespace BackEnd
             //TODO Just a placeholder for now, remove magic numbers.
             Position = 10;
             TurnsLeftInJail = 3;
+            DoublesRolled = 0;
         }
 
         /// <summary>
@@ -156,23 +161,27 @@ namespace BackEnd
         /// Takes any actions required when landing on a square.
         /// </summary>
         /// <returns></returns>
-        protected bool Move()
+        public bool Move()
         {
-            var roll = RollDice();
             if (DoublesRolled == 3) //TODO magic number
             {
                 GoToJail();
                 return false;
             }
+            
+            var roll = LastRoll.Item1 + LastRoll.Item2;
 
             //TODO Separate method or two for actually setting player position may be in order
-            Position += roll;
-            if (Position >= GameState.BoardSize)
+            if (Position + roll >= GameState.BoardSize)
             {
-                Position -= GameState.BoardSize;
+                Position = (Position + roll) % GameState.BoardSize;
                 AddMoney(200); //TODO magic number
             }
-
+            else
+            {
+                Position += roll;
+            }
+            
             return DoublesRolled > 0;
         }
 
@@ -183,13 +192,7 @@ namespace BackEnd
         //TODO: This functionality may need to be moved to a gamecontroller class
         public void TakeTurn()
         {
-            if (TurnsLeftInJail > 0)
-            {
-                HandleJAil();
-                return;
-            }
-
-            while (TurnsLeftInJail == 0 && Move()) ;
+            while (RollDice() > 0 && HandleJAil() && Move()) ;
         }
     }
 }
