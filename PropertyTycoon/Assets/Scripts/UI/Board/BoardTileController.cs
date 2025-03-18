@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Net.Http.Headers;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -27,15 +28,17 @@ namespace UI.Board
             _Path = "Assets/Resources/Images/GameMode/TileImages/";
             mainPlane = mainPlane.GetComponent<Transform>();
             _planes = CreateArray();
+            print("DATA: " + _data.Count);
+            
 
             for (int i = 0; i < _planes.Count; i += 10)
-            {
+            { 
                 CreateCornerTiles(i, _data[i].Name);
             }
 
             for (int i = 0; i < _planes.Count; i++)
             {
-                if (i % 10 == 0)
+                if (i % 10 == 0 || i ==0 )
                 {
                     continue;
                 }
@@ -52,8 +55,11 @@ namespace UI.Board
 
             if (_data[idx] is PropertyData tile)
             {
-                Renderer rend = _planes[idx].GetComponent<Renderer>();
-                rend.material.color = tile.Colour;
+                
+                GameObject child = _planes[idx].transform.GetChild(0).gameObject;
+                Renderer rend = child.GetComponent<Renderer>();
+                rend.material.color = tile.Colour.UnityColour;
+                child.SetActive(true);
             }
             
 
@@ -62,6 +68,7 @@ namespace UI.Board
 
         private void CreateCornerTiles(int idx, string cornerName)
         {
+            print(idx + cornerName);
             GameObject corner = _planes[idx];
             Renderer rend = corner.GetComponent<Renderer>();
             rend.material.mainTexture = AssetDatabase.LoadAssetAtPath<Texture>(_Path + cornerName + ".png");
@@ -70,12 +77,13 @@ namespace UI.Board
 
         private List<GameObject> CreateArray()
         {
+            List<GameObject> tiles = new List<GameObject>();
             for (int i = 0; i < 40; i++)
             {
-                _planes.Add(GameObject.Find(i.ToString()));
+                tiles.Add(GameObject.Find(i.ToString()));
             }
-            print(_planes.Count);
-            return _planes;
+            print(tiles.Count);
+            return tiles;
         }
         
     }
