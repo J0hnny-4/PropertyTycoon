@@ -17,8 +17,9 @@ namespace UI.Board
     {
         private List<SquareData> _data;
         public Transform mainPlane;
-        private List<GameObject> _planes;
+        public List<GameObject> _planes;  
         private string _Path;
+        
         
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +48,9 @@ namespace UI.Board
                     UpdateTiles(i);
                 }
             }
-            
+
+            var playercontroller = gameObject.GetComponent<PlayerController>();
+            playercontroller.Initialize();
         }
 
         private void UpdateTiles(int idx)

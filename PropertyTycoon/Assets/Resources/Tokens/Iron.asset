@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71a2de425ea1d09fa51f6aac3276fbd, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: 
-  sprite3D: {fileID: 0}
+  sprite3D: {fileID: 100002, guid: aa1fd57ebccbad148b68b63b71981dfc, type: 3}
   icon: {fileID: 2800000, guid: 19c45adb3fe0b1abba1e33708d026e6d, type: 3}
