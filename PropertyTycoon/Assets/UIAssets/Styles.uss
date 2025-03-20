@@ -4,6 +4,7 @@
     --header-height: 200px;
     --footer-height: 150px;
     
+    --font-xs: 12px;
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
@@ -17,17 +18,23 @@
     --spacing-lg: 32px;
     --spacing-xl: 64px;
     
+    --radius-xxs: 8px;
+    --radius-xs: 16px;
+    --radius-sm: 24px;
     --radius-md: 32px;
     
     --font-light: white;
     --font-dark: black;
-
-    --positive-color: rgb(4, 180, 4);
-    --primary-color: rgba(214, 48, 45, 1);
-    --border-color: rgba(0, 0, 0, 1);
-    --box-solid: rgba(217, 217, 217, 1);
-    --box-see-through: rgba(217, 217, 217, 0.95);
     
+    --positive-color: rgb(4, 180, 4);
+    --primary-color: rgb(214, 48, 45);
+    --primary-hover: rgb(145, 33, 30);
+    --primary-active: rgb(120, 13, 10);
+    --disabled-color: rgb(95, 73, 73);
+    --border-color: rgb(0, 0, 0);
+    --off-white: rgb(245, 245, 220);
+    --box-solid: rgb(217, 217, 217);
+    --box-see-through: rgba(217, 217, 217, 0.95);
 }
 
 * {
@@ -37,7 +44,7 @@
     padding: 0;
     margin: 0;
     -unity-background-scale-mode: scale-to-fit;
-    background-size: cover;
+    background-size: contain;
 }
 
 Button.simple {
@@ -52,115 +59,14 @@ Button.simple {
     transition: background-color 100ms ease-out;
 }
 
-Button.simple:hover {
-    background-color: rgb(145, 33, 30);
+Button.simple:enabled:hover {
+    background-color: var(--primary-hover);
 }
 
-Button.simple:active {
-    background-color: rgb(120, 13, 10);
+Button.simple:enabled:active {
+    background-color: var(--primary-active);
 }
 
-/* MENU SCENE ------------------------------------------------------------------------------------------------------- */
-
-#background {
-    padding: var(--spacing-lg) var(--spacing-xl);
-    width: 100%;
-    height: 100%;
-    background-image: resource("Images/placeholder-menu-bg"); /* todo placeholder image, to be updated */
-}
-
-#header {
-    height: var(--header-height);
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-#content {
-    flex-grow: 1;
-    padding: var(--spacing-lg) 0;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#footer {
-    height: var(--footer-height);
-    flex-direction: row;
-    align-content: flex-start;
-    justify-content: space-evenly;
-}
-
-#banner {
-    width: auto;
-    height: 170px;
-    padding: 0 var(--spacing-lg);
-    border-color: white;
-    background-color: var(--primary-color);
-    border-width: var(--spacing-sm);
-}
-
-#screen-title {
-    color: var(--font-light);
-    font-size: var(--font-xxl);
-    -unity-text-align: middle-center;
-    flex-grow: 1;
-}
-
-/* Main menu screen */
-
-#menu-button-container {
-    width: 500px;
-}
-
-#menu-button-container > Button {
-    margin-bottom: var(--spacing-xl);
-}
-
-/* Players setup screen */
-
-#players-grid {
-    width: 1400px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-self: stretch;
-}
-
-<<<<<<< HEAD:PropertyTycoon/Assets/UI/Screens/Styles.uss
-#box{
-    width: 700px;
-    height: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    opacity: 0.9;
-    padding: 0 var(--spacing-lg);
-    border-color: white;
-    background-color: white;
-    border-width: var(--spacing-sm);
-}
-
-
-=======
-.players-grid-cell {
-    height: 50%;
-    width: 33%;
-    align-items: center;
-    justify-content: center;
-}
-
-#add-player-button {
-    border-width: 0;
-    border-radius: 100%;
-    background-image: resource("Images/Icons/cross");
-    height: 120px;
-    width: 120px;
-    rotate: 45deg;
-    background-color: var(--positive-color);
-}
->>>>>>> master:PropertyTycoon/Assets/UIAssets/Styles.uss
-
-#spacer {
-    flex-grow: 1;
-    height: 100px;
+Button.simple:disabled {
+    background-color: var(--disabled-color);
 }

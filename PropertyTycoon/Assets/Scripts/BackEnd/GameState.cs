@@ -40,8 +40,6 @@ namespace BackEnd
         /// </summary>
         private GameState()
         {
-            var _allTokens = Resources.Load<Token>("Tokens/cat");
-            _players.Add(new PlayerData("test",_allTokens, false) );
             for(int i = 0; i < 40; i++)
             {
                 if(i == 0) _board.Add(new SquareData("Go"));
