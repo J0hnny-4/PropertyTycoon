@@ -12,46 +12,46 @@ namespace BackEnd
     /// </summary>
     public abstract class Player
     {
-        protected PlayerData Data { get; }
+        public PlayerData Data { get; }
         
 
-        protected int Money
+        public int Money
         {
             get => Data.Money;
-            set {  Data.Money = value; Data.TriggerOnUpdateEvent(); }
+            protected set{  Data.Money = value; Data.TriggerOnUpdateEvent(); }
         }
 
-        protected int Position
+        public int Position
         {
             get => Data.Position;
-            set => Data.Position = value;
+            protected set => Data.Position = value;
         }
 
-        protected Tuple<int, int> LastRoll
+        public Tuple<int, int> LastRoll
         {
             get => Data.LastRoll;
-            set => Data.LastRoll = value;
+            protected set => Data.LastRoll = value;
         }
 
-        protected int DoublesRolled
+        public int DoublesRolled
         {
             get => Data.DoublesRolled;
-            set => Data.DoublesRolled = value;
+            protected set => Data.DoublesRolled = value;
         }
 
-        protected int TurnsLeftInJail
+        public int TurnsLeftInJail
         {
             get => Data.TurnsLeftInJail;
-            set { Data.TurnsLeftInJail = value; Data.TriggerOnUpdateEvent(); }
+            protected set { Data.TurnsLeftInJail = value; Data.TriggerOnUpdateEvent(); }
         }
 
-        protected List<GetOutOfJail> GetOutOfJailCards
+        public List<GetOutOfJail> GetOutOfJailCards
         {
             get => Data.GetOutOfJailCards;
-            set => Data.GetOutOfJailCards = value;
+            protected set => Data.GetOutOfJailCards = value;
         }
 
-        protected HashSet<int> Properties => Data.Properties;
+        public HashSet<int> Properties => Data.Properties;
 
         protected Player(PlayerData data)
         {
@@ -81,7 +81,7 @@ namespace BackEnd
         /// Performs the actions required when a player is in jail.
         /// </summary>
         /// <returns>True if player has left jail, false otherwise</returns>
-        protected bool HandleJAil()
+        public bool HandleJAil()
         {
             if(TurnsLeftInJail == 0) return true;
             if(DoublesRolled > 0)
@@ -161,12 +161,12 @@ namespace BackEnd
         /// Takes any actions required when landing on a square.
         /// </summary>
         /// <returns></returns>
-        public bool Move()
+        public void Move()
         {
             if (DoublesRolled == 3) //TODO magic number
             {
                 GoToJail();
-                return false;
+                return;
             }
             
             var roll = LastRoll.Item1 + LastRoll.Item2;
@@ -181,8 +181,6 @@ namespace BackEnd
             {
                 Position += roll;
             }
-            
-            return DoublesRolled > 0;
         }
 
         /// <summary>
@@ -192,7 +190,7 @@ namespace BackEnd
         //TODO: This functionality may need to be moved to a gamecontroller class
         public void TakeTurn()
         {
-            while (RollDice() > 0 && HandleJAil() && Move()) ;
+            // while (RollDice() > 0 && HandleJAil() && Move()) ;
         }
     }
 }
