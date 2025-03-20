@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 74784419b1c4c6942a7fc53a14328d94
+timeCreated: 1528467989
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 120406
+  packageName: Modern smartphone
+  packageVersion: 1.0
+  assetPath: Assets/ModernSmartphone/demo scene.unity
+  uploadId: 250273

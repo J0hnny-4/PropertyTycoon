@@ -1,10 +1,11 @@
 namespace UI
 {
-    public enum MenuScreen
-    {
+    public enum MenuScreen {
         MainMenu,
         GameMode,
-        PlayerSetup
+        PlayerSetup,
+        Settings, 
+        Dice, 
     }
 
     /// <summary>

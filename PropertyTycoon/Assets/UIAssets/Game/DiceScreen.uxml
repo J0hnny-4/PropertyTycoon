@@ -1,0 +1,15 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Game/DiceScreen.uss?fileID=7433441132597879392&amp;guid=f32956010a790e36b97fe72c7220170d&amp;type=3#DiceScreen" />
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <engine:VisualElement name="Screen" style="justify-content: center; align-items: center; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.81);">
+        <engine:VisualElement style="width: 75%; height: 150%; flex-direction: row; align-items: center; justify-content: center;">
+            <engine:Button text="&#10;" name="dice1" style="background-image: resource(&apos;Images/Icons/Dice/dice&apos;); width: 150px; height: 150px; background-color: rgba(188, 188, 188, 0); margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+            <engine:Button text="&#10;" name="dice2" style="background-image: resource(&apos;Images/Icons/Dice/dice&apos;); width: 150px; height: 150px; background-color: rgba(188, 188, 188, 0); margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+        </engine:VisualElement>
+        <engine:VisualElement style="flex-direction: column-reverse; flex-wrap: nowrap; width: 50%; height: 70%; align-self: center; align-items: center; justify-content: flex-end;">
+            <engine:Button text="Roll" name="roll" class="simple" style="width: 50%; height: 50%; justify-content: space-evenly; align-self: center; align-content: stretch; align-items: center; flex-direction: column-reverse;" />
+            <engine:Label name="rolltotal" style="align-content: center; align-self: center; justify-content: flex-start; align-items: auto; flex-direction: row; color: rgb(255, 255, 255); width: 100px; height: 100px; font-size: 75px; -unity-text-align: upper-center;" />
+            <engine:Label text="YOU ROLLED A: " name="yourolled" style="width: 258px; background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); flex-direction: row; -unity-text-align: upper-center;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
