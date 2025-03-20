@@ -17,8 +17,8 @@ namespace UI.Board
     {
         private List<SquareData> _data;
         public Transform mainPlane;
-        public List<GameObject> _planes;  
-        private string _Path;
+        public List<GameObject> planes;  
+        private string _path;
         
         
         
@@ -26,18 +26,18 @@ namespace UI.Board
         void Start()
         {
             _data = GameState.Board; 
-            _Path = "Assets/Resources/Images/GameMode/TileImages/";
+            _path = "Assets/Resources/Images/GameMode/TileImages/";
             mainPlane = mainPlane.GetComponent<Transform>();
-            _planes = CreateArray();
+            planes = CreateArray();
             print("DATA: " + _data.Count);
             
 
-            for (int i = 0; i < _planes.Count; i += 10)
+            for (int i = 0; i < planes.Count; i += 10)
             { 
                 CreateCornerTiles(i, _data[i].Name);
             }
 
-            for (int i = 0; i < _planes.Count; i++)
+            for (int i = 0; i < planes.Count; i++)
             {
                 if (i % 10 == 0 || i ==0 )
                 {
@@ -59,7 +59,7 @@ namespace UI.Board
             if (_data[idx] is PropertyData tile)
             {
                 
-                GameObject child = _planes[idx].transform.GetChild(0).gameObject;
+                GameObject child = planes[idx].transform.GetChild(0).gameObject;
                 Renderer rend = child.GetComponent<Renderer>();
                 rend.material.color = tile.Colour.UnityColour;
                 child.SetActive(true);
@@ -72,9 +72,9 @@ namespace UI.Board
         private void CreateCornerTiles(int idx, string cornerName)
         {
             print(idx + cornerName);
-            GameObject corner = _planes[idx];
+            GameObject corner = planes[idx];
             Renderer rend = corner.GetComponent<Renderer>();
-            rend.material.mainTexture = AssetDatabase.LoadAssetAtPath<Texture>(_Path + cornerName + ".png");
+            rend.material.mainTexture = AssetDatabase.LoadAssetAtPath<Texture>(_path + cornerName + ".png");
 
         }
 

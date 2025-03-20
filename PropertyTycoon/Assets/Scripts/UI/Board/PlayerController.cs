@@ -12,7 +12,6 @@ namespace UI.Board
     public class PlayerController : MonoBehaviour
     {
         private List<PlayerData> _players;
-        private string _path;
         private BoardTileController _tileController;
         private List<GameObject> _tileArray;
         
@@ -21,8 +20,7 @@ namespace UI.Board
         public void Initialize()
         {
             _tileController = gameObject.GetComponent<BoardTileController>();
-            _path = "Assets/Resources/Tokens/3D models";
-            _tileArray = _tileController._planes;
+            _tileArray = _tileController.planes;
             _players = GameState.Players;
             
             for (int i = 0; i < _players.Count; i++)
@@ -33,12 +31,6 @@ namespace UI.Board
                 var spawnPoint = _tileArray[0].transform.Find("Spawn" + i);
                 r1.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y+1f, spawnPoint.position.z );
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }
