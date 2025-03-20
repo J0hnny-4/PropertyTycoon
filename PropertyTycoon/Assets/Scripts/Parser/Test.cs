@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Data;
 
 public class Test : MonoBehaviour
 {
@@ -6,7 +8,13 @@ public class Test : MonoBehaviour
     void Start()
     {
         Debug.Log("Start");
-        Parser.TileCreator();
+        int x = 0;
+        while (x < 40)
+        {
+            Debug.Log(Parser.TileCreator());
+            x++;
+        }
+        
         Debug.Log("End");
         
     }

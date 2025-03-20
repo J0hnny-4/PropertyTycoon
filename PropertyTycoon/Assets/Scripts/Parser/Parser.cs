@@ -43,24 +43,21 @@ public class Parser
       
     }
 
-    public static void TileCreator(){
+    public static List<SquareData> TileCreator(){
       Parse();
       List<SquareData> tiles = new List<SquareData>();
       int[] rentlist = new int[2];
       
       for(int i = 0; i < 39; i++)
       {
-        int cost = 0;
-        int rent = 0;
+        int cost;
+        int rent;
         string name = data[i, 1];
-        int housecost = 0;
-        int temp = 0;
+        int housecost;
+        int temp;
 
         int.TryParse(data[i, 5], out cost);
-        //var cost = Convert.ToInt32(data[i, 5]);
-        //var rent = Convert.ToInt32(data[i, 6]);      
         int.TryParse(data[i, 6], out rent);
-        //var housecost = Convert.ToInt32(data[i, 6]); 
         int.TryParse(data[i, 6], out housecost);
         
         int x = 0;
@@ -84,7 +81,7 @@ public class Parser
           
           case("Utilities"):
             x = 0;
-            y = 6;
+            y = 6;  
             while (x<3){
               int.TryParse(data[i, y], out temp);
               rentlist[x] = temp;
@@ -93,7 +90,7 @@ public class Parser
             }
             break;
           
-          case("Got to Jail"):
+          case("Go to Jail"):
             tiles.Add(new OwnableData(name,cost));
             break;
           
@@ -106,6 +103,8 @@ public class Parser
             break;
         }
       }
+
+      return tiles;
     }
 
   } 
