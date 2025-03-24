@@ -19,8 +19,8 @@
 
 .card > #content > #name {
     height: 75px;
-    color: var(--font-light);
-    background-color: blueviolet; /* default color, to be replaced dynamically */
+    color: var(--font-dark);
+    background-color: fuchsia; /* debug color, to be replaced dynamically */
     font-size: var(--font-sm);
     -unity-text-align: middle-center;
 }
