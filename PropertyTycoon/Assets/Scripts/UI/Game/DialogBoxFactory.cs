@@ -25,9 +25,9 @@ namespace UI.Game
         public static SimpleDialogBox MakePaymentDialogBox(object item, int amount)
         {
             var dialogBox = MakeSimpleDialogBox();
-            
             VisualElement image;
             string text;
+            
             switch (item)
             {
                 case PropertyData propertyData:
@@ -50,15 +50,30 @@ namespace UI.Game
         public static SimpleDialogBox MakeJailLandingDialogBox()
         {
             var dialogBox = MakeSimpleDialogBox();
-            var icon = new VisualElement();
-            icon.style.backgroundImage = Resources.Load<Texture2D>("Images/Icons/jail-1");
+            var image = MakeIconElement("jail-1");
             dialogBox.Initialise(
                 "Jail", 
                 "You've been sent to prison.\n\nYour bail is set to $50. Would you like to pay it?",
-                icon, 
+                image, 
                 confirmText: "Pay", 
                 cancelText: "Cancel");
             return dialogBox;
+        }
+
+        public static SimpleDialogBox MakePurchaseDialogBox(OwnableData ownableData)
+        {
+            var dialogBox = MakeSimpleDialogBox();
+            var text = $"You landed on {ownableData.Name}.\nWould you like to buy it for ${ownableData.Cost}?";
+            
+            var image = ownableData switch
+            {
+                PropertyData propertyData => OwnableCardFactory.MakeCard(propertyData),
+                _ => MakeIconElement("cross")
+            };
+            
+            dialogBox.Initialise(ownableData.Name, text, image, confirmText: "Yes", cancelText: "No");
+            return dialogBox;
+            
         }
         
         /// <summary>
