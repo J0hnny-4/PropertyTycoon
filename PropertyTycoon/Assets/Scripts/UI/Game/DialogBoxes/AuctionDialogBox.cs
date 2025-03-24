@@ -1,15 +1,19 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BackEnd;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
-    public class AuctionDialogBox : BaseDialogBox<Tuple<int, int>>
+    public class AuctionDialogBox : BaseDialogBox<(int, int)>
     {
         [SerializeField] private VisualTreeAsset playerBidFieldTemplate;
         private VisualElement _bidsContainer;
         private IntegerField[] _bids;
+        private readonly (int, int) _errorValue = (-1, -1);
         
         /// <summary>
         /// Initialise the dialog box by setting values and callbacks.
@@ -23,6 +27,7 @@ namespace UI.Game.DialogBoxes
             SetTitle("Auction");
             SetCancelButton("Skip");
             SetConfirmButton("Submit");
+            ConfirmBtn.SetEnabled(false);
             LeftPanel.Add(ownableCard);
             RightPanel.Q<Label>("text").text = text;
             
@@ -63,25 +68,43 @@ namespace UI.Game.DialogBoxes
             var upperBound = GameState.Players[playerIndex].Money - 1;
             var clampedValue = Math.Clamp(evt.newValue, 0, upperBound);
             field.SetValueWithoutNotify(clampedValue);
+
+            ConfirmBtn.SetEnabled(GetHighestBid() != _errorValue);
+        }
+
+        [CanBeNull]
+        private (int, int) GetHighestBid()
+        {
+            var highestBid = -1;
+            var highestBidders = new List<int>();
+
+            foreach (var bid in _bids)
+            {
+                if (bid.value > highestBid)
+                {
+                    highestBid = bid.value;
+                    highestBidders.Clear();
+                    highestBidders.Add((int)bid.userData);
+                }
+                else if (bid.value == highestBid)
+                {
+                    highestBidders.Add((int)bid.userData);
+                }
+            }
+
+            // returns the error value if multiple players share the highest bid
+            return highestBidders.Count != 1 ? _errorValue : (highestBidders.First(), highestBid);
         }
 
         protected override void HandleCancelClicked()
         {
-            RaiseOnChoiceMade(new Tuple<int, int>(-1, 0));
+            RaiseOnChoiceMade(_errorValue);
             Close();
         }
 
         protected override void HandleConfirmClicked()
         {
-            var winningPlayer = 0;
-
-            foreach (var bidField in _bids)
-            {
-                if (bidField.value <= winningPlayer) { continue; }
-                winningPlayer = (int)bidField.userData;
-            }
-            
-            RaiseOnChoiceMade(new Tuple<int, int>(winningPlayer, _bids[winningPlayer].value));
+            RaiseOnChoiceMade(GetHighestBid());
             Close();
         }
     }
