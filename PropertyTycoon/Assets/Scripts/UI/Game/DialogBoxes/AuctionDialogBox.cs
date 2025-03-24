@@ -45,9 +45,24 @@ namespace UI.Game.DialogBoxes
             playerBidField.Q<Label>("name").text = GameState.Players[playerIndex].Name;
             var bidField = playerBidField.Q<IntegerField>("bid");
             bidField.userData = playerIndex;
+            bidField.RegisterValueChangedCallback(OnBidValueChanged);
             _bids[playerIndex] = bidField;
 
             return playerBidField;
+        }
+
+        /// <summary>
+        /// Called when a value is updated in a bid field. Clamps the new value between 0 and the amount of money the
+        /// player holds minus 1. 
+        /// </summary>
+        /// <param name="evt">The event invoked by the change in value.</param>
+        private void OnBidValueChanged(ChangeEvent<int> evt)
+        {
+            var field = (IntegerField)evt.target;
+            var playerIndex = (int)field.userData;
+            var upperBound = GameState.Players[playerIndex].Money - 1;
+            var clampedValue = Math.Clamp(evt.newValue, 0, upperBound);
+            field.SetValueWithoutNotify(clampedValue);
         }
 
         protected override void HandleCancelClicked()
