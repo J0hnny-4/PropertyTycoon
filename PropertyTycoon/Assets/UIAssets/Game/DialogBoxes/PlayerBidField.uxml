@@ -1,0 +1,7 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="player" class="player-bid-field">
+        <engine:Label text="[playerName]" name="name" />
+        <engine:Label text="$" name="currency" />
+        <engine:IntegerField value="0" name="bid" placeholder-text="0" />
+    </engine:VisualElement>
+</engine:UXML>

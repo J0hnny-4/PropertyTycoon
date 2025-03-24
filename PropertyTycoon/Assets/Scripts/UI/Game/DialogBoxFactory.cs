@@ -8,7 +8,8 @@ namespace UI.Game
     public class DialogBoxFactory : MonoBehaviour
     {
         private static readonly GameObject SimpleDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/SimpleDialogBox");
-
+        private static readonly GameObject AuctionDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AuctionDialogBox");
+        
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
             var dialogObject = Instantiate(SimpleDialogBoxPrefab);
@@ -60,6 +61,11 @@ namespace UI.Game
             return dialogBox;
         }
 
+        /// <summary>
+        /// Creates a 'purchase' dialog box.
+        /// </summary>
+        /// <param name="ownableData">Ownable for sale.</param>
+        /// <returns>A simple dialog box, showing 'yes' (True) and 'no' (False) buttons.</returns>
         public static SimpleDialogBox MakePurchaseDialogBox(OwnableData ownableData)
         {
             var dialogBox = MakeSimpleDialogBox();
@@ -67,7 +73,21 @@ namespace UI.Game
             var image = OwnableCardFactory.MakeCard(ownableData);
             dialogBox.Initialise(ownableData.Name, text, image, confirmText: "Yes", cancelText: "No");
             return dialogBox;
-            
+        }
+
+        /// <summary>
+        /// Creates an 'auction' dialog box.
+        /// </summary>
+        /// <param name="ownableData">Ownable for sale.</param>
+        /// <returns>A dialog box prompting players to input their bids.</returns>
+        public static AuctionDialogBox MakeAuctionDialogBox(OwnableData ownableData)
+        {
+            var dialogObject = Instantiate(AuctionDialogBoxPrefab);
+            var dialogBox = dialogObject.GetComponent<AuctionDialogBox>();
+            var text = $"The bank is auctioning {ownableData.Name}!\nEnter your bids...";
+            var card = OwnableCardFactory.MakeCard(ownableData);
+            dialogBox.Initialise(card, text);
+            return dialogBox;
         }
         
         /// <summary>
