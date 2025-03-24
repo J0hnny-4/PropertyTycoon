@@ -6,27 +6,27 @@
             <engine:Label text="PropertyName" name="name" />
             <engine:VisualElement name="rent-section" class="section">
                 <engine:VisualElement name="default-rent" class="info">
-                    <engine:Label text="Rent" name="text" />
+                    <engine:Label text="Base rent" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="color-set-rent" class="info">
-                    <engine:Label text="Rent with color set" name="text" />
+                    <engine:Label text="Color set" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="one-house-rent" class="info">
-                    <engine:Label text="Rent with 1 house" name="text" />
+                    <engine:Label text="1 house" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="two-houses-rent" class="info">
-                    <engine:Label text="Rent with 2 houses" name="text" />
+                    <engine:Label text="2 houses" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="three-houses-rent" class="info">
-                    <engine:Label text="Rent with 3 houses" name="text" />
+                    <engine:Label text="3 houses" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="four-houses-rent" class="info">
-                    <engine:Label text="Rent with 4 houses" name="text" />
+                    <engine:Label text="4 houses" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="hotel-rent" class="info">
@@ -36,7 +36,7 @@
             </engine:VisualElement>
             <engine:VisualElement name="upgrade-section" class="section">
                 <engine:VisualElement name="house-cost" class="info">
-                    <engine:Label text="House cost (each)" name="text" />
+                    <engine:Label text="House cost" name="text" />
                     <engine:Label text="$ 00" name="value" />
                 </engine:VisualElement>
                 <engine:VisualElement name="hotel-cost" class="info">

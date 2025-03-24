@@ -54,18 +54,28 @@ namespace UI.Game
             nameTag.text = propertyData.Name;
             nameTag.style.backgroundColor = propertyData.Colour.UnityColour;
 
-            card.Q<VisualElement>("default-rent").Q<Label>("value").text = propertyData.Rent[0].ToString();
-            card.Q<VisualElement>("color-set-rent").Q<Label>("value").text = (propertyData.Rent[0] * Cons.ColorSetMultiplier).ToString();
-            card.Q<VisualElement>("one-house-rent").Q<Label>("value").text = propertyData.Rent[1].ToString();
-            card.Q<VisualElement>("two-houses-rent").Q<Label>("value").text = propertyData.Rent[2].ToString();
-            card.Q<VisualElement>("three-houses-rent").Q<Label>("value").text = propertyData.Rent[3].ToString();
-            card.Q<VisualElement>("four-houses-rent").Q<Label>("value").text = propertyData.Rent[4].ToString();
-            card.Q<VisualElement>("hotel-rent").Q<Label>("value").text = propertyData.Rent[5].ToString();
+            card.Q<VisualElement>("default-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[0]);
+            card.Q<VisualElement>("color-set-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[0] * Cons.ColorSetMultiplier);
+            card.Q<VisualElement>("one-house-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[1]);
+            card.Q<VisualElement>("two-houses-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[2]);
+            card.Q<VisualElement>("three-houses-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[3]);
+            card.Q<VisualElement>("four-houses-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[4]);
+            card.Q<VisualElement>("hotel-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[5]);
             
-            card.Q<VisualElement>("house-cost").Q<Label>("value").text = propertyData.HouseCost.ToString();
-            card.Q<VisualElement>("hotel-cost").Q<Label>("value").text = (propertyData.HouseCost * Cons.HotelCostMultiplier).ToString();
+            card.Q<VisualElement>("house-cost").Q<Label>("value").text = ToPrice(propertyData.HouseCost);
+            card.Q<VisualElement>("hotel-cost").Q<Label>("value").text = ToPrice(propertyData.HouseCost * Cons.HotelCostMultiplier);
 
             return card;
+        }
+
+        /// <summary>
+        /// Helper function to format a number to represent a price.
+        /// </summary>
+        /// <param name="number">Value to format.</param>
+        /// <returns>String in the format "$ {value}"</returns>
+        private static string ToPrice(int number)
+        {
+            return $"$ {number}";
         }
     }
 }

@@ -4,7 +4,7 @@
     --header-height: 200px;
     --footer-height: 150px;
     
-    --font-xs: 12px;
+    --font-xs: 16px;
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
