@@ -18,7 +18,7 @@ namespace UI.Game.DialogBoxes
         /// 
         public void Initialise(string title, 
             string text,
-            Texture2D icon,
+            VisualElement image,
             string cancelText = null,
             string confirmText = null,
             bool closable = false
@@ -31,7 +31,7 @@ namespace UI.Game.DialogBoxes
             if (closable) { AllowClosing(false); }
             
             
-            LeftPanel.style.backgroundImage = icon;
+            LeftPanel.Add(image);
             RightPanel.Q<Label>("text").text = text;
         }
 

@@ -1,5 +1,7 @@
+using Data;
 using UI.Game.DialogBoxes;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UI.Game
 {
@@ -19,17 +21,25 @@ namespace UI.Game
         /// </summary>
         /// <param name="item">The item prompting the payment (Property, Card, etc.)</param>
         /// <param name="amount">The amount due.</param>
-        /// <typeparam name="T">The type of the payment (Property, Card, etc.)</typeparam>
         /// <returns>A simple dialog box, showing only the 'pay' (true) button.</returns>
-        public static SimpleDialogBox MakePaymentDialogBox<T>(T item, int amount)
+        public static SimpleDialogBox MakePaymentDialogBox(object item, int amount)
         {
             var dialogBox = MakeSimpleDialogBox();
-        
-            // todo temporary variables -- swap with proper image & text
-            Texture2D icon = Resources.Load<Texture2D>("Images/Icons/fee");
-            string text = $"You have been charged ${amount} after landing on [SQUARE NAME].";
-        
-            dialogBox.Initialise("Payment Due", text, icon, confirmText: "Pay");
+            
+            VisualElement image;
+            string text;
+            switch (item)
+            {
+                case PropertyData propertyData:
+                    image = OwnableCardFactory.MakeCard(propertyData);
+                    text = $"You landed on {propertyData.Name}.\nYou need to pay ${amount} in rent.";
+                    break;
+                default:
+                    image = MakeIconElement("fee");
+                    text = $"You have been charged ${amount}.";
+                    break;
+            }
+            dialogBox.Initialise("Payment Due", text, image, confirmText: "Pay");
             return dialogBox;
         }
 
@@ -40,13 +50,29 @@ namespace UI.Game
         public static SimpleDialogBox MakeJailLandingDialogBox()
         {
             var dialogBox = MakeSimpleDialogBox();
+            var icon = new VisualElement();
+            icon.style.backgroundImage = Resources.Load<Texture2D>("Images/Icons/jail-1");
             dialogBox.Initialise(
                 "Jail", 
                 "You've been sent to prison.\n\nYour bail is set to $50. Would you like to pay it?",
-                Resources.Load<Texture2D>("Images/Icons/jail-1"), 
+                icon, 
                 confirmText: "Pay", 
                 cancelText: "Cancel");
             return dialogBox;
+        }
+        
+        /// <summary>
+        /// Helper function to get the name of the icon wanted, and embed it into a Visual Element.
+        /// </summary>
+        /// <param name="iconName">Filename of icon.</param>
+        /// <returns>A Visual Element using the given icon as background.</returns>
+        private static VisualElement MakeIconElement(string iconName)
+        {
+            var icon = Resources.Load<Texture2D>($"Images/Icons/{iconName}");
+            var element = new VisualElement();
+            element.style.backgroundImage = icon;
+            element.name = "icon";
+            return element;
         }
     }
 }
