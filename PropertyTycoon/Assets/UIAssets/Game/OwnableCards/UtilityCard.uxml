@@ -1,0 +1,18 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Game/OwnableCards/PropertyCard.uss?fileID=7433441132597879392&amp;guid=2a9de6b4bd0bda60c891701b54206472&amp;type=3#PropertyCard" />
+    <engine:VisualElement name="utility-card" class="card">
+        <engine:VisualElement name="content">
+            <engine:Label text="UtilityName" name="name" />
+            <engine:VisualElement name="mid-section" class="icon" style="flex-grow: 1; background-image: resource(&apos;Images/Icons/light-bulb&apos;);" />
+            <engine:VisualElement name="bottom-section" class="section">
+                <engine:VisualElement name="one-utility" class="info">
+                    <engine:Label text="1 utility owned:&#10;- pay 4x your last roll" name="text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="two-utilities" class="info">
+                    <engine:Label text="2 utility owned:&#10;- pay 10x your last roll" name="text" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

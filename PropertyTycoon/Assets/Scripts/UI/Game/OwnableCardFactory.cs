@@ -1,4 +1,3 @@
-using System.Linq;
 using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,7 +9,7 @@ namespace UI.Game
         private static OwnableCardFactory _instance;
         
         [SerializeField] private VisualTreeAsset propertyCardTemplate;
-        [SerializeField] private VisualTreeAsset trainCardTemplate;
+        [SerializeField] private VisualTreeAsset stationCardTemplate;
         [SerializeField] private VisualTreeAsset utilityCardTemplate;
         
         /// <summary>
@@ -33,8 +32,14 @@ namespace UI.Game
                 case PropertyData propertyData:
                     ownableCard = MakePropertyCard(propertyData);
                     break;
+                case StationData stationData:
+                    ownableCard = MakeStationCard(stationData);
+                    break;
+                case UtilityData utilityData:
+                    ownableCard = MakeUtilityCard(utilityData);
+                    break;
                 default:
-                    Debug.LogWarning("Invalid ownable data");
+                    Debug.LogWarning($"Invalid ownable data: {ownableData}");
                     break;
             }
             return ownableCard;
@@ -61,10 +66,33 @@ namespace UI.Game
             card.Q<VisualElement>("three-houses-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[3]);
             card.Q<VisualElement>("four-houses-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[4]);
             card.Q<VisualElement>("hotel-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[5]);
-            
             card.Q<VisualElement>("house-cost").Q<Label>("value").text = ToPrice(propertyData.HouseCost);
             card.Q<VisualElement>("hotel-cost").Q<Label>("value").text = ToPrice(propertyData.HouseCost * Cons.HotelCostMultiplier);
 
+            return card;
+        }
+
+        private static VisualElement MakeStationCard(StationData stationData)
+        {
+            var card = new VisualElement();
+            _instance.stationCardTemplate.CloneTree(card);
+            
+            card.Q<Label>("name").text = stationData.Name;
+
+            card.Q<VisualElement>("one-station").Q<Label>("value").text = ToPrice(stationData.Rent);
+            card.Q<VisualElement>("two-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 2);
+            card.Q<VisualElement>("three-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 4);
+            card.Q<VisualElement>("four-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 8);
+
+            return card;
+        }
+
+        private static VisualElement MakeUtilityCard(UtilityData utilityData)
+        {
+            var card = new VisualElement();
+            _instance.utilityCardTemplate.CloneTree(card);
+            
+            card.Q<Label>("name").text = utilityData.Name;
             return card;
         }
 

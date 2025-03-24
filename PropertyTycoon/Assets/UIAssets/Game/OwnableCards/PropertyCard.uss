@@ -19,16 +19,29 @@
 
 .card > #content > #name {
     height: 75px;
-    color: var(--font-dark);
-    background-color: fuchsia; /* debug color, to be replaced dynamically */
     font-size: var(--font-sm);
     -unity-text-align: middle-center;
+    border-bottom-width: var(--spacing-xs);
+    border-color: var(--border-color);
 }
 
-.card > #content > #rent-section {
-    border-width: var(--spacing-xs) 0;
-    border-color: var(--border-color);
+#property-card > #content > #name {
+    color: var(--font-dark);
+    background-color: fuchsia; /* debug color, to be replaced dynamically */
+}
+
+#station-card > #content > #name {
+    color: var(--font-light);
+    background-color: var(--font-dark);
+}
+
+.card > #content > #mid-section {
     flex-grow: 1;
+}
+
+.card > #content > #bottom-section {
+    border-top-width: var(--spacing-xs);
+    border-color: var(--border-color);
 }
 
 .section {
@@ -57,4 +70,8 @@
 
 .card > #content .info.active * {
     background-color: chartreuse;
+}
+
+.card > #content > .icon {
+    margin: var(--spacing-sm) 0;
 }
