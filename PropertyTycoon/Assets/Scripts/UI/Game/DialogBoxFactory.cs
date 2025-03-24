@@ -64,13 +64,7 @@ namespace UI.Game
         {
             var dialogBox = MakeSimpleDialogBox();
             var text = $"You landed on {ownableData.Name}.\nWould you like to buy it for ${ownableData.Cost}?";
-            
-            var image = ownableData switch
-            {
-                PropertyData propertyData => OwnableCardFactory.MakeCard(propertyData),
-                _ => MakeIconElement("cross")
-            };
-            
+            var image = OwnableCardFactory.MakeCard(ownableData);
             dialogBox.Initialise(ownableData.Name, text, image, confirmText: "Yes", cancelText: "No");
             return dialogBox;
             
