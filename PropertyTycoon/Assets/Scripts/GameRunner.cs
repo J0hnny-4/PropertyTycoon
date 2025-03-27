@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
@@ -39,7 +40,7 @@ public class GameRunner : MonoBehaviour
             }
         }
         
-        GameLoop();
+        StartCoroutine(GameLoop());
 
         Debug.Log("GAME OVER");
     }
@@ -56,7 +57,7 @@ public class GameRunner : MonoBehaviour
     }
 
     //TODO this may need to be a coroutine?
-    private void GameLoop()
+    protected IEnumerator GameLoop()
     {
         while (!GameOver())
         {
@@ -67,8 +68,13 @@ public class GameRunner : MonoBehaviour
 
             if (_players[_activePlayerIndex].TurnsLeftInJail > 0)
             {
+                GameState.Pause();
+                //TODO add jail ui here, unpause there.
+                GameState.Unpause();
+                while(GameState.Paused) yield return null;
                 if (_players[_activePlayerIndex].HandleJAil())
                 {
+                    
                     _players[_activePlayerIndex].Move();
                     _board[_players[_activePlayerIndex].Position].PlayerLands();
                     continue;
@@ -78,9 +84,18 @@ public class GameRunner : MonoBehaviour
             do
             {
                 _players[_activePlayerIndex].RollDice();
+                GameState.Pause();
+                //TODO add dice ui here, unpause there.
+                GameState.Unpause();
+                while(GameState.Paused) yield return null;
                 _players[_activePlayerIndex].Move();
                 _board[_players[_activePlayerIndex].Position].PlayerLands();
             } while (_players[_activePlayerIndex].DoublesRolled > 0);
+            
+            GameState.Pause();
+            //TODO add end turn ui here, unpause there.
+            GameState.Unpause();
+            while(GameState.Paused) yield return null;
         }
     }
 }
