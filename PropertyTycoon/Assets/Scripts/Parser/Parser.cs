@@ -76,7 +76,9 @@ public class Parser
               x++;
               y++;
             }
-            tiles.Add(new PropertyData(name,cost, rentlist,data[i,2],housecost));
+            Colour colour = (Data.Colour)typeof(Data.Colour).GetField(data[i, 2].Replace(" ", ""), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.GetValue(null);
+
+            tiles.Add(new PropertyData(name,cost, rentlist, colour, housecost));
             break;
           
           case("Utilities"):
