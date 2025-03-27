@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Codice.CM.SemanticMerge.Gui;
 using Data;
+using UnityEditor;
 using UnityEngine;
 
 namespace BackEnd
@@ -17,6 +18,7 @@ namespace BackEnd
         private List<SquareData> _board = new();
         private GameMode _gameMode;
         private int _freeParkingMoney = 0;
+        public static bool Paused { get; private set; } = false;
 
         /// <summary>
         /// Stores the single instance of GameState.
@@ -67,5 +69,8 @@ namespace BackEnd
         /// Resets the singleton instance to a new GameState object.
         /// </summary>
         public static void NewGame() { Instance = new GameState(); }
+        
+        public static void Pause() { Paused = true; }
+        public static void Unpause() { Paused = false; }
     }
 }
