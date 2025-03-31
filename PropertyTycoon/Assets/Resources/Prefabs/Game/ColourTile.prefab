@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8697347012082279008}
   - component: {fileID: 5975016058218809374}
   - component: {fileID: 5497146558237673824}
-  - component: {fileID: 7262706717985375800}
   m_Layer: 0
   m_Name: ColourTile
   m_TagString: Untagged
@@ -111,20 +110,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &7262706717985375800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2167008787102524966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd4df2b325df728da5260cb0f6b59a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tile: {fileID: 0}
-  _tileChild: {fileID: 6006123127390328235}
 --- !u!1 &6006123127390328235
 GameObject:
   m_ObjectHideFlags: 0

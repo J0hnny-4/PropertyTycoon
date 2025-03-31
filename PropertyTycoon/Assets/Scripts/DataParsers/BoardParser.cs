@@ -1,15 +1,17 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Data;
+using UnityEngine;
 
-
-public class Parser
+namespace DataParsers
 {
-  private static string[,] data;
+  public class BoardParser
+  {
+    private static string[,] data;
+  
     private static DataTable LoadDataTableFromXml(string path)
     {
       //Creates object xml and loads the path passed through the initial call
@@ -21,9 +23,9 @@ public class Parser
       return dataSet.Tables[0];
     }
 
-    public static void Parse()
+    private static void Parse()
     {
-      DataTable propertyList = LoadDataTableFromXml("Assets/Resources/Data/PropertyTable.xml");
+      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath +"/Data/PropertyTable.xml");
       //Sets the length of the array depending on the attributes loaded
       data = new string[propertyList.Rows.Count,propertyList.Columns.Count];
       int row = 0;
@@ -33,12 +35,8 @@ public class Parser
         for(int col = 0; col < dataRow.ItemArray.Count(); col++)
         {
           data[row, col] = dataRow[col].ToString();
-          //Test
-          Console.Write("{0} ", data[row, col]);
         }
         row++;
-        //Test
-        Console.Write(Environment.NewLine + Environment.NewLine);
       }
       
     }
@@ -46,62 +44,55 @@ public class Parser
     public static List<SquareData> TileCreator(){
       Parse();
       List<SquareData> tiles = new List<SquareData>();
-      int[] rentlist = new int[2];
+      int[] rentlist = new int[5];
       
-      for(int i = 0; i < 39; i++)
+      for(int i = 0; i < 40; i++)
       {
-        int cost;
-        int rent;
-        string name = data[i, 1];
-        int housecost;
+        string name = data[i, 0];
         int temp;
 
-        int.TryParse(data[i, 5], out cost);
-        int.TryParse(data[i, 6], out rent);
-        int.TryParse(data[i, 6], out housecost);
+        int.TryParse(data[i, 3], out var cost);
+        int.TryParse(data[i, 4], out var rent);
+        int.TryParse(data[i, 5], out var housecost);
         
-        int x = 0;
         switch (data[i, 2])
         {
           case("Action"):
             tiles.Add(new OwnableData(name,cost));            
             break;
           
-          case("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep Blue" or "Orange"):
-            x = 0;
-            int y = 6;
-            while (x<3){
+          case("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
+            int y = 5;
+            for (int x = 0; x < 5; x++)
+            {
               int.TryParse(data[i, y], out temp);
               rentlist[x] = temp;
               x++;
               y++;
             }
-            Colour colour = (Data.Colour)typeof(Data.Colour).GetField(data[i, 2].Replace(" ", ""), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.GetValue(null);
+            Colour colour = (Data.Colour)typeof(Data.Colour).GetField(data[i, 2].Replace(" ", ""), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.GetValue(Colour.Black);
 
             tiles.Add(new PropertyData(name,cost, rentlist, colour, housecost));
             break;
           
           case("Utilities"):
-            x = 0;
-            y = 6;  
-            while (x<3){
-              int.TryParse(data[i, y], out temp);
-              rentlist[x] = temp;
-              x++;
-              y++;
-            }
+            tiles.Add(new UtilityData(name, cost, new []{4, 10}));
             break;
           
-          case("Go to Jail"):
+          case("Go to jail"):
             tiles.Add(new OwnableData(name,cost));
             break;
           
           case("Take card"):
-            tiles.Add(new OwnableData(name,cost));
+            tiles.Add(new OwnableData(name,cost)); //todo: Update to suitable type
             break;
           
           case("Station"): 
             tiles.Add(new StationData(name, cost, rent));
+            break;
+          
+          default:
+            Debug.LogError($"Unknown tile type {data[i, 2]}");
             break;
         }
       }
@@ -109,4 +100,5 @@ public class Parser
       return tiles;
     }
 
-  } 
+  }
+} 

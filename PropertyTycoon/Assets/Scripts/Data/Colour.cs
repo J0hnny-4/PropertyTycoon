@@ -11,7 +11,7 @@ namespace Data
         public static readonly Colour Green = new Colour("Green", UnityEngine.Color.green);
         public static readonly Colour Deepblue = new Colour("Deep Blue", UnityEngine.Color.blue);
         public static readonly Colour Purple = new Colour("Purple", new UnityEngine.Color(0.4f, 0.05f, 0.7f));
-        public static readonly Colour Black = new Colour("Purple", UnityEngine.Color.black);
+        public static readonly Colour Black = new Colour("Black", UnityEngine.Color.black);
             
         public string Name { get; }
         public UnityEngine.Color UnityColour { get; }
