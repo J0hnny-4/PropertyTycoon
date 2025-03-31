@@ -134,3 +134,16 @@
     background-color: var(--off-white);
     padding: 0 var(--spacing-xs);
 }
+
+/* dice specific rules */
+
+#dialog-box > #content > .dice-container {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.dice {
+    width: 150px;
+    height: 150px;
+    margin: var(--spacing-xl);
+}
