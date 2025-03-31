@@ -13,6 +13,11 @@ namespace BackEnd
     public abstract class Player
     {
         public PlayerData Data { get; }
+
+        public string Name
+        {
+            get => Data.Name;
+        }
         
 
         public int Money

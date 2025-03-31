@@ -1,3 +1,4 @@
+using System;
 using Data;
 using UI.Game.DialogBoxes;
 using UnityEngine;
@@ -45,11 +46,11 @@ namespace UI.Game
             return dialogBox;
         }
 
-        public static DiceDialogBox MakeDiceDialogBox(int[] expectedResult)
+        public static DiceDialogBox DiceDialogBox(string playerName, Tuple<int, int> expectedResult)
         {
             var dialogObject = Instantiate(DiceDialogBoxPrefab);
             var dialogBox = dialogObject.GetComponent<DiceDialogBox>();
-            dialogBox.Initialise(expectedResult);
+            dialogBox.Initialise(playerName, expectedResult);
             return dialogBox;
         }
 

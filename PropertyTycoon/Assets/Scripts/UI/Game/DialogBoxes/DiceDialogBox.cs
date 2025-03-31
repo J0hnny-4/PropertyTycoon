@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace UI.Game.DialogBoxes
 {
@@ -9,16 +11,16 @@ namespace UI.Game.DialogBoxes
     {
         private VisualElement[] _dices;
         private Texture2D[] _diceIcons;
-        private int[] _result;
+        private Tuple<int, int> _result;
         
         /// <summary>
         /// Initialise the dialog box by setting values and callbacks.
         /// </summary>
         /// <param name="rollResult"> The values of the two dice. </param>
-        public void Initialise(int[] rollResult)
+        public void Initialise(string playerName, Tuple<int, int> rollResult)
         {
             base.Initialise();
-            SetTitle("Roll Dice");
+            SetTitle($"{playerName}'s turn");
             SetConfirmButton("Roll");
             
             // get reference to dices
@@ -35,7 +37,7 @@ namespace UI.Game.DialogBoxes
         {
             // shuffles dices around for a bit
             for (var i = 0; i < 20; i++) { 
-                SetDicesValues(new [] {Random.Range(0, 6), Random.Range(0, 6)});
+                SetDicesValues(new Tuple<int, int>(Random.Range(1, 7), Random.Range(1, 7)));
                 await Task.Delay(100);
             }
             
@@ -44,10 +46,11 @@ namespace UI.Game.DialogBoxes
             await Task.Delay(1500);
         }
 
-        private void SetDicesValues(int[] values)
+        private void SetDicesValues(Tuple<int, int> values)
         {
-            _dices[0].style.backgroundImage = _diceIcons[values[0]]; 
-            _dices[1].style.backgroundImage = _diceIcons[values[1]]; 
+            // adjust values to line up with 0 indexed array
+            _dices[0].style.backgroundImage = _diceIcons[values.Item1 - 1]; 
+            _dices[1].style.backgroundImage = _diceIcons[values.Item2 - 1]; 
         }
 
         protected override void HandleCancelClicked() { /* unused */ }

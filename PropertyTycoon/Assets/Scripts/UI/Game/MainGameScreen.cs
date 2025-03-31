@@ -1,6 +1,8 @@
+using System;
 using BackEnd;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace UI.Game
 {
@@ -27,10 +29,8 @@ namespace UI.Game
 
         private async void TestingDiceRoll()
         {
-            var values = new [] {Random.Range(0, 6), Random.Range(0, 6)};
-            Debug.Log($"Testing dice: {values[0]} {values[1]}");
-            
-            var result = await DialogBoxFactory.MakeDiceDialogBox(values).AsTask();
+            var values = new Tuple<int, int> (Random.Range(0, 6), Random.Range(0, 6));
+            var result = await DialogBoxFactory.DiceDialogBox("test", values).AsTask();
             Debug.Log(result);
             
         }

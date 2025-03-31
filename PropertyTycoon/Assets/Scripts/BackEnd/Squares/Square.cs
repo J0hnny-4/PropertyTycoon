@@ -1,4 +1,5 @@
 using Data;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -22,6 +23,7 @@ namespace BackEnd.Squares
         /// </summary>
         public virtual void PlayerLands()
         {
+            Debug.Log($"Player lands: {Data.Name}");
         }
     }
 }
