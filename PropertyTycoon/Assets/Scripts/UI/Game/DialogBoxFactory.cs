@@ -9,6 +9,7 @@ namespace UI.Game
     {
         private static readonly GameObject SimpleDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/SimpleDialogBox");
         private static readonly GameObject AuctionDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AuctionDialogBox");
+        private static readonly GameObject DiceDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/DiceDialogBox");
         
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
@@ -41,6 +42,14 @@ namespace UI.Game
                     break;
             }
             dialogBox.Initialise("Payment Due", text, image, confirmText: "Pay");
+            return dialogBox;
+        }
+
+        public static DiceDialogBox MakeDiceDialogBox(int[] expectedResult)
+        {
+            var dialogObject = Instantiate(DiceDialogBoxPrefab);
+            var dialogBox = dialogObject.GetComponent<DiceDialogBox>();
+            dialogBox.Initialise(expectedResult);
             return dialogBox;
         }
 

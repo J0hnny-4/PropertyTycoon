@@ -1,0 +1,30 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Game/DialogBoxes/DialogBox.uss?fileID=7433441132597879392&amp;guid=686f7cd8b50ecba39b1ca986d4745ecb&amp;type=3#DialogBox" />
+    <engine:VisualElement name="background" style="flex-grow: 1;">
+        <engine:VisualElement name="dialog-box">
+            <engine:VisualElement name="title-bar">
+                <engine:Label text="Title" name="title" />
+                <engine:Button name="close-button" style="background-image: resource(&apos;Images/Icons/cross&apos;);" />
+            </engine:VisualElement>
+            <engine:VisualElement name="content">
+                <engine:VisualElement name="left-panel" class="dice-container">
+                    <engine:VisualElement name="dice-1" class="dice" style="background-image: resource(&apos;Images/Icons/Dice/dice&apos;);" />
+                    <engine:VisualElement name="dice-2" class="dice" style="background-image: resource(&apos;Images/Icons/Dice/dice6&apos;);" />
+                </engine:VisualElement>
+                <engine:VisualElement name="right-panel" style="display: none;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="bottom-button-container">
+                <engine:Button text="Confirm" name="confirm-button" class="simple" />
+                <engine:Button text="Cancel" name="cancel-button" class="simple" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:VisualElement name="Screen" style="justify-content: center; align-items: center; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.81); display: none;">
+        <engine:VisualElement style="flex-direction: column-reverse; flex-wrap: nowrap; width: 50%; height: 70%; align-self: center; align-items: center; justify-content: flex-end;">
+            <engine:Button text="Roll" name="roll" class="simple" style="width: 50%; height: 50%; justify-content: space-evenly; align-self: center; align-content: stretch; align-items: center; flex-direction: column-reverse;" />
+            <engine:Label name="rolltotal" style="align-content: center; align-self: center; justify-content: flex-start; align-items: auto; flex-direction: row; color: rgb(255, 255, 255); width: 100px; height: 100px; font-size: 75px; -unity-text-align: upper-center;" />
+            <engine:Label text="YOU ROLLED A: " name="yourolled" style="width: 258px; background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); flex-direction: row; -unity-text-align: upper-center;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
