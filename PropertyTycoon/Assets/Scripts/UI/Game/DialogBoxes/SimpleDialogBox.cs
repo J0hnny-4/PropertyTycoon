@@ -1,6 +1,3 @@
-using System;
-using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
@@ -11,14 +8,14 @@ namespace UI.Game.DialogBoxes
         /// Initialise the dialog box by setting values and callbacks.
         /// </summary>
         /// <param name="title">Title.</param>
-        /// <param name="text">Text shown in the left panel.</param>
-        /// <param name="icon">Icon shown in the right panel.</param>
+        /// <param name="text">Text shown in the right panel.</param>
+        /// <param name="image">Icon shown in the left panel.</param>
         /// <param name="cancelText">Text of cancel button.</param>
         /// <param name="confirmText">Text of confirm button.</param>
         /// 
         public void Initialise(string title, 
             string text,
-            Texture2D icon,
+            VisualElement image,
             string cancelText = null,
             string confirmText = null,
             bool closable = false
@@ -31,7 +28,7 @@ namespace UI.Game.DialogBoxes
             if (closable) { AllowClosing(false); }
             
             
-            LeftPanel.style.backgroundImage = icon;
+            LeftPanel.Add(image);
             RightPanel.Q<Label>("text").text = text;
         }
 

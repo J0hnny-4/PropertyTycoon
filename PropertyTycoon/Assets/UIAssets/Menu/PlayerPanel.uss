@@ -29,26 +29,6 @@
     border-width: 0;
 }
 
-#ai-toggle > Label {
-    margin-right: var(--spacing-md);
-    min-width: auto;
-}
-
-#ai-toggle .unity-toggle__checkmark,
-#ai-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
-    border-width: var(--spacing-xxs);
-    border-color: var(--border-color);
-    border-radius: var(--spacing-xs);
-    background-color: var(--off-white);
-    -unity-background-image-tint-color: var(--off-white);
-}
-
-#ai-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
-    background-image: resource("Images/Icons/check");
-    background-color: var(--positive-color);
-    background-size: 70%;
-}
-
 #name-input .unity-text-element--inner-input-field-component {
     font-size: var(--font-sm);
 }
