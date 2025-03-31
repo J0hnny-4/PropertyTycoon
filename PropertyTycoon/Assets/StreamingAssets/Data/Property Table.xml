@@ -16,6 +16,7 @@
 		<house3>90</house3>
 		<house4>160</house4>
 		<hotel1>250</hotel1>
+		<HouseCost>50</HouseCost>
 	</property>
 	<property>
 		<Space>Pot Luck</Space>
@@ -33,6 +34,7 @@
 		<house3>180</house3>
 		<house4>320</house4>
 		<hotel1>450</hotel1>
+		<HouseCost>50</HouseCost>
 	</property>
 	<property>
 		<Space>Income Tax</Space>
@@ -57,6 +59,7 @@
 		<house3>270</house3>
 		<house4>400</house4>
 		<hotel1>550</hotel1>
+		<HouseCost>50</HouseCost>
 	</property>
 	<property>
 		<Space>Opportunity Knocks</Space>
@@ -74,6 +77,7 @@
 		<house3>270</house3>
 		<house4>400</house4>
 		<hotel1>550</hotel1>
+		<HouseCost>50</HouseCost>
 	</property>
 	<property>
 		<Space>Granger Drive</Space>
@@ -86,6 +90,7 @@
 		<house3>300</house3>
 		<house4>450</house4>
 		<hotel1>600</hotel1>
+		<HouseCost>50</HouseCost>
 	</property>
 	<property>
 		<Space>Jail</Space>
@@ -103,6 +108,7 @@
 		<house3>450</house3>
 		<house4>625</house4>
 		<hotel1>750</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Tesla Power Co</Space>
@@ -122,6 +128,7 @@
 		<house3>450</house3>
 		<house4>625</house4>
 		<hotel1>750</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Rey Lane</Space>
@@ -134,6 +141,7 @@
 		<house3>500</house3>
 		<house4>700</house4>
 		<hotel1>900</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Hove Station</Space>
@@ -153,6 +161,7 @@
 		<house3>550</house3>
 		<house4>750</house4>
 		<hotel1>950</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Pot Luck</Space>
@@ -170,6 +179,7 @@
 		<house3>550</house3>
 		<house4>750</house4>
 		<hotel1>950</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Broyles Lane</Space>
@@ -182,6 +192,7 @@
 		<house3>600</house3>
 		<house4>800</house4>
 		<hotel1>1000</hotel1>
+		<HouseCost>100</HouseCost>
 	</property>
 	<property>
 		<Space>Free Parking</Space>
@@ -199,6 +210,7 @@
 		<house3>700</house3>
 		<house4>875</house4>
 		<hotel1>1050</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
 		<Space>Opportunity Knocks</Space>
@@ -216,6 +228,7 @@
 		<house3>700</house3>
 		<house4>875</house4>
 		<hotel1>1050</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
 		<Space>Han Xin Gardens</Space>
@@ -228,6 +241,7 @@
 		<house3>750</house3>
 		<house4>925</house4>
 		<hotel1>1100</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
 		<Space>Falmer Station</Space>
@@ -247,6 +261,7 @@
 		<house3>800</house3>
 		<house4>975</house4>
 		<hotel1>1150</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
 		<Space>Picard Avenue</Space>
@@ -259,6 +274,7 @@
 		<house3>800</house3>
 		<house4>975</house4>
 		<hotel1>1150</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
 		<Space>Edison Water</Space>
@@ -278,9 +294,10 @@
 		<house3>850</house3>
 		<house4>1025</house4>
 		<hotel1>1200</hotel1>
+		<HouseCost>150</HouseCost>
 	</property>
 	<property>
-		<Space>Go to Jail</Space>
+		<Space>Go to jail</Space>
 		<Buyable>No</Buyable>
 		<Group>Go to jail</Group>
 	</property>
@@ -295,6 +312,7 @@
 		<house3>900</house3>
 		<house4>1100</house4>
 		<hotel1>1275</hotel1>
+		<HouseCost>200</HouseCost>
 	</property>
 	<property>
 		<Space>Ghengis Crescent</Space>
@@ -307,6 +325,7 @@
 		<house3>900</house3>
 		<house4>1100</house4>
 		<hotel1>1275</hotel1>
+		<HouseCost>200</HouseCost>
 	</property>
 	<property>
 		<Space>Pot Luck</Space>
@@ -324,6 +343,7 @@
 		<house3>1000</house3>
 		<house4>1200</house4>
 		<hotel1>1400</hotel1>
+		<HouseCost>200</HouseCost>
 	</property>
 	<property>
 		<Space>Portslade Station</Space>
@@ -348,6 +368,7 @@
 		<house3>1100</house3>
 		<house4>1300</house4>
 		<hotel1>1500</hotel1>
+		<HouseCost>200</HouseCost>
 	</property>
 	<property>
 		<Space>Super Tax</Space>
@@ -365,5 +386,6 @@
 		<house3>1400</house3>
 		<house4>1700</house4>
 		<hotel1>2000</hotel1>
+		<HouseCost>200</HouseCost>
 	</property>
 </Properties>

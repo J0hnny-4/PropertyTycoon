@@ -25,7 +25,7 @@ namespace DataParsers
 
     private static void Parse()
     {
-      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath +"/Data/PropertyTable.xml");
+      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath +"/Data/Property Table.xml");
       //Sets the length of the array depending on the attributes loaded
       data = new string[propertyList.Rows.Count,propertyList.Columns.Count];
       int row = 0;
@@ -44,7 +44,6 @@ namespace DataParsers
     public static List<SquareData> TileCreator(){
       Parse();
       List<SquareData> tiles = new List<SquareData>();
-      int[] rentlist = new int[5];
       
       for(int i = 0; i < 40; i++)
       {
@@ -53,7 +52,6 @@ namespace DataParsers
 
         int.TryParse(data[i, 3], out var cost);
         int.TryParse(data[i, 4], out var rent);
-        int.TryParse(data[i, 5], out var housecost);
         
         switch (data[i, 2])
         {
@@ -62,17 +60,17 @@ namespace DataParsers
             break;
           
           case("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
-            int y = 5;
+            int.TryParse(data[i, 10], out var housecost);
+            
+            int[] rentlist = new int[5];
             for (int x = 0; x < 5; x++)
             {
-              int.TryParse(data[i, y], out temp);
+              int.TryParse(data[i, x + 5], out temp);
               rentlist[x] = temp;
-              x++;
-              y++;
             }
             Colour colour = (Data.Colour)typeof(Data.Colour).GetField(data[i, 2].Replace(" ", ""), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.GetValue(Colour.Black);
 
-            tiles.Add(new PropertyData(name,cost, rentlist, colour, housecost));
+            tiles.Add(new PropertyData(name, cost, rentlist, colour, housecost));
             break;
           
           case("Utilities"):
