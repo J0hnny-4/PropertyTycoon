@@ -38,9 +38,6 @@ namespace DataParsers
         }
         row++;
       }
-      row++;
-      //Test
-      Console.Write(Environment.NewLine + Environment.NewLine);
     }
 
     public static List<SquareData> TileCreator()
@@ -59,7 +56,7 @@ namespace DataParsers
         switch (data[i, 2])
         {
           case ("Action"):
-            tiles.Add(new OwnableData(name, cost));
+            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
             break;
 
           case ("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
@@ -81,7 +78,7 @@ namespace DataParsers
             break;
 
           case ("Go to jail"):
-            tiles.Add(new OwnableData(name, cost));
+            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
             break;
 
           case ("Take card"):
@@ -97,9 +94,8 @@ namespace DataParsers
             break;
         }
       }
+
+      return tiles;
     }
-
-    return tiles;
   }
-
 }
