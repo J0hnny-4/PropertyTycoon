@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<property>
-		<Position>1</Position>
 		<Space>Go</Space>
-		<Action>Collect £200</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>2</Position>
 		<Space>The Old Creek</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Brown</Group>
@@ -21,14 +18,11 @@
 		<hotel1>250</hotel1>
 	</property>
 	<property>
-		<Position>3</Position>
 		<Space>Pot Luck</Space>
-		<Action>Take card</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>4</Position>
 		<Space>Gangsters Paradise</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Brown</Group>
@@ -41,14 +35,11 @@
 		<hotel1>450</hotel1>
 	</property>
 	<property>
-		<Position>5</Position>
 		<Space>Income Tax</Space>
-		<Action>Pay £200</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>6</Position>
 		<Space>Brighton Station</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Station</Group>
@@ -56,7 +47,6 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>7</Position>
 		<Space>The Angels Delight</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Blue</Group>
@@ -69,14 +59,11 @@
 		<hotel1>550</hotel1>
 	</property>
 	<property>
-		<Position>8</Position>
 		<Space>Opportunity Knocks</Space>
-		<Action>Take card</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>9</Position>
 		<Space>Potter Avenue</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Blue</Group>
@@ -89,7 +76,6 @@
 		<hotel1>550</hotel1>
 	</property>
 	<property>
-		<Position>10</Position>
 		<Space>Granger Drive</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Blue</Group>
@@ -102,13 +88,11 @@
 		<hotel1>600</hotel1>
 	</property>
 	<property>
-		<Position>11</Position>
-		<Space>Jail/Just visiting</Space>
+		<Space>Jail</Space>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>12</Position>
 		<Space>Skywalker Drive</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Purple</Group>
@@ -121,7 +105,6 @@
 		<hotel1>750</hotel1>
 	</property>
 	<property>
-		<Position>13</Position>
 		<Space>Tesla Power Co</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Utilities</Group>
@@ -129,7 +112,6 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>14</Position>
 		<Space>Wookie Hole</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Purple</Group>
@@ -142,7 +124,6 @@
 		<hotel1>750</hotel1>
 	</property>
 	<property>
-		<Position>15</Position>
 		<Space>Rey Lane</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Purple</Group>
@@ -155,7 +136,6 @@
 		<hotel1>900</hotel1>
 	</property>
 	<property>
-		<Position>16</Position>
 		<Space>Hove Station</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Station</Group>
@@ -163,7 +143,6 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>17</Position>
 		<Space>Bishop Drive</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Orange</Group>
@@ -176,14 +155,11 @@
 		<hotel1>950</hotel1>
 	</property>
 	<property>
-		<Position>18</Position>
 		<Space>Pot Luck</Space>
-		<Action>Take card</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>19</Position>
 		<Space>Dunham Street</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Orange</Group>
@@ -196,7 +172,6 @@
 		<hotel1>950</hotel1>
 	</property>
 	<property>
-		<Position>20</Position>
 		<Space>Broyles Lane</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Orange</Group>
@@ -209,14 +184,11 @@
 		<hotel1>1000</hotel1>
 	</property>
 	<property>
-		<Position>21</Position>
 		<Space>Free Parking</Space>
-		<Action>Collect fines</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>22</Position>
 		<Space>Yue Fei Square</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Red</Group>
@@ -229,14 +201,11 @@
 		<hotel1>1050</hotel1>
 	</property>
 	<property>
-		<Position>23</Position>
 		<Space>Opportunity Knocks</Space>
-		<Action>Take card</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>24</Position>
 		<Space>Mulan Rouge</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Red</Group>
@@ -249,7 +218,6 @@
 		<hotel1>1050</hotel1>
 	</property>
 	<property>
-		<Position>25</Position>
 		<Space>Han Xin Gardens</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Red</Group>
@@ -262,7 +230,6 @@
 		<hotel1>1100</hotel1>
 	</property>
 	<property>
-		<Position>26</Position>
 		<Space>Falmer Station</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Station</Group>
@@ -270,7 +237,6 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>27</Position>
 		<Space>Shatner Close</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Yellow</Group>
@@ -283,7 +249,6 @@
 		<hotel1>1150</hotel1>
 	</property>
 	<property>
-		<Position>28</Position>
 		<Space>Picard Avenue</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Yellow</Group>
@@ -296,7 +261,6 @@
 		<hotel1>1150</hotel1>
 	</property>
 	<property>
-		<Position>29</Position>
 		<Space>Edison Water</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Utilities</Group>
@@ -304,7 +268,6 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>30</Position>
 		<Space>Crusher Creek</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Yellow</Group>
@@ -317,13 +280,11 @@
 		<hotel1>1200</hotel1>
 	</property>
 	<property>
-		<Position>31</Position>
 		<Space>Go to Jail</Space>
 		<Buyable>No</Buyable>
 		<Group>Go to jail</Group>
 	</property>
 	<property>
-		<Position>32</Position>
 		<Space>Sirat Mews</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Green</Group>
@@ -336,7 +297,6 @@
 		<hotel1>1275</hotel1>
 	</property>
 	<property>
-		<Position>33</Position>
 		<Space>Ghengis Crescent</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Green</Group>
@@ -349,14 +309,11 @@
 		<hotel1>1275</hotel1>
 	</property>
 	<property>
-		<Position>34</Position>
 		<Space>Pot Luck</Space>
-		<Action>Take card</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>35</Position>
 		<Space>Ibis Close</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Green</Group>
@@ -369,7 +326,6 @@
 		<hotel1>1400</hotel1>
 	</property>
 	<property>
-		<Position>36</Position>
 		<Space>Portslade Station</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Station</Group>
@@ -377,13 +333,11 @@
 		<Rent>See notes</Rent>
 	</property>
 	<property>
-		<Position>37</Position>
 		<Space>Opportunity Knocks</Space>
 		<Buyable>No</Buyable>
 		<Group>Take card</Group>
 	</property>
 	<property>
-		<Position>38</Position>
 		<Space>James Webb Way</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Deep blue</Group>
@@ -396,14 +350,11 @@
 		<hotel1>1500</hotel1>
 	</property>
 	<property>
-		<Position>39</Position>
 		<Space>Super Tax</Space>
-		<Action>Pay £100</Action>
 		<Buyable>No</Buyable>
 		<Group>Action</Group>
 	</property>
 	<property>
-		<Position>40</Position>
 		<Space>Turing Heights</Space>
 		<Buyable>Yes</Buyable>
 		<Group>Deep blue</Group>
