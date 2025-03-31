@@ -13,7 +13,7 @@ namespace BackEnd
         
         public static int ChargePlayer(Object itemCausingPayment, int payer, int amount)
         {
-            bool choice = DialogBoxFactory.MakePaymentDialogBox(itemCausingPayment, amount).AsTask().Result;
+            bool choice = DialogBoxFactory.PaymentDialogBox(itemCausingPayment, amount).AsTask().Result;
             if(GameState.Players[payer].Money < amount)
             {
                 // TODO: Implement bankruptcy logic

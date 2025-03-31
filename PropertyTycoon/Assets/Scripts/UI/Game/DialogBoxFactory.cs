@@ -24,7 +24,7 @@ namespace UI.Game
         /// <param name="item">The item prompting the payment (Property, Card, etc.)</param>
         /// <param name="amount">The amount due.</param>
         /// <returns>A simple dialog box, showing only the 'pay' (true) button.</returns>
-        public static SimpleDialogBox MakePaymentDialogBox(object item, int amount)
+        public static SimpleDialogBox PaymentDialogBox(object item, int amount)
         {
             var dialogBox = MakeSimpleDialogBox();
             VisualElement image;
@@ -54,10 +54,10 @@ namespace UI.Game
         }
 
         /// <summary>
-        /// Creates a 'Jail' dialog box.
+        /// Creates a 'Jail' dialog box (player being sent to jail).
         /// </summary>
         /// <returns>A simple dialog box, showing the 'pay' (true) and 'cancel' (false) buttons.</returns>
-        public static SimpleDialogBox MakeJailLandingDialogBox()
+        public static SimpleDialogBox JailLandingDialogBox()
         {
             var dialogBox = MakeSimpleDialogBox();
             var image = MakeIconElement("jail-1");
@@ -69,13 +69,29 @@ namespace UI.Game
                 cancelText: "Cancel");
             return dialogBox;
         }
+        
+        /// <summary>
+        /// Creates a 'Jail' dialog box (player already in jail).
+        /// </summary>
+        /// <returns>A simple dialog box, showing the 'pay' (true) and 'cancel' (false) buttons.</returns>
+        public static SimpleDialogBox PlayerInJailDialogBox(string playerName, int turnsLeft)
+        {
+            var dialogBox = MakeSimpleDialogBox();
+            var image = MakeIconElement("jail-1");
+            dialogBox.Initialise(
+                "Jail", 
+                $"{playerName} in in jail.\nTurns left: {turnsLeft}.",
+                image, 
+                confirmText: "Continue");
+            return dialogBox;
+        }
 
         /// <summary>
         /// Creates a 'purchase' dialog box.
         /// </summary>
         /// <param name="ownableData">Ownable for sale.</param>
         /// <returns>A simple dialog box, showing 'yes' (True) and 'no' (False) buttons.</returns>
-        public static SimpleDialogBox MakePurchaseDialogBox(OwnableData ownableData)
+        public static SimpleDialogBox PurchaseDialogBox(OwnableData ownableData)
         {
             var dialogBox = MakeSimpleDialogBox();
             var text = $"You landed on {ownableData.Name}.\nWould you like to buy it for ${ownableData.Cost}?";
@@ -89,7 +105,7 @@ namespace UI.Game
         /// </summary>
         /// <param name="ownableData">Ownable for sale.</param>
         /// <returns>A dialog box prompting players to input their bids.</returns>
-        public static AuctionDialogBox MakeAuctionDialogBox(OwnableData ownableData)
+        public static AuctionDialogBox AuctionDialogBox(OwnableData ownableData)
         {
             var dialogObject = Instantiate(AuctionDialogBoxPrefab);
             var dialogBox = dialogObject.GetComponent<AuctionDialogBox>();
