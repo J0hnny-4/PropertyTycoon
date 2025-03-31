@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Properties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<property>
+		<Space>Go</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>The Old Creek</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Brown</Group>
+		<Cost>60</Cost>
+		<Rent>2</Rent>
+		<house1>10</house1>
+		<house2>30</house2>
+		<house3>90</house3>
+		<house4>160</house4>
+		<hotel1>250</hotel1>
+		<HouseCost>50</HouseCost>
+	</property>
+	<property>
+		<Space>Pot Luck</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Gangsters Paradise</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Brown</Group>
+		<Cost>60</Cost>
+		<Rent>4</Rent>
+		<house1>20</house1>
+		<house2>60</house2>
+		<house3>180</house3>
+		<house4>320</house4>
+		<hotel1>450</hotel1>
+		<HouseCost>50</HouseCost>
+	</property>
+	<property>
+		<Space>Income Tax</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Brighton Station</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Station</Group>
+		<Cost>200</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>The Angels Delight</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Blue</Group>
+		<Cost>100</Cost>
+		<Rent>6</Rent>
+		<house1>30</house1>
+		<house2>90</house2>
+		<house3>270</house3>
+		<house4>400</house4>
+		<hotel1>550</hotel1>
+		<HouseCost>50</HouseCost>
+	</property>
+	<property>
+		<Space>Opportunity Knocks</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Potter Avenue</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Blue</Group>
+		<Cost>100</Cost>
+		<Rent>6</Rent>
+		<house1>30</house1>
+		<house2>90</house2>
+		<house3>270</house3>
+		<house4>400</house4>
+		<hotel1>550</hotel1>
+		<HouseCost>50</HouseCost>
+	</property>
+	<property>
+		<Space>Granger Drive</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Blue</Group>
+		<Cost>120</Cost>
+		<Rent>8</Rent>
+		<house1>40</house1>
+		<house2>100</house2>
+		<house3>300</house3>
+		<house4>450</house4>
+		<hotel1>600</hotel1>
+		<HouseCost>50</HouseCost>
+	</property>
+	<property>
+		<Space>Jail</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Skywalker Drive</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Purple</Group>
+		<Cost>140</Cost>
+		<Rent>10</Rent>
+		<house1>50</house1>
+		<house2>150</house2>
+		<house3>450</house3>
+		<house4>625</house4>
+		<hotel1>750</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Tesla Power Co</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Utilities</Group>
+		<Cost>150</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>Wookie Hole</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Purple</Group>
+		<Cost>140</Cost>
+		<Rent>10</Rent>
+		<house1>50</house1>
+		<house2>150</house2>
+		<house3>450</house3>
+		<house4>625</house4>
+		<hotel1>750</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Rey Lane</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Purple</Group>
+		<Cost>160</Cost>
+		<Rent>12</Rent>
+		<house1>60</house1>
+		<house2>180</house2>
+		<house3>500</house3>
+		<house4>700</house4>
+		<hotel1>900</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Hove Station</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Station</Group>
+		<Cost>200</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>Bishop Drive</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Orange</Group>
+		<Cost>180</Cost>
+		<Rent>14</Rent>
+		<house1>70</house1>
+		<house2>200</house2>
+		<house3>550</house3>
+		<house4>750</house4>
+		<hotel1>950</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Pot Luck</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Dunham Street</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Orange</Group>
+		<Cost>180</Cost>
+		<Rent>14</Rent>
+		<house1>70</house1>
+		<house2>200</house2>
+		<house3>550</house3>
+		<house4>750</house4>
+		<hotel1>950</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Broyles Lane</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Orange</Group>
+		<Cost>200</Cost>
+		<Rent>16</Rent>
+		<house1>80</house1>
+		<house2>220</house2>
+		<house3>600</house3>
+		<house4>800</house4>
+		<hotel1>1000</hotel1>
+		<HouseCost>100</HouseCost>
+	</property>
+	<property>
+		<Space>Free Parking</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Yue Fei Square</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Red</Group>
+		<Cost>220</Cost>
+		<Rent>18</Rent>
+		<house1>90</house1>
+		<house2>250</house2>
+		<house3>700</house3>
+		<house4>875</house4>
+		<hotel1>1050</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Opportunity Knocks</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Mulan Rouge</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Red</Group>
+		<Cost>220</Cost>
+		<Rent>18</Rent>
+		<house1>90</house1>
+		<house2>250</house2>
+		<house3>700</house3>
+		<house4>875</house4>
+		<hotel1>1050</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Han Xin Gardens</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Red</Group>
+		<Cost>240</Cost>
+		<Rent>20</Rent>
+		<house1>100</house1>
+		<house2>300</house2>
+		<house3>750</house3>
+		<house4>925</house4>
+		<hotel1>1100</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Falmer Station</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Station</Group>
+		<Cost>200</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>Shatner Close</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Yellow</Group>
+		<Cost>260</Cost>
+		<Rent>22</Rent>
+		<house1>110</house1>
+		<house2>330</house2>
+		<house3>800</house3>
+		<house4>975</house4>
+		<hotel1>1150</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Picard Avenue</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Yellow</Group>
+		<Cost>260</Cost>
+		<Rent>22</Rent>
+		<house1>110</house1>
+		<house2>330</house2>
+		<house3>800</house3>
+		<house4>975</house4>
+		<hotel1>1150</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Edison Water</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Utilities</Group>
+		<Cost>150</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>Crusher Creek</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Yellow</Group>
+		<Cost>280</Cost>
+		<Rent>22</Rent>
+		<house1>120</house1>
+		<house2>360</house2>
+		<house3>850</house3>
+		<house4>1025</house4>
+		<hotel1>1200</hotel1>
+		<HouseCost>150</HouseCost>
+	</property>
+	<property>
+		<Space>Go to jail</Space>
+		<Buyable>No</Buyable>
+		<Group>Go to jail</Group>
+	</property>
+	<property>
+		<Space>Sirat Mews</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Green</Group>
+		<Cost>300</Cost>
+		<Rent>26</Rent>
+		<house1>130</house1>
+		<house2>390</house2>
+		<house3>900</house3>
+		<house4>1100</house4>
+		<hotel1>1275</hotel1>
+		<HouseCost>200</HouseCost>
+	</property>
+	<property>
+		<Space>Ghengis Crescent</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Green</Group>
+		<Cost>300</Cost>
+		<Rent>26</Rent>
+		<house1>130</house1>
+		<house2>390</house2>
+		<house3>900</house3>
+		<house4>1100</house4>
+		<hotel1>1275</hotel1>
+		<HouseCost>200</HouseCost>
+	</property>
+	<property>
+		<Space>Pot Luck</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Ibis Close</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Green</Group>
+		<Cost>320</Cost>
+		<Rent>28</Rent>
+		<house1>150</house1>
+		<house2>450</house2>
+		<house3>1000</house3>
+		<house4>1200</house4>
+		<hotel1>1400</hotel1>
+		<HouseCost>200</HouseCost>
+	</property>
+	<property>
+		<Space>Portslade Station</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Station</Group>
+		<Cost>200</Cost>
+		<Rent>See notes</Rent>
+	</property>
+	<property>
+		<Space>Opportunity Knocks</Space>
+		<Buyable>No</Buyable>
+		<Group>Take card</Group>
+	</property>
+	<property>
+		<Space>James Webb Way</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Deep blue</Group>
+		<Cost>350</Cost>
+		<Rent>35</Rent>
+		<house1>175</house1>
+		<house2>500</house2>
+		<house3>1100</house3>
+		<house4>1300</house4>
+		<hotel1>1500</hotel1>
+		<HouseCost>200</HouseCost>
+	</property>
+	<property>
+		<Space>Super Tax</Space>
+		<Buyable>No</Buyable>
+		<Group>Action</Group>
+	</property>
+	<property>
+		<Space>Turing Heights</Space>
+		<Buyable>Yes</Buyable>
+		<Group>Deep blue</Group>
+		<Cost>400</Cost>
+		<Rent>50</Rent>
+		<house1>200</house1>
+		<house2>600</house2>
+		<house3>1400</house3>
+		<house4>1700</house4>
+		<hotel1>2000</hotel1>
+		<HouseCost>200</HouseCost>
+	</property>
+</Properties>

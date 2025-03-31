@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using Codice.CM.SemanticMerge.Gui;
 using Data;
-using UnityEditor;
-using UnityEngine;
 
 namespace BackEnd
 {
@@ -36,23 +33,6 @@ namespace BackEnd
         public static List<PlayerData> Players { get => Instance._players; set => Instance._players = value; }
         
         
-        /// <summary>
-        /// Sets up the board and players for a new game.
-        /// Currently, creates a placeholder board and two placeholder players.
-        /// </summary>
-        private GameState()
-        {
-            for(int i = 0; i < 40; i++)
-            {
-                if(i == 0) _board.Add(new SquareData("Go"));
-                else if (i == 10) _board.Add(new SquareData("Jail"));
-                else if(i == 20) _board.Add(new SquareData("Free Parking"));
-                else if(i == 30) _board.Add(new SquareData("Go To Jail"));
-                else if(i%2 == 1)_board.Add(new SquareData("Square " + i));
-                else _board.Add(new PropertyData("Property " + i, i*10, new int[] { 1, 2, 3, 4, 5 }, Colour.Green, 50));
-                
-            }
-        }
 
         /// <summary>
         /// Restest the free parking money to 0.
