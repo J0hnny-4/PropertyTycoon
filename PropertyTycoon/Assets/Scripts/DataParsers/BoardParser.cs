@@ -11,7 +11,7 @@ namespace DataParsers
   public class BoardParser
   {
     private static string[,] data;
-  
+
     private static DataTable LoadDataTableFromXml(string path)
     {
       //Creates object xml and loads the path passed through the initial call
@@ -25,43 +25,43 @@ namespace DataParsers
 
     private static void Parse()
     {
-      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath +"/Data/Property Table.xml");
+      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath + "/Data/Property Table.xml");
       //Sets the length of the array depending on the attributes loaded
-      data = new string[propertyList.Rows.Count,propertyList.Columns.Count];
+      data = new string[propertyList.Rows.Count, propertyList.Columns.Count];
       int row = 0;
       //Loop to store the data into the 2d array
-      foreach(DataRow dataRow in propertyList.Rows)
+      foreach (DataRow dataRow in propertyList.Rows)
       {
-        for(int col = 0; col < dataRow.ItemArray.Count(); col++)
+        for (int col = 0; col < dataRow.ItemArray.Count(); col++)
         {
           data[row, col] = dataRow[col].ToString();
         }
         row++;
       }
-      
     }
 
-    public static List<SquareData> TileCreator(){
+    public static List<SquareData> TileCreator()
+    {
       Parse();
       List<SquareData> tiles = new List<SquareData>();
-      
-      for(int i = 0; i < 40; i++)
+
+      for (int i = 0; i < 40; i++)
       {
         string name = data[i, 0];
         int temp;
 
         int.TryParse(data[i, 3], out var cost);
         int.TryParse(data[i, 4], out var rent);
-        
+
         switch (data[i, 2])
         {
-          case("Action"):
-            tiles.Add(new OwnableData(name,cost));            
+          case ("Action"):
+            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
             break;
-          
-          case("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
+
+          case ("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
             int.TryParse(data[i, 10], out var housecost);
-            
+
             int[] rentlist = new int[5];
             for (int x = 0; x < 5; x++)
             {
@@ -72,31 +72,30 @@ namespace DataParsers
 
             tiles.Add(new PropertyData(name, cost, rentlist, colour, housecost));
             break;
-          
-          case("Utilities"):
-            tiles.Add(new UtilityData(name, cost, new []{4, 10}));
+
+          case ("Utilities"):
+            tiles.Add(new UtilityData(name, cost, new[] { 4, 10 }));
             break;
-          
-          case("Go to jail"):
-            tiles.Add(new OwnableData(name,cost));
+
+          case ("Go to jail"):
+            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
             break;
-          
-          case("Take card"):
-            tiles.Add(new OwnableData(name,cost)); //todo: Update to suitable type
+
+          case ("Take card"):
+            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
             break;
-          
-          case("Station"): 
+
+          case ("Station"):
             tiles.Add(new StationData(name, cost, rent));
             break;
-          
+
           default:
             Debug.LogError($"Unknown tile type {data[i, 2]}");
             break;
         }
       }
-
+      
       return tiles;
     }
-
   }
-} 
+}

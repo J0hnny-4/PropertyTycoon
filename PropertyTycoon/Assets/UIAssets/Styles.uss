@@ -4,7 +4,7 @@
     --header-height: 200px;
     --footer-height: 150px;
     
-    --font-xs: 12px;
+    --font-xs: 16px;
     --font-sm: 22px;
     --font-md: 28px;
     --font-lg: 34px;
@@ -69,4 +69,24 @@ Button.simple:enabled:active {
 
 Button.simple:disabled {
     background-color: var(--disabled-color);
+}
+
+Toggle > Label {
+    margin-right: var(--spacing-md);
+    min-width: auto;
+}
+
+Toggle .unity-toggle__checkmark,
+Toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    border-width: var(--spacing-xxs);
+    border-color: var(--border-color);
+    border-radius: var(--spacing-xs);
+    background-color: var(--off-white);
+    -unity-background-image-tint-color: var(--off-white);
+}
+
+Toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    background-image: resource("Images/Icons/check");
+    background-color: var(--positive-color);
+    background-size: 70%;
 }

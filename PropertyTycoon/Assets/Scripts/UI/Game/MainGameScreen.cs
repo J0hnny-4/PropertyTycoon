@@ -19,6 +19,20 @@ namespace UI.Game
             {
                 _playersContainer.Add(new PlayerElement(playerTemplate, playerData));
             }
+            
+            // testing only
+            var button = _controlButtonsContainer.Q<VisualElement>("forfeit-button").Q<Button>();
+            button.clicked += TestingDiceRoll;
+        }
+
+        private async void TestingDiceRoll()
+        {
+            var values = new [] {Random.Range(0, 6), Random.Range(0, 6)};
+            Debug.Log($"Testing dice: {values[0]} {values[1]}");
+            
+            var result = await DialogBoxFactory.MakeDiceDialogBox(values).AsTask();
+            Debug.Log(result);
+            
         }
 
         protected override void CleanUp()
