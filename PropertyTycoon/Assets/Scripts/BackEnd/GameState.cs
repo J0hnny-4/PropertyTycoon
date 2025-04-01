@@ -32,8 +32,9 @@ namespace BackEnd
         public static int FreeParkingMoney { get => Instance._freeParkingMoney; set => Instance._freeParkingMoney += value; }
 
         public static GameMode GameMode { get => Instance._gameMode; set => Instance._gameMode = value; }
-        
+
         public static List<PlayerData> Players { get => Instance._players; set => Instance._players = value; }
+<<<<<<< Updated upstream
         
         
         /// <summary>
@@ -53,6 +54,10 @@ namespace BackEnd
                 
             }
         }
+=======
+
+
+>>>>>>> Stashed changes
 
         /// <summary>
         /// Restest the free parking money to 0.
@@ -62,14 +67,14 @@ namespace BackEnd
 
         public static List<SquareData> Board { get { return Instance._board; } set { Instance._board = value; } }
         public static void AddSquare(SquareData square) { Instance._board.Add(square); }
-        
+
         public static int BoardSize => Instance._board.Count;
 
         /// <summary>
         /// Resets the singleton instance to a new GameState object.
         /// </summary>
         public static void NewGame() { Instance = new GameState(); }
-        
+
         public static void Pause() { Paused = true; }
         public static void Unpause() { Paused = false; }
     }

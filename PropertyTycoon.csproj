@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+<ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>/home/ella/Unity/Hub/Editor/6000.0.36f1/Editor/Data/Managed/UnityEngine.dll</HintPath> <!-- Example path -->
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/home/ella/Unity/Hub/Editor/6000.0.36f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -4,23 +4,25 @@ using UnityEngine;
 using BackEnd;
 using BackEnd.Squares;
 using Data;
+using UI.Board;
 using UnityEngine.Rendering.VirtualTexturing;
 
 public class GameRunner : MonoBehaviour
 {
     private List<Player> _players;
     private List<Square> _board;
+    private PlayerController control;
     private int _activePlayerIndex = -1;
     void Start()
     {
-        foreach(var pd in GameState.Players)
+        foreach (var pd in GameState.Players)
         {
-            if(pd.IsAi) _players.Add(new AiPlayer(pd));
+            if (pd.IsAi) _players.Add(new AiPlayer(pd));
             else _players.Add(new HumanPlayer(pd));
         }
 
         //TODO add load from xml
-        
+
         foreach (var sd in GameState.Board)
         {
             switch (sd)
@@ -39,7 +41,7 @@ public class GameRunner : MonoBehaviour
                     break;
             }
         }
-        
+
         StartCoroutine(GameLoop());
 
         Debug.Log("GAME OVER");
@@ -64,38 +66,42 @@ public class GameRunner : MonoBehaviour
             do
             {
                 _activePlayerIndex = (_activePlayerIndex + 1) % _players.Count;
-            } while (_players[_activePlayerIndex].Money < 0);
+            } while (_players[_activePlayerIndex].Money > 0);
 
             if (_players[_activePlayerIndex].TurnsLeftInJail > 0)
             {
                 GameState.Pause();
                 //TODO add jail ui here, unpause there.
                 GameState.Unpause();
-                while(GameState.Paused) yield return null;
+                while (GameState.Paused) yield return null;
                 if (_players[_activePlayerIndex].HandleJAil())
                 {
-                    
                     _players[_activePlayerIndex].Move();
                     _board[_players[_activePlayerIndex].Position].PlayerLands();
+
                     continue;
                 }
             }
-            
+
             do
             {
                 _players[_activePlayerIndex].RollDice();
                 GameState.Pause();
                 //TODO add dice ui here, unpause there.
                 GameState.Unpause();
-                while(GameState.Paused) yield return null;
+                while (GameState.Paused) yield return null;
+                var startPos = _players[_activePlayerIndex].Position;
                 _players[_activePlayerIndex].Move();
+                var endPos = _players[_activePlayerIndex].Position;
+                Debug.Log(startPos + " " + endPos);
+                control.MovePlayer(startPos, endPos);
                 _board[_players[_activePlayerIndex].Position].PlayerLands();
             } while (_players[_activePlayerIndex].DoublesRolled > 0);
-            
+
             GameState.Pause();
             //TODO add end turn ui here, unpause there.
             GameState.Unpause();
-            while(GameState.Paused) yield return null;
+            while (GameState.Paused) yield return null;
         }
     }
 }

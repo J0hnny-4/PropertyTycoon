@@ -15,7 +15,7 @@ namespace Data
         public string Name { get; set; }
         public Token Token { get; set; }
         public int Money { get; set; } = 1500; //TODO magic number
-        public int Position { get; set; } = 0;
+        public int Position { get; set; }
         public HashSet<int> Properties = new(); //Indices of properties in GameState.board
         public Tuple<int, int> LastRoll { get; set; } = new(0, 0);
         public int DoublesRolled { get; set; } = 0;
@@ -25,7 +25,7 @@ namespace Data
             new(); //TODO maybe move to player class, replace with int
 
         public bool IsAi { get; set; } = false;
-        
+
         public event Action OnUpdate;
 
         /// <summary>

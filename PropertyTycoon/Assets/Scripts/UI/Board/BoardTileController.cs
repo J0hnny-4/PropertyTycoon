@@ -17,29 +17,32 @@ namespace UI.Board
     {
         private List<SquareData> _data;
         public Transform mainPlane;
-        public List<GameObject> planes;  
+        public List<GameObject> planes;
         private string _path;
-        
-        
-        
+
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+<<<<<<< Updated upstream
             _data = GameState.Board; 
             _path = "Assets/Resources/Images/GameMode/TileImages/";
+=======
+            _data = GameState.Board;
+            _path = "Images/GameMode/TileImages/";
+>>>>>>> Stashed changes
             mainPlane = mainPlane.GetComponent<Transform>();
             planes = CreateArray();
-            print("DATA: " + _data.Count);
-            
+
 
             for (int i = 0; i < planes.Count; i += 10)
-            { 
+            {
                 CreateCornerTiles(i, _data[i].Name);
             }
 
             for (int i = 0; i < planes.Count; i++)
             {
-                if (i % 10 == 0 || i ==0 )
+                if (i % 10 == 0 || i == 0)
                 {
                     continue;
                 }
@@ -58,16 +61,16 @@ namespace UI.Board
 
             if (_data[idx] is PropertyData tile)
             {
-                
+
                 GameObject child = planes[idx].transform.GetChild(0).gameObject;
                 Renderer rend = child.GetComponent<Renderer>();
                 rend.material.color = tile.Colour.UnityColour;
                 child.SetActive(true);
             }
-            
+
 
         }
-        
+
 
         private void CreateCornerTiles(int idx, string cornerName)
         {
@@ -88,6 +91,6 @@ namespace UI.Board
             print(tiles.Count);
             return tiles;
         }
-        
+
     }
 }
