@@ -12,11 +12,12 @@ namespace UI.Game.DialogBoxes
         private VisualElement[] _dices;
         private Texture2D[] _diceIcons;
         private Tuple<int, int> _result;
-        
+
         /// <summary>
         /// Initialise the dialog box by setting values and callbacks.
         /// </summary>
-        /// <param name="rollResult"> The values of the two dice. </param>
+        /// <param name="playerName">Name of the player performing the dice roll.</param>
+        /// <param name="rollResult"> The values of the two dice.</param>
         public void Initialise(string playerName, Tuple<int, int> rollResult)
         {
             base.Initialise();

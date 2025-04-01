@@ -24,7 +24,7 @@ namespace BackEnd
         private static GameState Instance { get; set; } = new();
 
         public static PlayerData ActivePlayer => Instance._players[Instance._activePlayerIndex];
-        public static int ActivePlayerIndex => Instance._activePlayerIndex;
+        public static int ActivePlayerIndex { get => Instance._activePlayerIndex; set => Instance._activePlayerIndex = value; }
 
         public static int FreeParkingMoney { get => Instance._freeParkingMoney; set => Instance._freeParkingMoney += value; }
 

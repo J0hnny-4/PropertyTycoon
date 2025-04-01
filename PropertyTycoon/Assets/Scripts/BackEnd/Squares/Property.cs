@@ -1,4 +1,7 @@
+using System;
 using Data;
+using UI.Game;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -42,12 +45,27 @@ namespace BackEnd.Squares
         /// <summary>
         /// Calculates and charges rent based on the number of properties in the set and the number of houses on the property.
         /// </summary>
-        protected override void ChargeRent()
+        protected override async void ChargeRent()
         {
             var rentDue = Rent[Houses];
             if (Houses == 0 && OwnerHasSet) rentDue *= 2;
-            // int money = GameState.activePlayer.payMoney(rentDue); //TODO decouple from player
-            // .addMoney(rentDue);
+            
+            // todo add bankruptcy state
+            // gets current player and charges them
+            var player = GameState.ActivePlayer;
+            DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
+            var amountPaid = Math.Min(rentDue, player.Money);
+            player.TakeMoney(amountPaid);
+            
+            // give money paid to owner
+            if (Owner != null)
+            {
+                GameState.Players[(int)Owner].AddMoney(amountPaid);
+            }
+            else
+            {
+                Debug.LogError("Property with no owner is trying to charge rent");
+            }
         }
 
         /// <summary>

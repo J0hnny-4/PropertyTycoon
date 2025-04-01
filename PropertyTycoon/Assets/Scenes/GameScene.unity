@@ -661,6 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403206298}
   - component: {fileID: 403206299}
+  - component: {fileID: 403206300}
   m_Layer: 0
   m_Name: UI Manager
   m_TagString: Untagged
@@ -698,6 +699,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultScreen: 0
+--- !u!114 &403206300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403206296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0df99e678e98452084cdc3026146d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propertyCardTemplate: {fileID: 9197481963319205126, guid: f545107653d82cda0b08fc8872f615d0, type: 3}
+  stationCardTemplate: {fileID: 9197481963319205126, guid: 1064f545c6214976c892fb3221b35d93, type: 3}
+  utilityCardTemplate: {fileID: 9197481963319205126, guid: 0bd3e7947e3518f578a5195639b087c5, type: 3}
 --- !u!1001 &486736422
 PrefabInstance:
   m_ObjectHideFlags: 0

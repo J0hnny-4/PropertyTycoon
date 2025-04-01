@@ -71,8 +71,7 @@ namespace UI.Game.DialogBoxes
 
             ConfirmBtn.SetEnabled(GetHighestBid() != _errorValue);
         }
-
-        [CanBeNull]
+        
         private (int, int) GetHighestBid()
         {
             var highestBid = -1;

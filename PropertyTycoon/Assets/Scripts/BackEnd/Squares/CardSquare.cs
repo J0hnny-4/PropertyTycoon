@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BackEnd.Squares;
 using Data;
 
@@ -20,7 +21,7 @@ namespace BackEnd.Squares
         /// <summary>
         /// Adds the card drawing effect to the player landing on the square.
         /// </summary>
-        public override void PlayerLands()
+        public override async Task PlayerLands()
         {
             if (_deck.Count == 0) return; // Deck with at least one non GetOutOfJail card should not be empty
             var card = _deck.Dequeue();

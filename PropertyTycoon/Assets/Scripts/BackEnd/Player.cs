@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Data;
 
 namespace BackEnd
@@ -23,7 +24,7 @@ namespace BackEnd
         public int Money
         {
             get => Data.Money;
-            protected set{  Data.Money = value; Data.TriggerOnUpdateEvent(); }
+            protected set { Data.Money = value; }
         }
 
         public int Position
