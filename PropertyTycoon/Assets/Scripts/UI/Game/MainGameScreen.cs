@@ -9,6 +9,8 @@ namespace UI.Game
     public class MainGameScreen : BaseScreen<GameScreen>
     {
         [SerializeField] private VisualTreeAsset playerTemplate;
+        
+        private OwnedCardsController _ownedCardsController;
         private VisualElement _playersContainer;
         private VisualElement _controlButtonsContainer;
         private Button _endTurnButton;
@@ -18,6 +20,8 @@ namespace UI.Game
         
         public override void Initialise()
         {
+            _ownedCardsController = new OwnedCardsController(Root.Q<VisualElement>("owned-cards-container"));
+            
             _playersContainer = Root.Q<VisualElement>("players-container");
             _controlButtonsContainer = Root.Q<VisualElement>("control-buttons-container");
 
@@ -32,7 +36,11 @@ namespace UI.Game
             _leaderboardButton = _controlButtonsContainer.Q<VisualElement>("leaderboard-button").Q<Button>();
 
             _endTurnButton.clicked += EndTurn;
+            
+            
         }
+        
+        
 
         private void EndTurn() => GameState.Unpause();
 
