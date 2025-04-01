@@ -62,10 +62,11 @@ namespace DataParsers
           case ("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):
             int.TryParse(data[i, 10], out var housecost);
 
-            int[] rentlist = new int[5];
-            for (int x = 0; x < 5; x++)
+            int[] rentlist = new int[6];
+            rentlist[0] = rent;
+            for (int x = 1; x < 6; x++)
             {
-              int.TryParse(data[i, x + 5], out temp);
+              int.TryParse(data[i, x + 4], out temp);
               rentlist[x] = temp;
             }
             Colour colour = (Data.Colour)typeof(Data.Colour).GetField(data[i, 2].Replace(" ", ""), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.GetValue(Colour.Black);
