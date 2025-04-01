@@ -18,13 +18,14 @@ public class GameRunner : MonoBehaviour
         // initialises variables
         _players = new List<Player>();
         _board = new List<Square>();
-        
-        foreach(var pd in GameState.Players)
+        _controller = GameObject.FindFirstObjectByType<PlayerController>();
+
+        foreach (var pd in GameState.Players)
         {
             if (pd.IsAi) _players.Add(new AiPlayer(pd));
             else _players.Add(new HumanPlayer(pd));
         }
-        
+
         foreach (var sd in GameState.Board)
         {
             switch (sd)
@@ -43,7 +44,7 @@ public class GameRunner : MonoBehaviour
                     break;
             }
         }
-        
+
         await GameLoop();
 
         Debug.Log("GAME OVER");
@@ -81,8 +82,9 @@ public class GameRunner : MonoBehaviour
             } while (_players[_activePlayerIndex].Money < 0);
             GameState.ActivePlayerIndex = _activePlayerIndex;
             var player = _players[_activePlayerIndex];
-            
-            
+
+
+
             // handle player already in jail
             if (player.TurnsLeftInJail > 0)
             {
@@ -96,26 +98,25 @@ public class GameRunner : MonoBehaviour
                 //     continue;
                 // }
             }
-            
+
             // main loop
             do
             {
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
                 await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
-                
+
                 var startPos = _players[_activePlayerIndex].Position;
                 player.Move();
                 var endPos = _players[_activePlayerIndex].Position;
                 Debug.Log(startPos + " " + endPos);
-                _controller.MovePlayer(startPos, endPos);
-                // todo wait for player moving animation?
-                // while(GameState.Paused) await Task.Yield();
-                
+                StartCoroutine(_controller.MovePlayer(startPos, endPos));
+                await PauseAndWait();
+
                 await _board[player.Position].PlayerLands();
-                
+
             } while (player.DoublesRolled > 0);
-            
+
             // game stops until end-turn button is pressed
             await PauseAndWait();
         }

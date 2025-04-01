@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using BackEnd;
 using Data;
@@ -39,25 +40,40 @@ namespace UI.Board
             }
         }
 
-        public void MovePlayer(int startPos, int EndPos)
+        public IEnumerator<WaitForSeconds> MovePlayer(int startPos, int EndPos)
         {
             var current_player = GameState.ActivePlayerIndex;
-            var diff = EndPos - startPos;
+            var diff = Math.Abs(EndPos - startPos);
+
+
 
             for (int i = 1; i <= diff; i++)
             {
-                GameObject tile = _tileArray[startPos + i];
-                _playersObjects[current_player].transform.position = tile.transform.position;
-                StartCoroutine(Coroutines());
+                if (startPos + i == 40)
+                {
+                    diff = EndPos;
+                    i = 0;
+                    Debug.Log("Diff: " + diff);
+                    startPos = 0;
+                    GameObject tile = _tileArray[0];
+                    _playersObjects[current_player].transform.position = tile.transform.position;
+                    yield return new WaitForSeconds(1);
+
+                }
+                else
+                {
+                    GameObject tile = _tileArray[startPos + i];
+                    _playersObjects[current_player].transform.position = tile.transform.position;
+                    yield return new WaitForSeconds(1);
+
+                }
 
             }
+            GameState.Unpause();
 
         }
 
-        IEnumerator<WaitForSeconds> Coroutines()
-        {
-            yield return new WaitForSeconds(2);
-        }
+
     }
 }
 
