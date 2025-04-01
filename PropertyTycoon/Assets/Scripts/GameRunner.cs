@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
@@ -72,7 +73,6 @@ public class GameRunner : MonoBehaviour
 
     private async Task GameLoop()
     {
-        Debug.Log("start game loop");
         while (!GameOver())
         {
             // get next available player

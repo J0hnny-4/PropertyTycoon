@@ -26,7 +26,8 @@ namespace Data
 
         public bool IsAi { get; set; } = false;
 
-        public event Action OnUpdate;
+        public event Action OnMoneyUpdated;
+        public event Action OnOwnedPropertiesUpdated;
 
         /// <summary>
         /// Constructor.
@@ -41,18 +42,55 @@ namespace Data
             this.IsAi = isAi;
         }
 
+        /// <summary>
+        /// Used when a player gains money for any reason.
+        /// </summary>
+        /// <param name="amount">The amount of money to add to their total.</param>
         public void AddMoney(int amount)
         {
             Money += amount;
-            OnUpdate?.Invoke();
+            OnMoneyUpdated?.Invoke();
         }
-
-        public void TakeMoney(int amount)
+        
+        /// <summary>
+        /// Removes an amount of money from the player's total.
+        /// If they do not have enough money, the bankrupt process starts.
+        /// </summary>
+        /// <param name="amount">Amount of money needed to be paid</param>
+        /// <returns></returns>
+        public int TakeMoney(int amount)
         {
-            Money -= amount;
-            OnUpdate?.Invoke();
+            var amountPaid = Math.Min(amount, Money);
+            Money -= amountPaid;
+            OnMoneyUpdated?.Invoke();
+            return amountPaid;
+        }
+        
+        
+        /// <summary>
+        /// Adds a property to the player's list of owned properties.
+        /// Used for purchases or trades.
+        /// The int is the index of the property in GameState.board.
+        /// </summary>
+        /// <param name="property">The index of the property the player gained</param>
+        public void AddProperty(int property)
+        {
+            Properties.Add(property);
+            OnOwnedPropertiesUpdated?.Invoke();
         }
 
-        public void TriggerOnUpdateEvent() => OnUpdate?.Invoke();
+        /// <summary>
+        /// Removes a property from the player's list of owned properties.
+        /// Used for trades.
+        /// The int is the index of the property in GameState.board.
+        /// </summary>
+        /// <param name="property">The index of the property the player lost</param>
+        public void RemoveProperty(int property)
+        {
+            Properties.Remove(property);
+            OnOwnedPropertiesUpdated?.Invoke();
+        }
+
+        public void TriggerOnUpdateEvent() => OnMoneyUpdated?.Invoke();
     }
 }
