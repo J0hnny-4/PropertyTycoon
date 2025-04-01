@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Data;
 
 namespace BackEnd.Squares
@@ -15,7 +16,7 @@ namespace BackEnd.Squares
         /// <summary>
         /// Gives the money in free parking to the player who lands on it.
         /// </summary>
-        public override void PlayerLands()
+        public override async Task PlayerLands()
         {
             GameState.ActivePlayer.Money += GameState.FreeParkingMoney;
             GameState.FreeParkingReset();

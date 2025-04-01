@@ -41,6 +41,18 @@ namespace Data
             this.IsAi = isAi;
         }
 
+        public void AddMoney(int amount)
+        {
+            Money += amount;
+            OnUpdate?.Invoke();
+        }
+
+        public void TakeMoney(int amount)
+        {
+            Money -= amount;
+            OnUpdate?.Invoke();
+        }
+
         public void TriggerOnUpdateEvent() => OnUpdate?.Invoke();
     }
 }

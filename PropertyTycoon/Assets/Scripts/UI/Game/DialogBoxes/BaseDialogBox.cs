@@ -44,7 +44,6 @@ namespace UI.Game.DialogBoxes
 
         protected virtual void CleanUp()
         {
-            Debug.Log("BaseDialogBox cleaning up");
             CloseBtn.clicked -= Close;
             ConfirmBtn.clicked -= HandleConfirmClicked;
             CancelBtn.clicked -= HandleCancelClicked;

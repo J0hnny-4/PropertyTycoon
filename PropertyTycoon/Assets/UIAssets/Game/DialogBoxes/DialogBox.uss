@@ -69,14 +69,24 @@
 }
 
 #dialog-box > #content > #left-panel {
-    width: 45%;
-    margin-right: 5%;
+    width: 50%;
+    padding: 0 var(--spacing-md);
     justify-content: center;
     align-items: center;
 }
 
+#dialog-box > #content > #left-panel > * {
+    scale: 1.2;
+}
+
+#dialog-box > #content > #left-panel > #icon {
+    width: 250px;
+    height: 250px;
+}
+
 #dialog-box > #content > #right-panel {
     width: 50%;
+    padding: 0 var(--spacing-md);
 }
 
 #dialog-box > #content > #right-panel > #text {
@@ -84,7 +94,56 @@
     flex-grow: 1;
 }
 
-/* card dialog box */
+/* Auction specific rules */
 
-#card {
+#bids-container {
+    height: 70%;
+    padding: var(--spacing-sm) 0;
+}
+
+.player-bid-field {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+}
+
+.player-bid-field * {
+    font-size: var(--font-sm);
+}
+
+.player-bid-field > #name {
+    flex-grow: 1;
+    max-width: 230px;
+    padding-right: var(--spacing-sm);
+    text-overflow: ellipsis;
+    -unity-text-align: middle-center;
+    overflow: hidden;
+}
+
+.player-bid-field > #bid {
+    min-width: 130px;
+    border-width: var(--spacing-xxs);
+    border-color: var(--border-color);
+    border-radius: var(--spacing-xs);
+    margin-left: var(--spacing-xs);
+}
+
+.player-bid-field > #bid * {
+    -unity-text-align: middle-right;
+    background-color: var(--off-white);
+    padding: 0 var(--spacing-xs);
+}
+
+/* dice specific rules */
+
+#dialog-box > #content > .dice-container {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.dice {
+    width: 150px;
+    height: 150px;
+    margin: var(--spacing-xl);
 }

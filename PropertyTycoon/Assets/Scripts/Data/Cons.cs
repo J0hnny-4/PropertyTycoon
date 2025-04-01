@@ -8,5 +8,7 @@ namespace Data
     public class Cons
     {
         public static TimeSpan TimeLimit = TimeSpan.FromHours(1); // default value for testing
+        public static int ColorSetMultiplier = 2;
+        public static int HotelCostMultiplier = 5;
     }
 }

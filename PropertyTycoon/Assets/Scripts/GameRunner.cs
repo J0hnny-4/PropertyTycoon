@@ -1,28 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Squares;
 using Data;
+using UI.Game;
+using System.Threading.Tasks;
 using UI.Board;
-using UnityEngine.Rendering.VirtualTexturing;
 
 public class GameRunner : MonoBehaviour
 {
     private List<Player> _players;
     private List<Square> _board;
-    private PlayerController control;
+    private PlayerController _controller;
     private int _activePlayerIndex = -1;
-    void Start()
+    async void Start()
     {
-        foreach (var pd in GameState.Players)
+        // initialises variables
+        _players = new List<Player>();
+        _board = new List<Square>();
+        
+        foreach(var pd in GameState.Players)
         {
             if (pd.IsAi) _players.Add(new AiPlayer(pd));
             else _players.Add(new HumanPlayer(pd));
         }
-
-        //TODO add load from xml
-
+        
         foreach (var sd in GameState.Board)
         {
             switch (sd)
@@ -41,8 +43,8 @@ public class GameRunner : MonoBehaviour
                     break;
             }
         }
-
-        StartCoroutine(GameLoop());
+        
+        await GameLoop();
 
         Debug.Log("GAME OVER");
     }
@@ -52,56 +54,70 @@ public class GameRunner : MonoBehaviour
         int playersLeft = 0;
         foreach (var p in _players)
         {
-            if (p.Money < 0) playersLeft++;
+            if (p.Money > 0) playersLeft++;
         }
 
         return playersLeft <= 1;
     }
 
-    //TODO this may need to be a coroutine?
-    protected IEnumerator GameLoop()
+    private static async Task PauseAndWait()
     {
+        GameState.Pause();
+        while (GameState.Paused)
+        {
+            await Task.Yield();
+        }
+    }
+
+    private async Task GameLoop()
+    {
+        Debug.Log("start game loop");
         while (!GameOver())
         {
+            // get next available player
             do
             {
                 _activePlayerIndex = (_activePlayerIndex + 1) % _players.Count;
-            } while (_players[_activePlayerIndex].Money > 0);
-
-            if (_players[_activePlayerIndex].TurnsLeftInJail > 0)
+            } while (_players[_activePlayerIndex].Money < 0);
+            GameState.ActivePlayerIndex = _activePlayerIndex;
+            var player = _players[_activePlayerIndex];
+            
+            
+            // handle player already in jail
+            if (player.TurnsLeftInJail > 0)
             {
-                GameState.Pause();
-                //TODO add jail ui here, unpause there.
-                GameState.Unpause();
-                while (GameState.Paused) yield return null;
-                if (_players[_activePlayerIndex].HandleJAil())
-                {
-                    _players[_activePlayerIndex].Move();
-                    _board[_players[_activePlayerIndex].Position].PlayerLands();
+                await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.Money).AsTask();
 
-                    continue;
-                }
+                // todo: not sure what this is?
+                // if (player.HandleJAil())
+                // {
+                //     player.Move();
+                //     _board[player.Position].PlayerLands();
+                //     continue;
+                // }
             }
-
+            
+            // main loop
             do
             {
-                _players[_activePlayerIndex].RollDice();
-                GameState.Pause();
-                //TODO add dice ui here, unpause there.
-                GameState.Unpause();
-                while (GameState.Paused) yield return null;
+                player.RollDice();
+                Debug.Log($"{player.Name} rolled {player.LastRoll}");
+                await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                
                 var startPos = _players[_activePlayerIndex].Position;
-                _players[_activePlayerIndex].Move();
+                player.Move();
                 var endPos = _players[_activePlayerIndex].Position;
                 Debug.Log(startPos + " " + endPos);
-                control.MovePlayer(startPos, endPos);
-                _board[_players[_activePlayerIndex].Position].PlayerLands();
-            } while (_players[_activePlayerIndex].DoublesRolled > 0);
-
-            GameState.Pause();
-            //TODO add end turn ui here, unpause there.
-            GameState.Unpause();
-            while (GameState.Paused) yield return null;
+                _controller.MovePlayer(startPos, endPos);
+                // todo wait for player moving animation?
+                // while(GameState.Paused) await Task.Yield();
+                
+                await _board[player.Position].PlayerLands();
+                
+            } while (player.DoublesRolled > 0);
+            
+            // game stops until end-turn button is pressed
+            await PauseAndWait();
         }
     }
 }
