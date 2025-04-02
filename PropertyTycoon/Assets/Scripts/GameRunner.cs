@@ -28,6 +28,7 @@ public class GameRunner : MonoBehaviour
         {
             if (pd.IsAi) _players.Add(new AiPlayer(pd));
             else _players.Add(new HumanPlayer(pd));
+            pd.OnBankrupted += HandlePlayerBankruptcy;
         }
 
         foreach (var sd in GameState.Board)
@@ -48,6 +49,9 @@ public class GameRunner : MonoBehaviour
                     {
                         case "Go to jail":
                             _board.Add(new GoToJail(sd));
+                            break;
+                        case "Free Parking":
+                            _board.Add(new FreeParking(sd));
                             break;
                         default:
                             _board.Add(new Square(sd));
@@ -105,7 +109,7 @@ public class GameRunner : MonoBehaviour
             {
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
-                // await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
 
                 var startPos = _players[_activePlayerIndex].Position;
                 player.Move();
@@ -132,5 +136,19 @@ public class GameRunner : MonoBehaviour
                 await PauseAndWait(); // game stops until end-turn button is pressed
             }
         }
+    }
+
+    /// <summary>
+    /// Resets properties owned by the bankrupt player.
+    /// </summary>
+    /// <param name="player">Player going bankrupt.</param>
+    private void HandlePlayerBankruptcy(PlayerData player)
+    {
+        foreach (var tileNo in player.Properties)
+        {
+            var property = (Ownable)_board[tileNo];
+            property.Reset();
+        }
+        
     }
 }

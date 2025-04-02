@@ -108,6 +108,7 @@ namespace BackEnd
         {
             //TODO Just a placeholder for now, remove magic numbers.
             Position = 10;
+            
             TurnsLeftInJail = 3;
             DoublesRolled = 0;
         }

@@ -18,7 +18,7 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
-            GameState.ActivePlayer.Money += GameState.FreeParkingMoney;
+            GameState.ActivePlayer.AddMoney(GameState.FreeParkingMoney);
             GameState.FreeParkingReset();
         }
     }

@@ -60,7 +60,7 @@ namespace UI.Game
             _jailIcon.visible = (_data.TurnsLeftInJail != 0);
         }
 
-        private void DisableElement()
+        private void DisableElement(PlayerData _)
         {
             _money.text = "-";
             SetEnabled(false);

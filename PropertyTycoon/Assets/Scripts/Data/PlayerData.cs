@@ -1,6 +1,4 @@
 using BackEnd;
-using Codice.Client.Commands.WkTree;
-using UnityEngine.Events;
 
 namespace Data
 {
@@ -30,7 +28,9 @@ namespace Data
 
         public event Action OnStateUpdated;
         public event Action OnOwnedPropertiesUpdated;
-        public event Action OnBankrupted;
+        public event Action<PlayerData> OnBankrupted;
+        public event Action OnTeleported;
+        
         public void TriggerOnUpdateEvent() => OnStateUpdated?.Invoke();
         
         /// <summary>
@@ -67,7 +67,7 @@ namespace Data
             var amountPaid = Math.Min(amount, Money);
             Money -= amountPaid;
             OnStateUpdated?.Invoke();
-            if (IsBankrupt) { OnBankrupted?.Invoke(); }
+            if (IsBankrupt) { OnBankrupted?.Invoke(this); }
             return amountPaid;
         }
         
