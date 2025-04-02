@@ -92,19 +92,13 @@ public class GameRunner : MonoBehaviour
             } while (_players[_activePlayerIndex].IsBankrupt);
             GameState.ActivePlayerIndex = _activePlayerIndex;
             var player = _players[_activePlayerIndex];
-            
+
             // handle player already in jail
             if (player.TurnsLeftInJail > 0)
             {
-                await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.Money).AsTask();
-
-                // todo: not sure what this is?
-                // if (player.HandleJAil())
-                // {
-                //     player.Move();
-                //     _board[player.Position].PlayerLands();
-                //     continue;
-                // }
+                await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
+                player.HandleJAil();
+                continue;
             }
 
             // main loop
@@ -115,7 +109,7 @@ public class GameRunner : MonoBehaviour
                 await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
 
                 var startPos = _players[_activePlayerIndex].Position;
-                player.Move();
+                await player.Move();
                 var endPos = _players[_activePlayerIndex].Position;
                 Debug.Log(startPos + " " + endPos);
                 StartCoroutine(_controller.MovePlayer(startPos, endPos));
@@ -123,7 +117,7 @@ public class GameRunner : MonoBehaviour
 
                 await _board[player.Position].PlayerLands();
 
-            } while (player.DoublesRolled > 0 && !player.IsBankrupt);
+            } while (player.DoublesRolled > 0 && !player.IsBankrupt && player.TurnsLeftInJail == 0);
 
             if (player.IsBankrupt)
             {
@@ -134,7 +128,7 @@ public class GameRunner : MonoBehaviour
                 }
                 player.Properties.Clear();
             }
-            else 
+            else
             {
                 await PauseAndWait(); // game stops until end-turn button is pressed
             }
@@ -152,6 +146,6 @@ public class GameRunner : MonoBehaviour
             var property = (Ownable)_board[tileNo];
             property.Reset();
         }
-        
+
     }
 }

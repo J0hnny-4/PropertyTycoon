@@ -106,8 +106,6 @@ namespace UI.Board
                 Renderer rend = tax.GetComponent<Renderer>();
                 rend.material.mainTexture = Resources.Load<Texture>(_taxPath);
             }
-
-
         }
 
 

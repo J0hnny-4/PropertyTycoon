@@ -32,6 +32,8 @@ namespace UI.Board
             {
                 print("Player count" + _players.Count + " tile " + _tileArray.Count);
                 var player = _players[i];
+                player.OnGoToJail += TeleportPlayer;
+                player.OnBankrupted += PlayerBankrupt;
                 GameObject r1 = Instantiate(player.Token.sprite3D, new Vector3(1, 1, 1), Quaternion.identity);
                 var spawnPoint = _tileArray[0].transform.Find("Spawn" + i);
                 r1.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y + 1f, spawnPoint.position.z);
@@ -44,8 +46,6 @@ namespace UI.Board
         {
             var current_player = GameState.ActivePlayerIndex;
             var diff = Math.Abs(EndPos - startPos);
-
-
 
             for (int i = 1; i <= diff; i++)
             {
@@ -73,6 +73,23 @@ namespace UI.Board
 
         }
 
+        public void TeleportPlayer()
+        {
+            Debug.Log("Teleported");
+            GameObject tile = _tileArray[GameState.ActivePlayer.Position];
+            _playersObjects[GameState.ActivePlayerIndex].transform.position = tile.transform.position;
+        }
+        public void PlayerBankrupt(PlayerData play)
+        {
+            for (int i = 0; i <= _players.Count; i++)
+            {
+                if (play == _players[i])
+                {
+                    Destroy(_playersObjects[i]);
+                }
+            }
+
+        }
 
     }
 }
