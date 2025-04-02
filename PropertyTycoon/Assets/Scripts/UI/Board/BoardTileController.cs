@@ -17,29 +17,38 @@ namespace UI.Board
     {
         private List<SquareData> _data;
         public Transform mainPlane;
-        public List<GameObject> planes;  
+        public List<GameObject> planes;
         private string _path;
-        
-        
-        
+        private string _stationPath;
+        private string _utilPath;
+        private string _potPath;
+        private string _knocksPath;
+        private string _taxPath;
+
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            _data = GameState.Board; 
+            _data = GameState.Board;
             _path = "Images/GameMode/TileImages/";
+            _stationPath = "Images/Icons/Trains";
+            _utilPath = "Images/Icons/Util";
+            _potPath = "Images/Icons/Pot";
+            _knocksPath = "Images/Icons/Knocks";
+            _taxPath = "Images/Icons/Tax";
             mainPlane = mainPlane.GetComponent<Transform>();
             planes = CreateArray();
             print("DATA: " + _data.Count);
-            
+
 
             for (int i = 0; i < planes.Count; i += 10)
-            { 
+            {
                 CreateCornerTiles(i, _data[i].Name);
             }
 
             for (int i = 0; i < planes.Count; i++)
             {
-                if (i % 10 == 0 || i ==0 )
+                if (i % 10 == 0 || i == 0)
                 {
                     continue;
                 }
@@ -58,16 +67,47 @@ namespace UI.Board
 
             if (_data[idx] is PropertyData tile)
             {
-                
+
                 GameObject child = planes[idx].transform.GetChild(0).gameObject;
                 Renderer rend = child.GetComponent<Renderer>();
                 rend.material.color = tile.Colour.UnityColour;
                 child.SetActive(true);
             }
-            
-
+            else if (_data[idx] is StationData)
+            {
+                GameObject station = planes[idx];
+                Renderer rend = station.GetComponent<Renderer>();
+                rend.material.mainTexture = Resources.Load<Texture>(_stationPath);
+            }
+            else if (_data[idx] is UtilityData)
+            {
+                GameObject utility = planes[idx];
+                Renderer rend = utility.GetComponent<Renderer>();
+                rend.material.mainTexture = Resources.Load<Texture>(_utilPath);
+            }
+            else if (_data[idx] is OwnableData own)
+            {
+                if (own.Name == "Pot Luck")
+                {
+                    GameObject pot = planes[idx];
+                    Renderer rend = pot.GetComponent<Renderer>();
+                    rend.material.mainTexture = Resources.Load<Texture>(_potPath);
+                }
+                else if (own.Name == "Opportunity Knocks")
+                {
+                    GameObject knocks = planes[idx];
+                    Renderer rend = knocks.GetComponent<Renderer>();
+                    rend.material.mainTexture = Resources.Load<Texture>(_knocksPath);
+                }
+            }
+            else if (_data[idx] is TaxData)
+            {
+                GameObject tax = planes[idx];
+                Renderer rend = tax.GetComponent<Renderer>();
+                rend.material.mainTexture = Resources.Load<Texture>(_taxPath);
+            }
         }
-        
+
 
         private void CreateCornerTiles(int idx, string cornerName)
         {
@@ -79,6 +119,7 @@ namespace UI.Board
 
         }
 
+
         private List<GameObject> CreateArray()
         {
             List<GameObject> tiles = new List<GameObject>();
@@ -89,6 +130,6 @@ namespace UI.Board
             print(tiles.Count);
             return tiles;
         }
-        
+
     }
 }

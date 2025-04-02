@@ -9,7 +9,7 @@
             </engine:VisualElement>
             <engine:VisualElement name="content">
                 <engine:VisualElement name="left-panel" class="dice-container">
-                    <engine:VisualElement name="dice-1" class="dice" style="background-image: resource(&apos;Images/Icons/Dice/dice&apos;);" />
+                    <engine:VisualElement name="dice-1" class="dice" style="background-image: resource(&apos;Images/Icons/Dice/dice1&apos;);" />
                     <engine:VisualElement name="dice-2" class="dice" style="background-image: resource(&apos;Images/Icons/Dice/dice6&apos;);" />
                 </engine:VisualElement>
                 <engine:VisualElement name="right-panel" style="display: none;" />

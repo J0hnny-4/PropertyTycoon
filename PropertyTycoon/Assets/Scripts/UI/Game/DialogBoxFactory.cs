@@ -1,3 +1,4 @@
+using System;
 using Data;
 using UI.Game.DialogBoxes;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace UI.Game
         private static readonly GameObject SimpleDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/SimpleDialogBox");
         private static readonly GameObject AuctionDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AuctionDialogBox");
         private static readonly GameObject DiceDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/DiceDialogBox");
-        
+
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
             var dialogObject = Instantiate(SimpleDialogBoxPrefab);
@@ -29,12 +30,12 @@ namespace UI.Game
             var dialogBox = MakeSimpleDialogBox();
             VisualElement image;
             string text;
-            
+
             switch (item)
             {
-                case PropertyData propertyData:
-                    image = OwnableCardFactory.MakeCard(propertyData);
-                    text = $"You landed on {propertyData.Name}.\nYou need to pay ${amount} in rent.";
+                case OwnableData ownableData:
+                    image = OwnableCardFactory.MakeCard(ownableData);
+                    text = $"You landed on {ownableData.Name}.\nYou need to pay ${amount} in rent.";
                     break;
                 default:
                     image = MakeIconElement("fee");
@@ -45,11 +46,11 @@ namespace UI.Game
             return dialogBox;
         }
 
-        public static DiceDialogBox MakeDiceDialogBox(int[] expectedResult)
+        public static DiceDialogBox DiceDialogBox(string playerName, Tuple<int, int> expectedResult)
         {
             var dialogObject = Instantiate(DiceDialogBoxPrefab);
             var dialogBox = dialogObject.GetComponent<DiceDialogBox>();
-            dialogBox.Initialise(expectedResult);
+            dialogBox.Initialise(playerName, expectedResult);
             return dialogBox;
         }
 
@@ -57,19 +58,33 @@ namespace UI.Game
         /// Creates a 'Jail' dialog box (player being sent to jail).
         /// </summary>
         /// <returns>A simple dialog box, showing the 'pay' (true) and 'cancel' (false) buttons.</returns>
-        public static SimpleDialogBox JailLandingDialogBox()
+        public static SimpleDialogBox JailLandingDialogBox(bool afford)
         {
             var dialogBox = MakeSimpleDialogBox();
             var image = MakeIconElement("jail-1");
+            var text = afford ? "Your bail is set to $50. Would you like to pay it?" : "";
             dialogBox.Initialise(
-                "Jail", 
-                "You've been sent to prison.\n\nYour bail is set to $50. Would you like to pay it?",
-                image, 
-                confirmText: "Pay", 
-                cancelText: "Cancel");
+                "Jail",
+                "You've been sent to prison.\n\n" + text,
+                image,
+                confirmText: afford ? "Pay" : null,
+                cancelText: afford ? "Cancel" : "Continue");
             return dialogBox;
         }
-        
+
+        public static SimpleDialogBox BankruptcyDialogBox(string playerName)
+        {
+            var dialogBox = MakeSimpleDialogBox();
+            var image = MakeIconElement("broken-piggy-bank");
+            dialogBox.Initialise(
+                "Bankruptcy",
+                $"{playerName} has lost all of their money, they file for bankruptcy and leave the game!",
+                image,
+                confirmText: "Continue"
+                );
+            return dialogBox;
+        }
+
         /// <summary>
         /// Creates a 'Jail' dialog box (player already in jail).
         /// </summary>
@@ -79,9 +94,9 @@ namespace UI.Game
             var dialogBox = MakeSimpleDialogBox();
             var image = MakeIconElement("jail-1");
             dialogBox.Initialise(
-                "Jail", 
+                "Jail",
                 $"{playerName} in in jail.\nTurns left: {turnsLeft}.",
-                image, 
+                image,
                 confirmText: "Continue");
             return dialogBox;
         }
@@ -114,7 +129,7 @@ namespace UI.Game
             dialogBox.Initialise(card, text);
             return dialogBox;
         }
-        
+
         /// <summary>
         /// Helper function to get the name of the icon wanted, and embed it into a Visual Element.
         /// </summary>

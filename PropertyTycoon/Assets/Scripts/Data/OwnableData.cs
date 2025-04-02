@@ -9,7 +9,7 @@ namespace Data
         public int Cost { get; }
         public int? Owner { get; set; } = null;
         public bool Mortgaged { get; set; } = false;
-        
+
         /// <summary>
         /// Constructor.
         /// </summary>

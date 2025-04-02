@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BackEnd;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace UI.Game.DialogBoxes
 {
@@ -27,13 +27,14 @@ namespace UI.Game.DialogBoxes
             SetTitle("Auction");
             SetCancelButton("Skip");
             SetConfirmButton("Submit");
-            ConfirmBtn.SetEnabled(false);
             LeftPanel.Add(ownableCard);
             RightPanel.Q<Label>("text").text = text;
             
             _bids = new IntegerField[GameState.Players.Count];
             _bidsContainer = RightPanel.Q<VisualElement>("bids-container");
             for (var i = 0; i < _bids.Length; i++) { _bidsContainer.Add(CreateBidField(i)); }
+            
+            SetButtonsState();
         }
         
         /// <summary>
@@ -43,7 +44,7 @@ namespace UI.Game.DialogBoxes
         /// <returns>A 'bid field', comprised of player name and a field for the player's bid.</returns>
         private VisualElement CreateBidField(int playerIndex)
         {
-            VisualElement tempContainer = new VisualElement();
+            var tempContainer = new VisualElement();
             playerBidFieldTemplate.CloneTree(tempContainer);
             var playerBidField = tempContainer.ElementAt(0);
             
@@ -53,6 +54,20 @@ namespace UI.Game.DialogBoxes
             bidField.RegisterValueChangedCallback(OnBidValueChanged);
             _bids[playerIndex] = bidField;
 
+            var player = GameState.Players[playerIndex];
+            
+            // simply hides the current player's bid field, since they decided not to buy the property
+            if (player == GameState.ActivePlayer)
+            {
+                playerBidField.style.display = DisplayStyle.None;
+                bidField.SetValueWithoutNotify(0);
+            } 
+            else if (player.IsAi) // if player is AI, set a random amount they can afford, then disable their field (to prevent changing it)
+            {
+                bidField.SetValueWithoutNotify(Random.Range(0, player.Money - 1));
+                playerBidField.SetEnabled(false);
+            }
+            
             return playerBidField;
         }
 
@@ -69,10 +84,25 @@ namespace UI.Game.DialogBoxes
             var clampedValue = Math.Clamp(evt.newValue, 0, upperBound);
             field.SetValueWithoutNotify(clampedValue);
 
-            ConfirmBtn.SetEnabled(GetHighestBid() != _errorValue);
+            SetButtonsState();
         }
 
-        [CanBeNull]
+        private void SetButtonsState()
+        {
+            // "continue" option is only available if a clear, single highest bid is provided
+            // if not, then an agreement has not been reached, meaning the auction is skipped
+            if (GetHighestBid() != _errorValue)
+            {
+                ConfirmBtn.SetEnabled(true);
+                CancelBtn.SetEnabled(false);
+            }
+            else
+            {
+                ConfirmBtn.SetEnabled(false);
+                CancelBtn.SetEnabled(true);
+            }
+        }
+        
         private (int, int) GetHighestBid()
         {
             var highestBid = -1;

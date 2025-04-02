@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Data;
+using UI.Board;
+using UI.Game;
 
 namespace BackEnd
 {
@@ -12,13 +15,18 @@ namespace BackEnd
     /// </summary>
     public abstract class Player
     {
+
         public PlayerData Data { get; }
-        
+
+        public string Name
+        {
+            get => Data.Name;
+        }
 
         public int Money
         {
             get => Data.Money;
-            protected set{  Data.Money = value; Data.TriggerOnUpdateEvent(); }
+            protected set { Data.Money = value; }
         }
 
         public int Position
@@ -44,6 +52,8 @@ namespace BackEnd
             get => Data.TurnsLeftInJail;
             protected set { Data.TurnsLeftInJail = value; Data.TriggerOnUpdateEvent(); }
         }
+
+        public bool IsBankrupt => Data.IsBankrupt;
 
         public List<GetOutOfJail> GetOutOfJailCards
         {
@@ -81,79 +91,18 @@ namespace BackEnd
         /// Performs the actions required when a player is in jail.
         /// </summary>
         /// <returns>True if player has left jail, false otherwise</returns>
-        public bool HandleJAil()
+        public void HandleJAil()
         {
-            if(TurnsLeftInJail == 0) return true;
-            if(DoublesRolled > 0)
+            if (DoublesRolled > 0)
             {
                 TurnsLeftInJail = 0;
                 DoublesRolled = 0;
-                return true;
             }
-            return --TurnsLeftInJail == 0;
-        }
-
-        /// <summary>
-        /// Adds a property to the player's list of owned properties.
-        /// Used for purchases or trades.
-        /// The int is the index of the property in GameState.board.
-        /// </summary>
-        /// <param name="property">The index of the property the player gained</param>
-        public void AddProperty(int property)
-        {
-            Properties.Add(property);
-        }
-
-        /// <summary>
-        /// Removes a property from the player's list of owned properties.
-        /// Used for trades.
-        /// The int is the index of the property in GameState.board.
-        /// </summary>
-        /// <param name="property">The index of the property the player lost</param>
-        public void RemoveProperty(int property)
-        {
-            Properties.Remove(property);
-        }
-
-        /// <summary>
-        /// Used when a player gains money for any reason.
-        /// </summary>
-        /// <param name="amount">The amount of money to add to their total.</param>
-        public void AddMoney(int amount)
-        {
-            Money += amount;
-        }
-
-        /// <summary>
-        /// Removes an amount of money from the player's total.
-        /// If they do not have enough money, the bankrupt process starts.
-        /// </summary>
-        /// <param name="amount">Amount of money needed to be paid</param>
-        /// <returns></returns>
-        public int PayMoney(int amount)
-        {
-            //TODO Possibly start bankrupt process here?
-            if (Money < amount)
+            if (TurnsLeftInJail > 0)
             {
-                var ret = Money;
-                Money = 0;
-                return ret;
+                TurnsLeftInJail -= 1;
             }
 
-            Money -= amount;
-            return amount;
-        }
-
-        /// <summary>
-        /// Sends the player to jail.
-        /// Sets their position to the jail square and sets the number of turns left in jail to the appropriate number.
-        /// </summary>
-        public void GoToJail()
-        {
-            //TODO Just a placeholder for now, remove magic numbers.
-            Position = 10;
-            TurnsLeftInJail = 3;
-            DoublesRolled = 0;
         }
 
         /// <summary>
@@ -161,21 +110,21 @@ namespace BackEnd
         /// Takes any actions required when landing on a square.
         /// </summary>
         /// <returns></returns>
-        public void Move()
+        public async Task Move()
         {
             if (DoublesRolled == 3) //TODO magic number
             {
-                GoToJail();
+                await Data.GoToJail();
                 return;
             }
-            
+
             var roll = LastRoll.Item1 + LastRoll.Item2;
 
             //TODO Separate method or two for actually setting player position may be in order
             if (Position + roll >= GameState.BoardSize)
             {
                 Position = (Position + roll) % GameState.BoardSize;
-                AddMoney(200); //TODO magic number
+                Data.AddMoney(200); //TODO magic number
             }
             else
             {

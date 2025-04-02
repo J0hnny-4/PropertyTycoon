@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using Data;
+using UnityEngine;
+using UI.Board;
 
 namespace BackEnd.Squares
 {
@@ -14,10 +17,9 @@ namespace BackEnd.Squares
         /// <summary>
         /// Sends the player to jail.
         /// </summary>
-        public override void PlayerLands()
+        public override async Task PlayerLands()
         {
-            GameState.ActivePlayer.TurnsLeftInJail = 3; //TODO: Magic number
-            GameState.ActivePlayer.Position = 10; //TODO: Magic number
+            await GameState.ActivePlayer.GoToJail();//TODO: Magic number
         }
     }
 }

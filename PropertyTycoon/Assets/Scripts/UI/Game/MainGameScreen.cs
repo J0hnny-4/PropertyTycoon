@@ -1,17 +1,27 @@
+using System;
 using BackEnd;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace UI.Game
 {
     public class MainGameScreen : BaseScreen<GameScreen>
     {
         [SerializeField] private VisualTreeAsset playerTemplate;
+        
+        private OwnedCardsController _ownedCardsController;
         private VisualElement _playersContainer;
         private VisualElement _controlButtonsContainer;
+        private Button _endTurnButton;
+        private Button _forfeitButton;
+        private Button _leaderboardButton;
+        
         
         public override void Initialise()
         {
+            _ownedCardsController = new OwnedCardsController(Root.Q<VisualElement>("owned-cards-container"));
+            
             _playersContainer = Root.Q<VisualElement>("players-container");
             _controlButtonsContainer = Root.Q<VisualElement>("control-buttons-container");
 
@@ -20,24 +30,23 @@ namespace UI.Game
                 _playersContainer.Add(new PlayerElement(playerTemplate, playerData));
             }
             
-            // testing only
-            var button = _controlButtonsContainer.Q<VisualElement>("forfeit-button").Q<Button>();
-            button.clicked += TestingDiceRoll;
-        }
+            // initialises buttons
+            _endTurnButton = _controlButtonsContainer.Q<VisualElement>("end-turn-button").Q<Button>();
+            _forfeitButton = _controlButtonsContainer.Q<VisualElement>("forfeit-button").Q<Button>();
+            _leaderboardButton = _controlButtonsContainer.Q<VisualElement>("leaderboard-button").Q<Button>();
 
-        private async void TestingDiceRoll()
-        {
-            var values = new [] {Random.Range(0, 6), Random.Range(0, 6)};
-            Debug.Log($"Testing dice: {values[0]} {values[1]}");
+            _endTurnButton.clicked += EndTurn;
             
-            var result = await DialogBoxFactory.MakeDiceDialogBox(values).AsTask();
-            Debug.Log(result);
             
         }
+        
+        
+
+        private void EndTurn() => GameState.Unpause();
 
         protected override void CleanUp()
         {
-            // no events to unsubscribe from yet
+            _endTurnButton.clicked -= EndTurn;
         }
     }
 }

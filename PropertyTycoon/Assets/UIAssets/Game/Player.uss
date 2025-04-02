@@ -21,6 +21,10 @@
     background-color: green;
 }
 
+.player > #top.active {
+    background-color: firebrick;
+}
+
 .player > #bottom {
     height: 40px;
     width: 80%;

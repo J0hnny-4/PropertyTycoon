@@ -1,5 +1,9 @@
 using System;
+using System.Threading.Tasks;
+using Codice.Client.BaseCommands;
 using Data;
+using UI.Game;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -44,46 +48,59 @@ namespace BackEnd.Squares
         /// <summary>
         /// Gives the player the option to buy the property, otherwise it is auctioned. 
         /// </summary>
-        private void Buy()
+        private async Task Buy()
         {
-            //TODO menu options
-            if (true)
+            var player = GameState.ActivePlayer;
+
+            // player is prompted if they have enough money to buy it
+            var bought = false;
+            if (player.Money > Cost)
             {
-                GameState.ActivePlayer.Money -= Cost;
-                Owner = GameState.ActivePlayerIndex;
-                GameState.ActivePlayer.Properties.Add(Index);
+                bought = await DialogBoxFactory.PurchaseDialogBox(Data as OwnableData).AsTask();
             }
-            else
+            
+            if (bought) // if player bought the property, assign them as owners
             {
-                Auction();
+                GameState.ActivePlayer.TakeMoney(Cost);
+                Owner = GameState.ActivePlayerIndex;
+                GameState.ActivePlayer.AddProperty(Index);
+            }
+            else // else auction it
+            {
+                await Auction();
             }
         }
 
         /// <summary>
         /// Auctions off the property to all the players.
         /// </summary>
-        private void Auction()
+        private async Task Auction()
         {
-            //TODO Auction should return the player who won the auction
-            var winner = GameState.ActivePlayerIndex;
+            var (winner, bid) = await DialogBoxFactory.AuctionDialogBox(Data as OwnableData).AsTask();
+
+            // -1 represents auction being skipped
+            if (winner == -1) { return; }
+
+            // bid is guaranteed to be less than the amount held by the player
+            GameState.Players[winner].TakeMoney(bid);
             Owner = winner;
-            GameState.Players[winner].Properties.Add(Index);
+            GameState.Players[winner].AddProperty(Index);
         }
 
         /// <summary>
         /// Adds the functionality to purchase the property or charge rent on landing
         /// </summary>
-        public override void PlayerLands()
+        public override async Task PlayerLands()
         {
-            if (Owner == null) Buy();
-            else if (Owner != GameState.ActivePlayerIndex && !Mortgaged) ChargeRent();
+            if (Owner == null) await Buy();
+            else if (Owner != GameState.ActivePlayerIndex && !Mortgaged) await ChargeRent();
         }
 
         /// <summary>
         /// Charge the landing player rent for landing on the property.
         /// Must be implemented by the subclass.
         /// </summary>
-        protected abstract void ChargeRent();
+        protected abstract Task ChargeRent();
 
         /// <summary>
         /// Sets the property to mortgaged and gives the owner half the cost of the property.
@@ -93,6 +110,15 @@ namespace BackEnd.Squares
         {
             Mortgaged = true;
             // owner.addMoney(cost / 2); //TODO decouple from player
+        }
+
+        /// <summary>
+        /// Resets the ownable to its original state.
+        /// </summary>
+        public virtual void Reset()
+        {
+            Owner = null;
+            Mortgaged = false;
         }
     }
 }
