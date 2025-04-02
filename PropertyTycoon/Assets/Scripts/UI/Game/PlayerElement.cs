@@ -38,12 +38,12 @@ namespace UI.Game
             UpdateUI();
             
             // register callbacks
-            _data.OnUpdate += UpdateUI;
+            _data.OnMoneyUpdated += UpdateUI;
         }
 
         private void CleanUp()
         {
-            _data.OnUpdate -= UpdateUI;
+            _data.OnMoneyUpdated -= UpdateUI;
         }
         
         /// <summary>
