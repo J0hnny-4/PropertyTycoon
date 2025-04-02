@@ -73,13 +73,13 @@ namespace UI.Board
                 rend.material.color = tile.Colour.UnityColour;
                 child.SetActive(true);
             }
-            else if (_data[idx] is StationData stat)
+            else if (_data[idx] is StationData)
             {
                 GameObject station = planes[idx];
                 Renderer rend = station.GetComponent<Renderer>();
                 rend.material.mainTexture = Resources.Load<Texture>(_stationPath);
             }
-            else if (_data[idx] is UtilityData util)
+            else if (_data[idx] is UtilityData)
             {
                 GameObject utility = planes[idx];
                 Renderer rend = utility.GetComponent<Renderer>();
@@ -99,12 +99,12 @@ namespace UI.Board
                     Renderer rend = knocks.GetComponent<Renderer>();
                     rend.material.mainTexture = Resources.Load<Texture>(_knocksPath);
                 }
-                else if (own.Name.Contains("Tax"))
-                {
-                    GameObject tax = planes[idx];
-                    Renderer rend = tax.GetComponent<Renderer>();
-                    rend.material.mainTexture = Resources.Load<Texture>(_taxPath);
-                }
+            }
+            else if (_data[idx] is TaxData)
+            {
+                GameObject tax = planes[idx];
+                Renderer rend = tax.GetComponent<Renderer>();
+                rend.material.mainTexture = Resources.Load<Texture>(_taxPath);
             }
 
 

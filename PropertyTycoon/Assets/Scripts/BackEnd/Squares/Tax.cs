@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Data;
+using UI.Game;
 
 namespace BackEnd.Squares
 {
@@ -9,7 +10,7 @@ namespace BackEnd.Squares
     public class Tax : Square
     {
         private int Amount => (Data as TaxData).Amount;
-        
+
         public Tax(TaxData data) : base(data) { }
 
         /// <summary>
@@ -17,6 +18,7 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
+            await DialogBoxFactory.PaymentDialogBox(Data, Amount).AsTask();
             GameState.ActivePlayer.TakeMoney(Amount);
         }
     }

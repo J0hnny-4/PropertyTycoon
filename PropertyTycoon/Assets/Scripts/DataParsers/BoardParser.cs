@@ -56,7 +56,18 @@ namespace DataParsers
         switch (data[i, 2])
         {
           case ("Action"):
-            tiles.Add(new SquareData(name));
+            if (name == "Income Tax")
+            {
+              tiles.Add(new TaxData(name, Cons.IncomeTax));
+            }
+            else if (name == "Super Tax")
+            {
+              tiles.Add(new TaxData(name, Cons.SuperTax));
+            }
+            else
+            {
+              tiles.Add(new SquareData(name));
+            }
             break;
 
           case ("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):

@@ -44,6 +44,9 @@ public class GameRunner : MonoBehaviour
                 case StationData s:
                     _board.Add(new Station(s));
                     break;
+                case TaxData t:
+                    _board.Add(new Tax(t));
+                    break;
                 default:
                     switch (sd.Name)
                     {
