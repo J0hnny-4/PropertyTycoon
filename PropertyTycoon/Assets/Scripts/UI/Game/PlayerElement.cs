@@ -1,4 +1,6 @@
+using BackEnd;
 using Data;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game
@@ -38,12 +40,15 @@ namespace UI.Game
             UpdateUI();
             
             // register callbacks
-            _data.OnMoneyUpdated += UpdateUI;
+            _data.OnStateUpdated += UpdateUI;
+            _data.OnBankrupted += DisableElement;
+            GameState.OnNewPlayerTurn += HighlightCurrent;
         }
 
         private void CleanUp()
         {
-            _data.OnMoneyUpdated -= UpdateUI;
+            _data.OnStateUpdated -= UpdateUI;
+            _data.OnBankrupted -= DisableElement;
         }
         
         /// <summary>
@@ -53,6 +58,25 @@ namespace UI.Game
         {
             _money.text = $"$ {_data.Money}";
             _jailIcon.visible = (_data.TurnsLeftInJail != 0);
+        }
+
+        private void DisableElement()
+        {
+            _money.text = "-";
+            SetEnabled(false);
+        }
+
+        private void HighlightCurrent()
+        {
+            var background = this.Q<VisualElement>("top");
+            if (GameState.ActivePlayer == _data)
+            {
+                background.AddToClassList("active");
+            }
+            else 
+            {
+                background.RemoveFromClassList("active");
+            }
         }
     }
 }

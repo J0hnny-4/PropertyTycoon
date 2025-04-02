@@ -75,11 +75,11 @@ namespace DataParsers
             break;
 
           case ("Utilities"):
-            tiles.Add(new UtilityData(name, cost, new[] { 4, 10 }));
+            tiles.Add(new UtilityData(name, cost));
             break;
 
           case ("Go to jail"):
-            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
+            tiles.Add(new SquareData(name)); //todo: Update to suitable type
             break;
 
           case ("Take card"):

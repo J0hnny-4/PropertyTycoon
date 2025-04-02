@@ -93,14 +93,14 @@ namespace BackEnd.Squares
         public override async Task PlayerLands()
         {
             if (Owner == null) await Buy();
-            else if (Owner != GameState.ActivePlayerIndex && !Mortgaged) ChargeRent();
+            else if (Owner != GameState.ActivePlayerIndex && !Mortgaged) await ChargeRent();
         }
 
         /// <summary>
         /// Charge the landing player rent for landing on the property.
         /// Must be implemented by the subclass.
         /// </summary>
-        protected abstract void ChargeRent();
+        protected abstract Task ChargeRent();
 
         /// <summary>
         /// Sets the property to mortgaged and gives the owner half the cost of the property.

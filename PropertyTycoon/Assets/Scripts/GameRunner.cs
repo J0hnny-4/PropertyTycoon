@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Squares;
@@ -14,12 +15,14 @@ public class GameRunner : MonoBehaviour
     private List<Square> _board;
     private PlayerController _controller;
     private int _activePlayerIndex = -1;
-    async void Start()
+    private bool GameOver => _players.Count(p => !p.IsBankrupt) <= 1;
+
+    private async void Start()
     {
         // initialises variables
         _players = new List<Player>();
         _board = new List<Square>();
-        _controller = GameObject.FindFirstObjectByType<PlayerController>();
+        _controller = FindFirstObjectByType<PlayerController>();
 
         foreach (var pd in GameState.Players)
         {
@@ -56,19 +59,11 @@ public class GameRunner : MonoBehaviour
 
         await GameLoop();
 
-        Debug.Log("GAME OVER");
+        Player winner = null;
+        foreach (var player in _players.Where(player => !player.IsBankrupt)) { winner = player; }
+        Debug.Log($"{winner.Name} has won!");
     }
 
-    private bool GameOver()
-    {
-        int playersLeft = 0;
-        foreach (var p in _players)
-        {
-            if (p.Money > 0) playersLeft++;
-        }
-
-        return playersLeft <= 1;
-    }
 
     private static async Task PauseAndWait()
     {
@@ -81,18 +76,16 @@ public class GameRunner : MonoBehaviour
 
     private async Task GameLoop()
     {
-        while (!GameOver())
+        while (!GameOver)
         {
             // get next available player
             do
             {
                 _activePlayerIndex = (_activePlayerIndex + 1) % _players.Count;
-            } while (_players[_activePlayerIndex].Money < 0);
+            } while (_players[_activePlayerIndex].IsBankrupt);
             GameState.ActivePlayerIndex = _activePlayerIndex;
             var player = _players[_activePlayerIndex];
-
-
-
+            
             // handle player already in jail
             if (player.TurnsLeftInJail > 0)
             {
@@ -112,7 +105,7 @@ public class GameRunner : MonoBehaviour
             {
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
-                await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                // await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
 
                 var startPos = _players[_activePlayerIndex].Position;
                 player.Move();
@@ -123,10 +116,21 @@ public class GameRunner : MonoBehaviour
 
                 await _board[player.Position].PlayerLands();
 
-            } while (player.DoublesRolled > 0);
+            } while (player.DoublesRolled > 0 && !player.IsBankrupt);
 
-            // game stops until end-turn button is pressed
-            await PauseAndWait();
+            if (player.IsBankrupt)
+            {
+                await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
+                foreach (var tileNo in player.Properties)
+                {
+                    ((OwnableData)GameState.Board[tileNo]).Owner = null;
+                }
+                player.Properties.Clear();
+            }
+            else 
+            {
+                await PauseAndWait(); // game stops until end-turn button is pressed
+            }
         }
     }
 }

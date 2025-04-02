@@ -1,4 +1,5 @@
 using BackEnd;
+using Codice.Client.Commands.WkTree;
 using UnityEngine.Events;
 
 namespace Data
@@ -14,7 +15,7 @@ namespace Data
     {
         public string Name { get; set; }
         public Token Token { get; set; }
-        public int Money { get; set; } = 1500; //TODO magic number
+        public int Money { get; set; } = Cons.StartingMoney; //TODO magic number
         public int Position { get; set; }
         public HashSet<int> Properties = new(); //Indices of properties in GameState.board
         public Tuple<int, int> LastRoll { get; set; } = new(0, 0);
@@ -25,10 +26,13 @@ namespace Data
             new(); //TODO maybe move to player class, replace with int
 
         public bool IsAi { get; set; } = false;
+        public bool IsBankrupt => Money <= 0;
 
-        public event Action OnMoneyUpdated;
+        public event Action OnStateUpdated;
         public event Action OnOwnedPropertiesUpdated;
-
+        public event Action OnBankrupted;
+        public void TriggerOnUpdateEvent() => OnStateUpdated?.Invoke();
+        
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -49,7 +53,7 @@ namespace Data
         public void AddMoney(int amount)
         {
             Money += amount;
-            OnMoneyUpdated?.Invoke();
+            OnStateUpdated?.Invoke();
         }
         
         /// <summary>
@@ -62,10 +66,10 @@ namespace Data
         {
             var amountPaid = Math.Min(amount, Money);
             Money -= amountPaid;
-            OnMoneyUpdated?.Invoke();
+            OnStateUpdated?.Invoke();
+            if (IsBankrupt) { OnBankrupted?.Invoke(); }
             return amountPaid;
         }
-        
         
         /// <summary>
         /// Adds a property to the player's list of owned properties.
@@ -90,7 +94,5 @@ namespace Data
             Properties.Remove(property);
             OnOwnedPropertiesUpdated?.Invoke();
         }
-
-        public void TriggerOnUpdateEvent() => OnMoneyUpdated?.Invoke();
     }
 }

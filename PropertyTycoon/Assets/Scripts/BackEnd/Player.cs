@@ -19,7 +19,6 @@ namespace BackEnd
         {
             get => Data.Name;
         }
-        
 
         public int Money
         {
@@ -50,6 +49,8 @@ namespace BackEnd
             get => Data.TurnsLeftInJail;
             protected set { Data.TurnsLeftInJail = value; Data.TriggerOnUpdateEvent(); }
         }
+        
+        public bool IsBankrupt => Data.IsBankrupt;
 
         public List<GetOutOfJail> GetOutOfJailCards
         {
