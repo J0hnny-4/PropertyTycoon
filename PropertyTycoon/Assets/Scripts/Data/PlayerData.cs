@@ -35,7 +35,6 @@ namespace Data
         public event Action<PlayerData> OnBankrupted;
         public event Action OnGoToJail;
         public void TriggerOnUpdateEvent() => OnStateUpdated?.Invoke();
-        public void TriggerOnJailEvent() => OnGoToJail?.Invoke();
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -49,12 +48,17 @@ namespace Data
             this.IsAi = isAi;
         }
 
+
+        /// <summary>
+        /// Sends the player to jail.
+        /// Sets their position to the jail square and sets the number of turns left in jail to the appropriate number.
+        /// </summary>
         public async Task GoToJail()
         {
             //TODO Just a placeholder for now, remove magic numbers.
             Position = 10;
             DoublesRolled = 0;
-            TriggerOnJailEvent();
+            OnGoToJail?.Invoke()
             var afford = Money >= 50;
             var payed = await DialogBoxFactory.JailLandingDialogBox(afford).AsTask();
             if (payed)

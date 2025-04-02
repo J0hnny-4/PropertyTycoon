@@ -106,11 +106,6 @@ namespace BackEnd
         }
 
         /// <summary>
-        /// Sends the player to jail.
-        /// Sets their position to the jail square and sets the number of turns left in jail to the appropriate number.
-        /// </summary>
-
-        /// <summary>
         /// Moves the player around the board based on a dice roll.
         /// Takes any actions required when landing on a square.
         /// </summary>

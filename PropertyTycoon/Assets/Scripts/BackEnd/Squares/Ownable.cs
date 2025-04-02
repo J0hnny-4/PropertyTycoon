@@ -111,5 +111,14 @@ namespace BackEnd.Squares
             Mortgaged = true;
             // owner.addMoney(cost / 2); //TODO decouple from player
         }
+
+        /// <summary>
+        /// Resets the ownable to its original state.
+        /// </summary>
+        public virtual void Reset()
+        {
+            Owner = null;
+            Mortgaged = false;
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace DataParsers
         switch (data[i, 2])
         {
           case ("Action"):
-            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
+            tiles.Add(new SquareData(name));
             break;
 
           case ("Brown" or "Blue" or "Green" or "Red" or "Yellow" or "Purple" or "Deep blue" or "Orange"):

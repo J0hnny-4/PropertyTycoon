@@ -94,5 +94,11 @@ namespace BackEnd.Squares
                 return count == NumberInSet;
             }
         }
+
+        public override void Reset()
+        {
+            base.Reset();
+            Houses = 0;
+        }
     }
 }
