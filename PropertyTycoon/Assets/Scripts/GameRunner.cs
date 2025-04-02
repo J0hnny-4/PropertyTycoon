@@ -41,7 +41,15 @@ public class GameRunner : MonoBehaviour
                     _board.Add(new Station(s));
                     break;
                 default:
-                    _board.Add(new Square(sd));
+                    switch (sd.Name)
+                    {
+                        case "Go to jail":
+                            _board.Add(new GoToJail(sd));
+                            break;
+                        default:
+                            _board.Add(new Square(sd));
+                            break;
+                    }
                     break;
             }
         }
