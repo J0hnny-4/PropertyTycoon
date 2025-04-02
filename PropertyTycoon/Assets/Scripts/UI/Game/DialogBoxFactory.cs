@@ -33,9 +33,9 @@ namespace UI.Game
             
             switch (item)
             {
-                case PropertyData propertyData:
-                    image = OwnableCardFactory.MakeCard(propertyData);
-                    text = $"You landed on {propertyData.Name}.\nYou need to pay ${amount} in rent.";
+                case OwnableData ownableData:
+                    image = OwnableCardFactory.MakeCard(ownableData);
+                    text = $"You landed on {ownableData.Name}.\nYou need to pay ${amount} in rent.";
                     break;
                 default:
                     image = MakeIconElement("fee");
@@ -68,6 +68,19 @@ namespace UI.Game
                 image, 
                 confirmText: "Pay", 
                 cancelText: "Cancel");
+            return dialogBox;
+        }
+
+        public static SimpleDialogBox BankruptcyDialogBox(string playerName)
+        {
+            var dialogBox = MakeSimpleDialogBox();
+            var image = MakeIconElement("broken-piggy-bank");
+            dialogBox.Initialise(
+                "Bankruptcy", 
+                $"{playerName} has lost all of their money, they file for bankruptcy and leave the game!",
+                image, 
+                confirmText: "Continue"
+                );
             return dialogBox;
         }
         

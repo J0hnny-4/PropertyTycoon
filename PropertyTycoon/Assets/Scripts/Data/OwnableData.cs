@@ -7,7 +7,6 @@ namespace Data
     public class OwnableData : SquareData
     {
         public int Cost { get; }
-        public string Name { get; }
         public int? Owner { get; set; } = null;
         public bool Mortgaged { get; set; } = false;
 
@@ -19,7 +18,6 @@ namespace Data
         public OwnableData(string name, int cost) : base(name)
         {
             this.Cost = cost;
-            this.Name = name;
         }
     }
 }

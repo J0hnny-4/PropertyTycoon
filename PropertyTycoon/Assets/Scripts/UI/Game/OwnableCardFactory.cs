@@ -79,10 +79,10 @@ namespace UI.Game
             
             card.Q<Label>("name").text = stationData.Name;
 
-            card.Q<VisualElement>("one-station").Q<Label>("value").text = ToPrice(stationData.Rent);
-            card.Q<VisualElement>("two-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 2);
-            card.Q<VisualElement>("three-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 4);
-            card.Q<VisualElement>("four-stations").Q<Label>("value").text = ToPrice(stationData.Rent * 8);
+            card.Q<VisualElement>("one-station").Q<Label>("value").text = ToPrice(Cons.StationsRent[0]);
+            card.Q<VisualElement>("two-stations").Q<Label>("value").text = ToPrice(Cons.StationsRent[1]);
+            card.Q<VisualElement>("three-stations").Q<Label>("value").text = ToPrice(Cons.StationsRent[2]);
+            card.Q<VisualElement>("four-stations").Q<Label>("value").text = ToPrice(Cons.StationsRent[3]);
 
             return card;
         }

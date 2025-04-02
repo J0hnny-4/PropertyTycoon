@@ -1,4 +1,4 @@
-using System;
+using System.Threading.Tasks;
 using Data;
 using UI.Game;
 using UnityEngine;
@@ -45,26 +45,19 @@ namespace BackEnd.Squares
         /// <summary>
         /// Calculates and charges rent based on the number of properties in the set and the number of houses on the property.
         /// </summary>
-        protected override async void ChargeRent()
+        protected override async Task ChargeRent()
         {
+            Debug.Assert(Owner != null, nameof(Owner) + " != null");
+            
+            var owner = GameState.Players[(int)Owner];
             var rentDue = Rent[Houses];
-            if (Houses == 0 && OwnerHasSet) rentDue *= 2;
+            if (Houses == 0 && OwnerHasSet) rentDue *= Cons.ColorSetMultiplier;
             
             // todo add bankruptcy state
             // gets current player and charges them
-            var player = GameState.ActivePlayer;
             await DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
-            var amountPaid = player.TakeMoney(rentDue);
-            
-            // give money paid to owner
-            if (Owner != null)
-            {
-                GameState.Players[(int)Owner].AddMoney(amountPaid);
-            }
-            else
-            {
-                Debug.LogError("Property with no owner is trying to charge rent");
-            }
+            var amountPaid = GameState.ActivePlayer.TakeMoney(rentDue);
+            owner.AddMoney(amountPaid);
         }
 
         /// <summary>
