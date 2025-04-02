@@ -32,10 +32,9 @@ namespace Data
 
         public event Action OnStateUpdated;
         public event Action OnOwnedPropertiesUpdated;
-        public event Action OnBankrupted;
+        public event Action<PlayerData> OnBankrupted;
         public event Action OnGoToJail;
         public void TriggerOnUpdateEvent() => OnStateUpdated?.Invoke();
-
         public void TriggerOnJailEvent() => OnGoToJail?.Invoke();
         /// <summary>
         /// Constructor.
@@ -90,7 +89,7 @@ namespace Data
             var amountPaid = Math.Min(amount, Money);
             Money -= amountPaid;
             OnStateUpdated?.Invoke();
-            if (IsBankrupt) { OnBankrupted?.Invoke(); }
+            if (IsBankrupt) { OnBankrupted?.Invoke(this); }
             return amountPaid;
         }
 
