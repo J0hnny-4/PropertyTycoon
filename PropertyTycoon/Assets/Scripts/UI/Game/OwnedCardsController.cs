@@ -39,6 +39,7 @@ namespace UI.Game
             {
                 var owned = GameState.Board[tileNo];
                 var card = OwnableCardFactory.MakeCard((OwnableData)owned);
+                card.AddToClassList("owned-card");
                 _container.Add(card);
                 Debug.Log(owned.Name);
             }
