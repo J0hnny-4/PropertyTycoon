@@ -2,10 +2,10 @@ namespace Data
 {
     public class Colour
     {
-        public static readonly Colour Brown = new Colour("Brown", new UnityEngine.Color(0.5f, 0.25f, 0f, 0f));
+        public static readonly Colour Brown = new Colour("Brown", new UnityEngine.Color(0.5f, 0.25f, 0f));
         public static readonly Colour Blue = new Colour("Blue", UnityEngine.Color.cyan);
         public static readonly Colour Magenta = new Colour("Magenta", UnityEngine.Color.magenta);
-        public static readonly Colour Orange = new Colour("Orange", new UnityEngine.Color(1f, 0.5f, 0f, 0f));
+        public static readonly Colour Orange = new Colour("Orange", new UnityEngine.Color(1f, 0.5f, 0f));
         public static readonly Colour Red = new Colour("Red", UnityEngine.Color.red);
         public static readonly Colour Yellow = new Colour("Yellow", UnityEngine.Color.yellow);
         public static readonly Colour Green = new Colour("Green", UnityEngine.Color.green);

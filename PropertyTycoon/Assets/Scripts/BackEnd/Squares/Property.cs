@@ -53,9 +53,8 @@ namespace BackEnd.Squares
             // todo add bankruptcy state
             // gets current player and charges them
             var player = GameState.ActivePlayer;
-            DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
-            var amountPaid = Math.Min(rentDue, player.Money);
-            player.TakeMoney(amountPaid);
+            await DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
+            var amountPaid = player.TakeMoney(rentDue);
             
             // give money paid to owner
             if (Owner != null)

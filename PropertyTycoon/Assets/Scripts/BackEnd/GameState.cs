@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Data;
 
@@ -15,6 +16,7 @@ namespace BackEnd
         private List<SquareData> _board = new();
         private GameMode _gameMode;
         private int _freeParkingMoney = 0;
+        public static event Action OnNewPlayerTurn;
         public static bool Paused { get; private set; } = false;
 
         /// <summary>
@@ -24,7 +26,16 @@ namespace BackEnd
         private static GameState Instance { get; set; } = new();
 
         public static PlayerData ActivePlayer => Instance._players[Instance._activePlayerIndex];
-        public static int ActivePlayerIndex { get => Instance._activePlayerIndex; set => Instance._activePlayerIndex = value; }
+
+        public static int ActivePlayerIndex
+        {
+            get => Instance._activePlayerIndex;
+            set
+            {
+                Instance._activePlayerIndex = value;
+                OnNewPlayerTurn?.Invoke();
+            }
+        }
 
         public static int FreeParkingMoney { get => Instance._freeParkingMoney; set => Instance._freeParkingMoney += value; }
 

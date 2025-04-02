@@ -21,7 +21,7 @@
 	<property>
 		<Space>Pot Luck</Space>
 		<Buyable>No</Buyable>
-		<Group>Action</Group>
+		<Group>Take card</Group>
 	</property>
 	<property>
 		<Space>Gangsters Paradise</Space>
@@ -64,7 +64,7 @@
 	<property>
 		<Space>Opportunity Knocks</Space>
 		<Buyable>No</Buyable>
-		<Group>Action</Group>
+		<Group>Take card</Group>
 	</property>
 	<property>
 		<Space>Potter Avenue</Space>
@@ -166,7 +166,7 @@
 	<property>
 		<Space>Pot Luck</Space>
 		<Buyable>No</Buyable>
-		<Group>Action</Group>
+		<Group>Take card</Group>
 	</property>
 	<property>
 		<Space>Dunham Street</Space>
@@ -215,7 +215,7 @@
 	<property>
 		<Space>Opportunity Knocks</Space>
 		<Buyable>No</Buyable>
-		<Group>Action</Group>
+		<Group>Take card</Group>
 	</property>
 	<property>
 		<Space>Mulan Rouge</Space>
@@ -330,7 +330,7 @@
 	<property>
 		<Space>Pot Luck</Space>
 		<Buyable>No</Buyable>
-		<Group>Action</Group>
+		<Group>Take card</Group>
 	</property>
 	<property>
 		<Space>Ibis Close</Space>

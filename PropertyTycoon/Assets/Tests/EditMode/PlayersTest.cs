@@ -46,7 +46,7 @@ namespace Tests.EditMode
         public void TestMoney()
         {
             int balance = GameState.Players[0].Money;
-            TestPlayer.AddMoney(200);
+            TestPlayer.Data.AddMoney(200);
             Assert.AreEqual(balance + 200, GameState.Players[0].Money, "Money was not added correctly.");
         }
     }

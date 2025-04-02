@@ -63,7 +63,7 @@ namespace BackEnd.Squares
             {
                 GameState.ActivePlayer.TakeMoney(Cost);
                 Owner = GameState.ActivePlayerIndex;
-                GameState.ActivePlayer.Properties.Add(Index);
+                GameState.ActivePlayer.AddProperty(Index);
             }
             else // else auction it
             {
@@ -82,9 +82,9 @@ namespace BackEnd.Squares
             if (winner == -1) { return; }
 
             // bid is guaranteed to be less than the amount held by the player
-            GameState.Players[winner].Money -= bid;
+            GameState.Players[winner].TakeMoney(bid);
             Owner = winner;
-            GameState.Players[winner].Properties.Add(Index);
+            GameState.Players[winner].AddProperty(Index);
         }
 
         /// <summary>
