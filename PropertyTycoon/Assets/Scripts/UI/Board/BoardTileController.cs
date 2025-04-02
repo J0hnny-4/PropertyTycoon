@@ -99,7 +99,7 @@ namespace UI.Board
                     Renderer rend = knocks.GetComponent<Renderer>();
                     rend.material.mainTexture = Resources.Load<Texture>(_knocksPath);
                 }
-                else if (own.Name.Contains("Tax"))
+                else if (_data[idx] is TaxData)
                 {
                     GameObject tax = planes[idx];
                     Renderer rend = tax.GetComponent<Renderer>();

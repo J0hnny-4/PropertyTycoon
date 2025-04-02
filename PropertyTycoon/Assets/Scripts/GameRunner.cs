@@ -143,6 +143,6 @@ public class GameRunner : MonoBehaviour
             var property = (Ownable)_board[tileNo];
             property.Reset();
         }
-        
+
     }
 }

@@ -58,7 +58,7 @@ namespace Data
             //TODO Just a placeholder for now, remove magic numbers.
             Position = 10;
             DoublesRolled = 0;
-            OnGoToJail?.Invoke()
+            OnGoToJail?.Invoke();
             var afford = Money >= 50;
             var payed = await DialogBoxFactory.JailLandingDialogBox(afford).AsTask();
             if (payed)
