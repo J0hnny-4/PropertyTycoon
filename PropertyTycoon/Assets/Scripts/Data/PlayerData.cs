@@ -1,6 +1,8 @@
 using BackEnd;
 using Codice.Client.Commands.WkTree;
 using UnityEngine.Events;
+using UI.Game;
+using System.Threading.Tasks;
 
 namespace Data
 {
@@ -31,8 +33,10 @@ namespace Data
         public event Action OnStateUpdated;
         public event Action OnOwnedPropertiesUpdated;
         public event Action OnBankrupted;
+        public event Action OnGoToJail;
         public void TriggerOnUpdateEvent() => OnStateUpdated?.Invoke();
-        
+
+        public void TriggerOnJailEvent() => OnGoToJail?.Invoke();
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -46,6 +50,25 @@ namespace Data
             this.IsAi = isAi;
         }
 
+        public async Task GoToJail()
+        {
+            //TODO Just a placeholder for now, remove magic numbers.
+            Position = 10;
+            DoublesRolled = 0;
+            TriggerOnJailEvent();
+            var afford = Money >= 50;
+            var payed = await DialogBoxFactory.JailLandingDialogBox(afford).AsTask();
+            if (payed)
+            {
+                TakeMoney(50);
+                TurnsLeftInJail = 0;
+            }
+            else
+            {
+                TurnsLeftInJail = 3;
+            }
+        }
+
         /// <summary>
         /// Used when a player gains money for any reason.
         /// </summary>
@@ -55,7 +78,7 @@ namespace Data
             Money += amount;
             OnStateUpdated?.Invoke();
         }
-        
+
         /// <summary>
         /// Removes an amount of money from the player's total.
         /// If they do not have enough money, the bankrupt process starts.
@@ -70,7 +93,7 @@ namespace Data
             if (IsBankrupt) { OnBankrupted?.Invoke(); }
             return amountPaid;
         }
-        
+
         /// <summary>
         /// Adds a property to the player's list of owned properties.
         /// Used for purchases or trades.
