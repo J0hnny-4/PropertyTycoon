@@ -125,6 +125,7 @@ public class GameRunner : MonoBehaviour
             }
             else
             {
+                GameState.TriggerOnActionPhase();
                 await PauseAndWait(); // game stops until end-turn button is pressed
             }
         }

@@ -17,6 +17,7 @@ namespace BackEnd
         private GameMode _gameMode;
         private int _freeParkingMoney = 0;
         public static event Action OnNewPlayerTurn;
+        public static event Action OnActionsPhase;
         public static bool Paused { get; private set; } = false;
 
         /// <summary>
@@ -63,5 +64,7 @@ namespace BackEnd
         
         public static void Pause() { Paused = true; }
         public static void Unpause() { Paused = false; }
+        
+        public static void TriggerOnActionPhase() { OnActionsPhase?.Invoke(); }
     }
 }

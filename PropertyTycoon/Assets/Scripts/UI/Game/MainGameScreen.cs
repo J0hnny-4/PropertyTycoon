@@ -37,11 +37,18 @@ namespace UI.Game
             _leaderboardButton = _controlButtonsContainer.Q<VisualElement>("leaderboard-button").Q<Button>();
             _endTurnButton.clicked += EndTurn;
             _forfeitButton.clicked += Forfeit;
+
+            // listeners to enable/disable control buttons
+            GameState.OnNewPlayerTurn += DisableControlButtons;
+            GameState.OnActionsPhase += EnableControlButtons;
         }
         
 
         private void EndTurn() => GameState.Unpause();
 
+        private void DisableControlButtons() => ToggleControlButtons(false);
+        private void EnableControlButtons() => ToggleControlButtons(true);
+        
         private void ToggleControlButtons(bool state)
         {
             _endTurnButton.SetEnabled(state);
