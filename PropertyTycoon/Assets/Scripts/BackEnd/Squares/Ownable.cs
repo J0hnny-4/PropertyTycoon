@@ -4,6 +4,7 @@ using Codice.Client.BaseCommands;
 using Data;
 using UI.Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BackEnd.Squares
 {
@@ -56,9 +57,27 @@ namespace BackEnd.Squares
             var bought = false;
             if (player.Money > Cost)
             {
-                bought = await DialogBoxFactory.PurchaseDialogBox(Data as OwnableData).AsTask();
+                if (!player.IsAi)
+                {
+                    bought = await DialogBoxFactory.PurchaseDialogBox(Data as OwnableData).AsTask();
+                }
+                else
+                {
+                    var des = Random.Range(0, 10);
+                    if (des >= 5)
+                    {
+                        bought = true;
+                    }
+                    else
+                    {
+                        bought = false;
+                    }
+
+                    await DialogBoxFactory.AIDialogBox("Ai Action ", bought ? "Bought property: " + Data.Name : "Ai didn't buy property" + Data.Name).AsTask();
+                }
+
             }
-            
+
             if (bought) // if player bought the property, assign them as owners
             {
                 GameState.ActivePlayer.TakeMoney(Cost);

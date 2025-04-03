@@ -24,7 +24,7 @@ public class GameRunner : MonoBehaviour
         _players = new List<Player>();
         _board = new List<Square>();
         _controller = FindFirstObjectByType<PlayerController>();
-        
+
         // setup listener to ABRIDGED timer (if present)
         FindFirstObjectByType<AbridgeTimer>().OnTimeUp += OnTimeUp;
 
@@ -69,7 +69,7 @@ public class GameRunner : MonoBehaviour
         }
 
         await GameLoop();
-        
+
         var winner = _players.OrderByDescending(p => p.Money).First();
         Debug.Log($"{winner.Name} has won!");
     }
@@ -102,7 +102,7 @@ public class GameRunner : MonoBehaviour
         } while (_players[nextPlayerIndex].IsBankrupt);
         return nextPlayerIndex;
     }
-    
+
 
     private async Task GameLoop()
     {
@@ -116,9 +116,17 @@ public class GameRunner : MonoBehaviour
             // handle player already in jail
             if (player.TurnsLeftInJail > 0)
             {
-                await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
-                player.HandleJAil();
-                continue;
+                if (player is HumanPlayer)
+                {
+                    await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
+                    player.HandleJAil();
+                    continue;
+                }
+                else
+                {
+                    await DialogBoxFactory.AIDialogBox("Ai in Jail", "Ai has " + player.TurnsLeftInJail + "left in Jail!").AsTask();
+                    continue;
+                }
             }
 
             // main loop
@@ -126,8 +134,15 @@ public class GameRunner : MonoBehaviour
             {
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
-                await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
-                
+                if (player is HumanPlayer)
+                {
+                    await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                }
+                else
+                {
+                    await DialogBoxFactory.AIDialogBox("AI Rolled", "Ai rolled: " + player.LastRoll).AsTask();
+                }
+
                 if (player.DoublesRolled == Cons.DoublesToJail)
                 {
                     await player.Data.GoToJail();
@@ -141,6 +156,7 @@ public class GameRunner : MonoBehaviour
                 StartCoroutine(_controller.MovePlayer(startPos, endPos));
                 await PauseAndWait();
 
+
                 await _board[player.Position].PlayerLands();
 
             } while (player.DoublesRolled > 0 && !player.IsBankrupt && player.TurnsLeftInJail == 0);
@@ -149,10 +165,10 @@ public class GameRunner : MonoBehaviour
             {
                 await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
             }
-            else
+            else if (player is HumanPlayer)
             {
                 GameState.TriggerOnActionPhase();
-                await PauseAndWait(); // game stops until end-turn button is pressed
+                await PauseAndWait();// game stops until end-turn button is pressed
             }
         }
     }

@@ -13,7 +13,7 @@ namespace UI.Game
         private static readonly GameObject DiceDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/DiceDialogBox");
         private static readonly GameObject ConfirmationDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/ConfirmationDialogBox");
         private static readonly GameObject AIDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AIDialogBox");
-        
+
 
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
@@ -35,7 +35,7 @@ namespace UI.Game
             dialogBox.Initialise(title, text, confirmText: "Confirm", cancelText: "Cancel");
             return dialogBox;
         }
-        
+
         public static AIDialogBox AIDialogBox(string title, string text)
         {
             var dialogObject = Instantiate(AIDialogBoxPrefab);
