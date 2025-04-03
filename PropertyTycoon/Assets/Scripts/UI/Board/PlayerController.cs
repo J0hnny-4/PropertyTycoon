@@ -81,7 +81,7 @@ namespace UI.Board
         }
         public void PlayerBankrupt(PlayerData play)
         {
-            for (int i = 0; i <= _players.Count; i++)
+            for (int i = 0; i < _players.Count; i++)
             {
                 if (play == _players[i])
                 {
