@@ -84,7 +84,7 @@ namespace Data
             }
             if (payed)
             {
-                TakeMoney(50);
+                GameState.FreeParkingMoney += TakeMoney(50);
                 TurnsLeftInJail = 0;
             }
             else
