@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using Data;
+using UI.Game;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -42,12 +45,19 @@ namespace BackEnd.Squares
         /// <summary>
         /// Calculates and charges rent based on the number of properties in the set and the number of houses on the property.
         /// </summary>
-        protected override void ChargeRent()
+        protected override async Task ChargeRent()
         {
+            Debug.Assert(Owner != null, nameof(Owner) + " != null");
+            
+            var owner = GameState.Players[(int)Owner];
             var rentDue = Rent[Houses];
-            if (Houses == 0 && OwnerHasSet) rentDue *= 2;
-            // int money = GameState.activePlayer.payMoney(rentDue); //TODO decouple from player
-            // .addMoney(rentDue);
+            if (Houses == 0 && OwnerHasSet) rentDue *= Cons.ColorSetMultiplier;
+            
+            // todo add bankruptcy state
+            // gets current player and charges them
+            await DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
+            var amountPaid = GameState.ActivePlayer.TakeMoney(rentDue);
+            owner.AddMoney(amountPaid);
         }
 
         /// <summary>
@@ -83,6 +93,12 @@ namespace BackEnd.Squares
                         count++;
                 return count == NumberInSet;
             }
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            Houses = 0;
         }
     }
 }

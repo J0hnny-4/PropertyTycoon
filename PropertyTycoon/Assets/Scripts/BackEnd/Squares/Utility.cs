@@ -1,5 +1,9 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Data;
+using UI.Game;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -8,22 +12,22 @@ namespace BackEnd.Squares
     /// </summary>
     public class Utility : Ownable
     {
-        private int[] Rent { get; }
-
         public Utility(UtilityData data) : base(data) { }
 
-        protected override void ChargeRent()
+        protected override async Task ChargeRent()
         {
-            //TODO Decouple
-            // var noOfUtilitiesOwned = 0;
-            // foreach (var i in Owner.properties)
-            //     if (i is Station)
-            //         noOfUtilitiesOwned++;
-            // noOfUtilitiesOwned = Math.Min(noOfUtilitiesOwned, Rent.Length) - 1;
-            // var rentOwed = Rent[noOfUtilitiesOwned] *
-            //                (GameState.ActivePlayer.LastRoll.Item1 + GameState.ActivePlayer.LastRoll.Item2);
-            // int money = GameState.ActivePlayer.payMoney(rentOwed);
-            // Owner.addMoney(money);
+            
+            Debug.Assert(Owner != null, nameof(Owner) + " != null");
+            var owner = GameState.Players[(int)Owner];
+            var ownedProperties = owner.Properties;
+            
+            var noOfUtilitiesOwned = ownedProperties.Count(tileNo => GameState.Board[tileNo] is UtilityData);
+            var multiplier = Cons.UtilitiesMultiplier[noOfUtilitiesOwned] - 1; // - 1 to account for 0 indexed array
+            var amountOwed = multiplier * (GameState.ActivePlayer.LastRoll.Item1 + GameState.ActivePlayer.LastRoll.Item2);
+            
+            await DialogBoxFactory.PaymentDialogBox(Data, amountOwed).AsTask();
+            var amountPaid = GameState.ActivePlayer.TakeMoney(amountOwed);
+            owner.AddMoney(amountPaid);
         }
     }
 }

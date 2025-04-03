@@ -1,0 +1,77 @@
+.card {
+    width: 250px;
+    height: 350px;
+    padding: var(--spacing-xs);
+    background-color: var(--off-white);
+    border-radius: var(--radius-xs);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.card > #content {
+    flex-grow: 1;
+    flex-direction: column;
+    background-color: var(--off-white);
+    border-radius: var(--radius-xxs);
+    border-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.card > #content > #name {
+    height: 75px;
+    font-size: var(--font-sm);
+    -unity-text-align: middle-center;
+    border-bottom-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+#property-card > #content > #name {
+    color: var(--font-dark);
+    background-color: fuchsia; /* debug color, to be replaced dynamically */
+}
+
+#station-card > #content > #name {
+    color: var(--font-light);
+    background-color: var(--font-dark);
+}
+
+.card > #content > #mid-section {
+    flex-grow: 1;
+}
+
+.card > #content > #bottom-section {
+    border-top-width: var(--spacing-xs);
+    border-color: var(--border-color);
+}
+
+.section {
+    padding: var(--spacing-xs);
+    justify-content: space-evenly;
+}
+
+.card > #content .info {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card > #content .info * {
+    font-size: var(--font-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.card > #content .info > #text {
+    -unity-text-align: middle-left;
+}
+
+.card > #content .info > #value {
+    -unity-text-align: middle-right;
+}
+
+.card > #content .info.active * {
+    background-color: chartreuse;
+}
+
+.card > #content > .icon {
+    margin: var(--spacing-sm) 0;
+}

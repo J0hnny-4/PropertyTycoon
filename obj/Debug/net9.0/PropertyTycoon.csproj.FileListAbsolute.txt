@@ -1,0 +1,6 @@
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.GeneratedMSBuildEditorConfig.editorconfig
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.AssemblyInfoInputs.cache
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.AssemblyInfo.cs
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.csproj.CoreCompileInputs.cache
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.sourcelink.json
+/home/ella/PropertyTycoon/obj/Debug/net9.0/PropertyTycoon.csproj.AssemblyReference.cache

@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Data;
+using UnityEngine;
 
 namespace BackEnd.Squares
 {
@@ -20,8 +22,9 @@ namespace BackEnd.Squares
         /// Action to take when a player lands on this square.
         /// Base class is a blank square such as Go with no effect
         /// </summary>
-        public virtual void PlayerLands()
+        public virtual async Task PlayerLands()
         {
+            Debug.Log($"Player lands: {Data.Name}");
         }
     }
 }

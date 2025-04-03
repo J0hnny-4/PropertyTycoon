@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "dduQYByCZDU=",
+  "success": true,
+  "projectFilePath": "/home/ella/PropertyTycoon/PropertyTycoon.csproj",
+  "expectedPackageFiles": [
+    "/home/ella/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "/home/ella/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "/home/ella/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.13/microsoft.netcore.app.host.linux-x64.8.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
