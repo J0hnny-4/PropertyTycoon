@@ -122,11 +122,6 @@ public class GameRunner : MonoBehaviour
             if (player.IsBankrupt)
             {
                 await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
-                foreach (var tileNo in player.Properties)
-                {
-                    ((OwnableData)GameState.Board[tileNo]).Owner = null;
-                }
-                player.Properties.Clear();
             }
             else
             {
@@ -146,6 +141,5 @@ public class GameRunner : MonoBehaviour
             var property = (Ownable)_board[tileNo];
             property.Reset();
         }
-
     }
 }

@@ -72,6 +72,13 @@ namespace Data
             }
         }
 
+        public void Forfeit()
+        {
+            Money = 0;
+            OnStateUpdated?.Invoke();
+            OnBankrupted?.Invoke(this);
+        }
+
         /// <summary>
         /// Used when a player gains money for any reason.
         /// </summary>
