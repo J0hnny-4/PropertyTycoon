@@ -8,7 +8,7 @@ namespace Data
     public class Cons
     {
         public static TimeSpan TimeLimit = TimeSpan.FromHours(1); // default value for testing
-        public const int AIDialogBoxDelay = 1000; // milliseconds
+        public const int AIDialogBoxDelay = 2000; // milliseconds
         public const int StartingMoney = 500;
         public const int ColorSetMultiplier = 2;
         public const int HotelCostMultiplier = 5;

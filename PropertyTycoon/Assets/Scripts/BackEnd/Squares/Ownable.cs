@@ -79,12 +79,20 @@ namespace BackEnd.Squares
             var (winner, bid) = await DialogBoxFactory.AuctionDialogBox(Data as OwnableData).AsTask();
 
             // -1 represents auction being skipped
-            if (winner == -1) { return; }
+            if (winner == -1)
+            {
+                await DialogBoxFactory.AIDialogBox("Auction Failed", "No one bought the property.").AsTask();
+                return;
+            }
 
             // bid is guaranteed to be less than the amount held by the player
-            GameState.Players[winner].TakeMoney(bid);
+            var player = GameState.Players[winner];
+            await DialogBoxFactory.AIDialogBox(
+                "Auction Success", 
+                $"player {player.Name} won the auction!").AsTask();
+            player.TakeMoney(bid);
             Owner = winner;
-            GameState.Players[winner].AddProperty(Index);
+            player.AddProperty(Index);
         }
 
         /// <summary>
