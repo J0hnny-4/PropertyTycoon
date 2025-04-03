@@ -8,6 +8,7 @@ using Data;
 using UI.Game;
 using System.Threading.Tasks;
 using UI.Board;
+using UnityEditor;
 
 public class GameRunner : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class GameRunner : MonoBehaviour
         _players = new List<Player>();
         _board = new List<Square>();
         _controller = FindFirstObjectByType<PlayerController>();
+        
+        // Dictionary of decks for CardSquares
+        var decks = CardGenerator.GenerateCards();
 
         foreach (var pd in GameState.Players)
         {
@@ -47,6 +51,10 @@ public class GameRunner : MonoBehaviour
                 case TaxData t:
                     _board.Add(new Tax(t));
                     break;
+                case CardSquareData csd:
+                    _board.Add(new CardSquare(csd, decks[csd.Name]));
+                    break;
+                
                 default:
                     switch (sd.Name)
                     {

@@ -12,7 +12,7 @@ namespace BackEnd
     {
         private Queue<Card> _homeDeck;
 
-        public GetOutOfJail(string name, string description, Action effect, Queue<Card> homeDeck) : base(name, description,
+        public GetOutOfJail(string name, string description, string effect, Queue<Card> homeDeck) : base(name, description,
             effect)
         {
             this._homeDeck = homeDeck;
