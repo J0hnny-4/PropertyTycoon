@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Data;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes

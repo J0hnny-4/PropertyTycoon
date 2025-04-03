@@ -19,7 +19,7 @@ namespace BackEnd.Squares
         public override async Task PlayerLands()
         {
             await DialogBoxFactory.PaymentDialogBox(Data, Amount).AsTask();
-            GameState.ActivePlayer.TakeMoney(Amount);
+            GameState.FreeParkingMoney += GameState.ActivePlayer.TakeMoney(Amount);
         }
     }
 }

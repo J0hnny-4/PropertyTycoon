@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BackEnd;
+using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -57,7 +59,7 @@ namespace UI.Game.DialogBoxes
             var player = GameState.Players[playerIndex];
             
             // simply hides the current player's bid field, since they decided not to buy the property
-            if (player == GameState.ActivePlayer)
+            if (player == GameState.ActivePlayer || player.IsBankrupt)
             {
                 playerBidField.style.display = DisplayStyle.None;
                 bidField.SetValueWithoutNotify(0);
@@ -136,6 +138,30 @@ namespace UI.Game.DialogBoxes
         {
             RaiseOnChoiceMade(GetHighestBid());
             Close();
+        }
+
+        private bool AllBiddersAreAI()
+        {
+            foreach (var bidField in _bidsContainer.Children())
+            {
+                // hidden means the player is not part of the auction
+                if (bidField.style.display == DisplayStyle.None) continue;
+                // a field is enabled if it is not AI
+                if (bidField.enabledSelf) return false;
+            }
+            return true;
+        }
+
+        public override async Task<(int, int)> AsTask()
+        {
+            if (!AllBiddersAreAI()) return await base.AsTask();
+            
+            // hides buttons
+            ConfirmBtn.style.display = DisplayStyle.None;
+            CancelBtn.style.display = DisplayStyle.None;
+            await Task.Delay(Cons.AIDialogBoxDelay);
+            Close();
+            return GetHighestBid(); // return highest bidder
         }
     }
 }

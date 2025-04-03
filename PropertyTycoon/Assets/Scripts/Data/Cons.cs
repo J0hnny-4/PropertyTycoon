@@ -10,6 +10,7 @@ namespace Data
         public static TimeSpan TimeLimit = TimeSpan.FromHours(1); // default value for testing
         public const int AIDialogBoxDelay = 3000; // milliseconds
         public const int StartingMoney = 500;
+
         public const int ColorSetMultiplier = 2;
         public const int HotelCostMultiplier = 5;
         public const int IncomeTax = 200;
