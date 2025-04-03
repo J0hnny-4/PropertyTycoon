@@ -1,9 +1,6 @@
-using System;
-using BackEnd;
 using UnityEngine;
 using UnityEngine.UIElements;
 using GameState = BackEnd.GameState;
-using Random = UnityEngine.Random;
 
 namespace UI.Game
 {

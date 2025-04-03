@@ -72,6 +72,7 @@ public class GameRunner : MonoBehaviour
 
         var winner = _players.OrderByDescending(p => p.Money).First();
         Debug.Log($"{winner.Name} has won!");
+        GameState.TriggerGameOver(winner.Data);
     }
 
 

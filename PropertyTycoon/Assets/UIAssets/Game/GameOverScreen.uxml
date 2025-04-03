@@ -1,0 +1,13 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIAssets/Styles.uss?fileID=7433441132597879392&amp;guid=01c2427ada08fe92ab6b221a6ec51cbc&amp;type=3#Styles" />
+    <Style src="project://database/Assets/UIAssets/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=5e70fcf87ba467575a75b5e34721443c&amp;type=3#GameStyle" />
+    <engine:VisualElement name="game-over">
+        <engine:VisualElement name="content">
+            <engine:Label text="[PLAYER NAME] WON!" name="winner-label" />
+            <engine:VisualElement name="button-container">
+                <engine:Button text="GO TO MENU" name="menu-button" class="simple" />
+                <engine:Button text="QUIT" name="quit-button" class="simple" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

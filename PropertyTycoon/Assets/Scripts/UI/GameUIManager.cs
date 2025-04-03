@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using BackEnd.Squares;
+using BackEnd;
+using Data;
 using UI.Game;
 
 namespace UI
 {
     public enum GameScreen {
         MainGame,
+        GameOver
     }
 
     /// <summary>

@@ -37,6 +37,7 @@ namespace UI.Game
             
             // setup timer
             StarTimer();
+            GameState.OnGameOver += _ => StopTimer();
         }
         
         /// <summary>
@@ -55,7 +56,11 @@ namespace UI.Game
         /// </summary>
         private void StopTimer()
         {
-            if (!IsRunning) { Debug.LogWarning("Timer is already stopped."); }
+            if (!IsRunning)
+            {
+                Debug.LogWarning("Timer is already stopped.");
+                return;
+            }
             StopCoroutine(_countdownCoroutine);
             _countdownCoroutine = null;
         }

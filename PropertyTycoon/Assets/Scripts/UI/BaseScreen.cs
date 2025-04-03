@@ -57,7 +57,7 @@ namespace UI
         /// NOTE: The screen is simply hidden, it will consume resources in the background. This allows to quickly switch
         /// between screens by avoiding multiple re-initialisation of the same screen.
         /// </summary>
-        public void Hide()
+        public virtual void Hide()
         {
             Root.style.display = DisplayStyle.None;
         }
