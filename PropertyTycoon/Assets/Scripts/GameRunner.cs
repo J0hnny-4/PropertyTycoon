@@ -107,6 +107,12 @@ public class GameRunner : MonoBehaviour
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
                 await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                
+                if (player.DoublesRolled == Cons.DoublesToJail)
+                {
+                    await player.Data.GoToJail();
+                    break;
+                }
 
                 var startPos = _players[_activePlayerIndex].Position;
                 await player.Move();

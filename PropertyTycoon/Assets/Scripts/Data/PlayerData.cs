@@ -70,6 +70,7 @@ namespace Data
             {
                 TurnsLeftInJail = 3;
             }
+            OnStateUpdated?.Invoke();
         }
 
         public void Forfeit()
