@@ -3,7 +3,6 @@ using UnityEngine;
 using BackEnd;
 using BackEnd.Squares;
 using Data;
-using UnityEngine.Rendering.VirtualTexturing;
 
 public class GameRunner : MonoBehaviour
 {

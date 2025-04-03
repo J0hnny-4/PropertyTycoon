@@ -76,7 +76,7 @@ public class Parser
               x++;
               y++;
             }
-            tiles.Add(new PropertyData(name,cost, rentlist,data[i,2],housecost));
+            tiles.Add(new PropertyData(name,cost, rentlist, Colour.Brown, housecost));
             break;
           
           case("Utilities"):

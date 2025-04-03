@@ -26,7 +26,7 @@ namespace UI.Board
         void Start()
         {
             _data = GameState.Board; 
-            _path = "Assets/Resources/Images/GameMode/TileImages/";
+            _path = "/Images/GameMode/TileImages/";
             mainPlane = mainPlane.GetComponent<Transform>();
             planes = CreateArray();
             print("DATA: " + _data.Count);
@@ -74,7 +74,7 @@ namespace UI.Board
             print(idx + cornerName);
             GameObject corner = planes[idx];
             Renderer rend = corner.GetComponent<Renderer>();
-            rend.material.mainTexture = AssetDatabase.LoadAssetAtPath<Texture>(_path + cornerName + ".png");
+            rend.material.mainTexture = Resources.Load<Texture>(_path + cornerName + ".png");
 
         }
 
