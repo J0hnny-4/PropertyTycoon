@@ -42,9 +42,18 @@ namespace UI.Game
             GameState.OnNewPlayerTurn += DisableControlButtons;
             GameState.OnActionsPhase += EnableControlButtons;
         }
-        
 
-        private void EndTurn() => GameState.Unpause();
+
+        private async void EndTurn()
+        {
+            var confirmed = await DialogBoxFactory.ConfirmDialogBox(
+                "End Turn",
+                "You are about to end your turn."
+            ).AsTask();
+            if (!confirmed) return;
+            
+            GameState.Unpause();
+        }
 
         private void DisableControlButtons() => ToggleControlButtons(false);
         private void EnableControlButtons() => ToggleControlButtons(true);
@@ -56,10 +65,16 @@ namespace UI.Game
             _leaderboardButton.SetEnabled(state);
         }
 
-        private void Forfeit()
+        private async void Forfeit()
         {
+            var confirmed = await DialogBoxFactory.ConfirmDialogBox(
+                "Forfeit",
+                "Are you sure you want to forfeit the game?"
+                ).AsTask();
+            if (!confirmed) return;
+            
             GameState.ActivePlayer.Forfeit();
-            EndTurn();
+            GameState.Unpause();
         }
 
         protected override void CleanUp()

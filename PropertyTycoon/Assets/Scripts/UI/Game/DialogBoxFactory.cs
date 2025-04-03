@@ -11,12 +11,28 @@ namespace UI.Game
         private static readonly GameObject SimpleDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/SimpleDialogBox");
         private static readonly GameObject AuctionDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AuctionDialogBox");
         private static readonly GameObject DiceDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/DiceDialogBox");
+        private static readonly GameObject ConfirmationDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/ConfirmationDialogBox");
+        
 
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
             var dialogObject = Instantiate(SimpleDialogBoxPrefab);
             var simpleDialogBox = dialogObject.GetComponent<SimpleDialogBox>();
             return simpleDialogBox;
+        }
+
+        private static SimpleDialogBox MakeConfirmationDialogBox()
+        {
+            var dialogObject = Instantiate(ConfirmationDialogBoxPrefab);
+            var simpleDialogBox = dialogObject.GetComponent<SimpleDialogBox>();
+            return simpleDialogBox;
+        }
+
+        public static SimpleDialogBox ConfirmDialogBox(string title, string text)
+        {
+            var dialogBox = MakeConfirmationDialogBox();
+            dialogBox.Initialise(title, text, confirmText: "Confirm", cancelText: "Cancel");
+            return dialogBox;
         }
 
         /// <summary>

@@ -59,6 +59,11 @@ Button.simple {
     transition: background-color 100ms ease-out;
 }
 
+Button.simple.small {
+    min-height: 75px;
+    min-width: 350px;
+}
+
 Button.simple:enabled:hover {
     background-color: var(--primary-hover);
 }

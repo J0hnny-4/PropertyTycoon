@@ -15,7 +15,7 @@ namespace UI.Game.DialogBoxes
         /// 
         public void Initialise(string title, 
             string text,
-            VisualElement image,
+            VisualElement image = null,
             string cancelText = null,
             string confirmText = null,
             bool closable = false
@@ -26,9 +26,7 @@ namespace UI.Game.DialogBoxes
             if (cancelText != null) { SetCancelButton(cancelText); }
             if (confirmText != null) { SetConfirmButton(confirmText); }
             if (closable) { AllowClosing(false); }
-            
-            
-            LeftPanel.Add(image);
+            if (image != null) { LeftPanel.Add(image); }
             RightPanel.Q<Label>("text").text = text;
         }
 
