@@ -100,6 +100,11 @@ namespace UI.Game.DialogBoxes
         
         protected void RaiseOnChoiceMade(T value) => OnChoiceMade?.Invoke(value);
 
+        /// <summary>
+        /// Returns a task that completes when the player makes a choice in the dialog box. The result of the task
+        /// represents the player's selection, with the type determined by the specific dialog box implementation.
+        /// </summary>
+        /// <returns>A value reflecting the choice made by the player.</returns>
         public virtual Task<T> AsTask()
         {
             var tcs = new TaskCompletionSource<T>();

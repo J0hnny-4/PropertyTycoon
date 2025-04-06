@@ -1,6 +1,5 @@
 using BackEnd;
 using Data;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.Game
@@ -45,10 +44,14 @@ namespace UI.Game
             GameState.OnNewPlayerTurn += HighlightCurrent;
         }
 
-        private void CleanUp()
+        /// <summary>
+        /// Removes listeners.
+        /// </summary>
+        public void CleanUp()
         {
             _data.OnStateUpdated -= UpdateUI;
             _data.OnBankrupted -= DisableElement;
+            GameState.OnNewPlayerTurn -= HighlightCurrent;
         }
         
         /// <summary>
@@ -60,12 +63,19 @@ namespace UI.Game
             _jailIcon.visible = (_data.TurnsLeftInJail != 0);
         }
 
+        /// <summary>
+        /// Disables the player element, used to distinguish eliminated players.
+        /// </summary>
+        /// <param name="_">PlayerData object -- not used.</param>
         private void DisableElement(PlayerData _)
         {
             _money.text = "-";
             SetEnabled(false);
         }
 
+        /// <summary>
+        /// Highlights the current (active) player by changing its appearance (style dictated by the 'active' selector).
+        /// </summary>
         private void HighlightCurrent()
         {
             var background = this.Q<VisualElement>("top");

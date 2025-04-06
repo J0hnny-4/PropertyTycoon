@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 
 namespace UI.Game
 {
+    /// <summary>
+    /// Factory class to create (UI) cards based on the (ownable) data given.
+    /// </summary>
     public class OwnableCardFactory : MonoBehaviour
     {
         private static OwnableCardFactory _instance;
@@ -49,16 +52,16 @@ namespace UI.Game
         /// Creates a property card, based on the data given to it.
         /// </summary>
         /// <param name="propertyData">Data used to generate the card.</param>
-        /// <returns>A card matching the data given.</returns>
+        /// <returns>A property card matching the data given.</returns>
         private static VisualElement MakePropertyCard(PropertyData propertyData)
         {
             var card = new VisualElement();
             _instance.propertyCardTemplate.CloneTree(card);
 
+            // adjust UI elements based on property data
             var nameTag = card.Q<Label>("name");
             nameTag.text = propertyData.Name;
             nameTag.style.backgroundColor = propertyData.Colour.UnityColour;
-
             card.Q<VisualElement>("default-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[0]);
             card.Q<VisualElement>("color-set-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[0] * Cons.ColorSetMultiplier);
             card.Q<VisualElement>("one-house-rent").Q<Label>("value").text = ToPrice(propertyData.Rent[1]);
@@ -72,13 +75,18 @@ namespace UI.Game
             return card;
         }
 
+        /// <summary>
+        /// Creates a station card, based on the data given to it.
+        /// </summary>
+        /// <param name="stationData">Data used to generate the card.</param>
+        /// <returns>A station card matching the data given.</returns>
         private static VisualElement MakeStationCard(StationData stationData)
         {
             var card = new VisualElement();
             _instance.stationCardTemplate.CloneTree(card);
             
+            // adjust UI elements based on station data
             card.Q<Label>("name").text = stationData.Name;
-
             card.Q<VisualElement>("one-station").Q<Label>("value").text = ToPrice(Cons.StationsRent[0]);
             card.Q<VisualElement>("two-stations").Q<Label>("value").text = ToPrice(Cons.StationsRent[1]);
             card.Q<VisualElement>("three-stations").Q<Label>("value").text = ToPrice(Cons.StationsRent[2]);
@@ -87,11 +95,15 @@ namespace UI.Game
             return card;
         }
 
+        /// <summary>
+        /// Creates a utility card, based on the data given to it.
+        /// </summary>
+        /// <param name="utilityData">Data used to generate the card.</param>
+        /// <returns>A utility card matching the data given.</returns>
         private static VisualElement MakeUtilityCard(UtilityData utilityData)
         {
             var card = new VisualElement();
             _instance.utilityCardTemplate.CloneTree(card);
-            
             card.Q<Label>("name").text = utilityData.Name;
             return card;
         }
@@ -101,9 +113,6 @@ namespace UI.Game
         /// </summary>
         /// <param name="number">Value to format.</param>
         /// <returns>String in the format "$ {value}"</returns>
-        private static string ToPrice(int number)
-        {
-            return $"$ {number}";
-        }
+        private static string ToPrice(int number) => $"$ {number}";
     }
 }

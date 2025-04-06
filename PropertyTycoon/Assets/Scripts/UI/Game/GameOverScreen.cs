@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 namespace UI.Game
 {
+    /// <summary>
+    /// Shows the winner's name, and allows the user to return to the menu or quit the game.
+    /// </summary>
     public class GameOverScreen : BaseScreen<GameScreen>
     {
         private Button _menuButton;
@@ -27,9 +30,13 @@ namespace UI.Game
             GameState.OnGameOver += HandleGameOver;
         }
 
+        /// <summary>
+        /// Sets the winner's name, then shows itself (the game over screen).
+        /// </summary>
+        /// <param name="winner">Data about the winning player.</param>
         private void HandleGameOver(PlayerData winner)
         {
-            _winnerLabel.text = $"{winner.Name} WON!";
+            _winnerLabel.text = $"{winner.Name} won!";
             Show();
         }
 
@@ -39,14 +46,16 @@ namespace UI.Game
             _quitButton.UnregisterCallback<ClickEvent>(OnQuitClicked);
         }
 
-        private void OnMenuClicked(ClickEvent e)
-        {
-            SceneManager.LoadScene("MenuScene");
-        }
+        /// <summary>
+        /// Method triggered by the "menu" button. It takes the user to the main menu screen.
+        /// </summary>
+        /// <param name="e">Click event -- not used.</param>
+        private void OnMenuClicked(ClickEvent e) => SceneManager.LoadScene("MenuScene");
         
-        private void OnQuitClicked(ClickEvent e)
-        {
-            Application.Quit();
-        }
+        /// <summary>
+        /// Method triggered by the "quit" button. It closes the game.
+        /// </summary>
+        /// <param name="e">Click event -- not used.</param>
+        private void OnQuitClicked(ClickEvent e) => Application.Quit();
     }
 }
