@@ -1,17 +1,19 @@
 using System.Collections.Generic;
-using BackEnd;
-using Data;
 using UI.Game;
 
 namespace UI
 {
+    /// <summary>
+    /// Enum used to identify screens belonging to the game scene.
+    /// Useful for testing.
+    /// </summary>
     public enum GameScreen {
         MainGame,
         GameOver
     }
 
     /// <summary>
-    /// Implementation of BaseUIManager used in the menu.
+    /// Implementation of BaseUIManager used in the game.
     /// </summary>
     public class GameUIManager : BaseUIManager<GameScreen>
     {

@@ -100,7 +100,9 @@ namespace BackEnd.Squares
             // -1 represents auction being skipped
             if (winner == -1)
             {
-                await DialogBoxFactory.AIDialogBox("Auction Failed", "No one bought the property.").AsTask();
+                await DialogBoxFactory.AIDialogBox(
+                    "Auction Failed", 
+                    "No one bought the property.").AsTask();
                 return;
             }
 

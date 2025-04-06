@@ -6,10 +6,13 @@ using UnityEngine.UIElements;
 
 namespace UI.Menu
 {
+    /// <summary>
+    /// Allows the user to choose the game mode to play.
+    /// </summary>
     public class GameModeScreen : BaseScreen<MenuScreen>
     {
-        [SerializeField] private VisualTreeAsset gameModePanelTemplate;
-        [SerializeField] private List<GameModeData> gameModesData;
+        [SerializeField] private VisualTreeAsset gameModePanelTemplate; // uxml template (UI element) for the game mode
+        [SerializeField] private List<GameModeData> gameModesData; // data about each game mode
         private List<GameModePanel> _gameModePanels;
         private GameModePanel _selectedPanel;
         private Button _continueButton;
@@ -25,6 +28,7 @@ namespace UI.Menu
             _continueButton.RegisterCallback<ClickEvent>(OnContinueClicked);
             _backButton.RegisterCallback<ClickEvent>(OnBackClicked);
 
+            // setup panels & updates the button state
             _gameModePanels = new List<GameModePanel>();
             UpdateContinueButtonState();
             GenerateGameModePanels();
@@ -49,13 +53,13 @@ namespace UI.Menu
         /// </summary>
         private void GenerateGameModePanels()
         {
-            var uIelement = Root.Q<VisualElement>("content");
+            var container = Root.Q<VisualElement>("content");
             foreach (var data in gameModesData)
             {
                 var panel = new GameModePanel(gameModePanelTemplate, data);
                 panel.OnClicked += OnPanelClicked;
                 _gameModePanels.Add(panel);
-                uIelement.Add(panel);
+                container.Add(panel);
             }
         }
 
@@ -73,22 +77,26 @@ namespace UI.Menu
         }
 
         /// <summary>
-        /// Uses <c>_selectedPanel</c> to determine whether to enable/disable the continue button.
+        /// Uses <c>_selectedPanel</c> to determine whether to enable/disable the continue button: the button is only
+        /// enabled if a mode has been selected. 
         /// </summary>
-        private void UpdateContinueButtonState()
-        {
-            _continueButton.SetEnabled(_selectedPanel != null);
-        }
-
+        private void UpdateContinueButtonState() => _continueButton.SetEnabled(_selectedPanel != null);
+        
+        /// <summary>
+        /// Method triggered by the "continue" button. It saves the selected game mode, then takes the user to the
+        /// players setup screen.
+        /// </summary>
+        /// <param name="e">Click event -- not used.</param>
         private void OnContinueClicked(ClickEvent e)
         {
             GameState.GameMode = _selectedPanel.GameMode;
             UIManager.NavigateTo(MenuScreen.PlayerSetup);
         }
-
-        private void OnBackClicked(ClickEvent e)
-        {
-            UIManager.NavigateTo(MenuScreen.MainMenu);
-        }
+        
+        /// <summary>
+        /// Method triggered by the "back" button. It takes the user back to the main screen.
+        /// </summary>
+        /// <param name="e">Click event -- not used.</param>
+        private void OnBackClicked(ClickEvent e) => UIManager.NavigateTo(MenuScreen.MainMenu);
     }
 }

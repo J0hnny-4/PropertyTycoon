@@ -5,7 +5,7 @@ namespace UI
 {
     /// <summary>
     /// Generic screen, to be added to the scene as a GameObject (as a child of UIManager).
-    /// Part of the same GameObject should be the corresponding UXML document.
+    /// As part of the same GameObject should be the corresponding UXML document.
     /// </summary>
     public abstract class BaseScreen<T> : MonoBehaviour
     {
@@ -54,7 +54,7 @@ namespace UI
 
         /// <summary>
         /// Hides the screen.<br/>
-        /// NOTE: The screen is simply hidden, it will consume resources in the background. This allows to quickly switch
+        /// NOTE: The screen is simply hidden, it will still consume resources in the background. This allows to quickly switch
         /// between screens by avoiding multiple re-initialisation of the same screen.
         /// </summary>
         public virtual void Hide()
