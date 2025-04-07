@@ -174,7 +174,7 @@ namespace UI.Game.DialogBoxes
             // hides buttons
             ConfirmBtn.style.display = DisplayStyle.None;
             CancelBtn.style.display = DisplayStyle.None;
-            await Task.Delay(Cons.AIDialogBoxDelay);
+            await AsyncDelayHelper.DelayAsync(Cons.AIDialogBoxDelay);
             Close();
             return GetHighestBid(); // return highest bidder
         }

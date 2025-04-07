@@ -45,10 +45,10 @@ namespace UI.Game.DialogBoxes
             // shuffles dices around for a bit
             for (var i = 0; i < 20; i++) { 
                 SetDicesValues(new Tuple<int, int>(Random.Range(1, 7), Random.Range(1, 7)));
-                await Task.Delay(100);
+                await AsyncDelayHelper.DelayAsync(100);
             }
             SetDicesValues(_result); // finally, set them to the correct values
-            await Task.Delay(Cons.AIDialogBoxDelay);
+            await AsyncDelayHelper.DelayAsync(Cons.AIDialogBoxDelay);
         }
 
         /// <summary>

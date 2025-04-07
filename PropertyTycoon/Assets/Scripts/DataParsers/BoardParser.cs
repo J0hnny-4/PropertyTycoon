@@ -12,20 +12,19 @@ namespace DataParsers
   {
     private static string[,] data;
 
-    private static DataTable LoadDataTableFromXml(string path)
+    private static DataTable LoadDataTableFromXml()
     {
-      //Creates object xml and loads the path passed through the initial call
-      XmlDocument xml = new XmlDocument();
-      xml.Load(path);
       //Creates a dataset and store the Xml contents into dataSet
       DataSet dataSet = new DataSet();
-      dataSet.ReadXml(new StringReader(xml.InnerXml));
+      TextAsset xmlAsset = Resources.Load<TextAsset>("Property Table");
+      dataSet.ReadXml(new StringReader(xmlAsset.text));
       return dataSet.Tables[0];
     }
 
     private static void Parse()
     {
-      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath + "/Data/Property Table.xml");
+      
+      DataTable propertyList = LoadDataTableFromXml();
       //Sets the length of the array depending on the attributes loaded
       data = new string[propertyList.Rows.Count, propertyList.Columns.Count];
       int row = 0;

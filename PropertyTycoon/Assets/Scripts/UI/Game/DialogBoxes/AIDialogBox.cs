@@ -41,7 +41,7 @@ namespace UI.Game.DialogBoxes
         /// <returns>A throw-away value.</returns>
         public override async Task<bool> AsTask()
         {
-            await Task.Delay(Cons.AIDialogBoxDelay);
+            await AsyncDelayHelper.DelayAsync(Cons.AIDialogBoxDelay);
             Close();
             return true;
         }
