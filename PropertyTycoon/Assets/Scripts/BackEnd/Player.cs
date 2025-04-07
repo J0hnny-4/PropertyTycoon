@@ -88,21 +88,9 @@ namespace BackEnd
         }
 
         /// <summary>
-        /// Performs the actions required when a player is in jail.
+        /// Reduces the turns left in prison.
         /// </summary>
-        /// <returns>True if player has left jail, false otherwise</returns>
-        public void HandleJAil()
-        {
-            if (DoublesRolled > 0)
-            {
-                TurnsLeftInJail = 0;
-                DoublesRolled = 0;
-            }
-            if (TurnsLeftInJail > 0)
-            {
-                TurnsLeftInJail -= 1;
-            }
-        }
+        public void HandleJail() => TurnsLeftInJail--;
 
         /// <summary>
         /// Moves the player around the board based on a dice roll.

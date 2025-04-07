@@ -25,7 +25,17 @@ namespace BackEnd.Squares
             var noOfStationsOwned = ownedProperties.Count(tileNo => GameState.Board[tileNo] is StationData);
             var amountOwed = Cons.StationsRent[noOfStationsOwned - 1]; // - 1 to account for 0 indexed array
             
-            await DialogBoxFactory.PaymentDialogBox(Data, amountOwed).AsTask();
+            if (GameState.ActivePlayer.IsAi)
+            {
+                await DialogBoxFactory.AIDialogBox(
+                    "Payment due",
+                    $"You landed on {Data.Name}.\nYou need to pay ${amountOwed} in rent.").AsTask();
+            }
+            else
+            {
+                await DialogBoxFactory.PaymentDialogBox(Data, amountOwed).AsTask();
+            }
+            
             var amountPaid = GameState.ActivePlayer.TakeMoney(amountOwed);
             owner.AddMoney(amountPaid);
         }

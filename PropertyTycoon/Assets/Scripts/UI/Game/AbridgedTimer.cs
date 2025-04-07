@@ -57,7 +57,6 @@ namespace UI.Game
         {
             if (!IsRunning)
             {
-                Debug.LogWarning("Timer is already stopped.");
                 return;
             }
             StopCoroutine(_countdownCoroutine);

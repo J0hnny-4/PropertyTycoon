@@ -128,12 +128,13 @@ public class GameRunner : MonoBehaviour
                 if (player is HumanPlayer)
                 {
                     await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
-                    player.HandleJAil();
+                    player.HandleJail();
                     continue;
                 }
                 else
                 {
-                    await DialogBoxFactory.AIDialogBox("Ai in Jail", "Ai has " + player.TurnsLeftInJail + "left in Jail!").AsTask();
+                    await DialogBoxFactory.AIDialogBox("Ai in Jail", "Ai has " + player.TurnsLeftInJail + " left in Jail!").AsTask();
+                    player.HandleJail();
                     continue;
                 }
             }
@@ -154,6 +155,9 @@ public class GameRunner : MonoBehaviour
 
                 if (player.DoublesRolled == Cons.DoublesToJail)
                 {
+                    await DialogBoxFactory.AIDialogBox(
+                        "Doubles rolled",
+                        "You rolled too many doubles, you've been sent to jail.").AsTask();
                     await player.Data.GoToJail();
                     break;
                 }
@@ -172,7 +176,18 @@ public class GameRunner : MonoBehaviour
 
             if (player.IsBankrupt)
             {
-                await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
+                if (player is HumanPlayer)
+                {
+                    await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
+                }
+                else
+                {
+                    await DialogBoxFactory.AIDialogBox(
+                            "Bankruptcy",
+                            $"{player.Name} has lost all of their money, they file for bankruptcy and leave the game!")
+                            .AsTask();
+                }
+                    
             }
             else if (player is HumanPlayer)
             {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UI.Game;
 
 namespace BackEnd
 {
@@ -25,10 +26,18 @@ namespace BackEnd
             switch (effect)
             {
                 case "GoToJail":
-                    Effect = async () => await GameState.ActivePlayer.GoToJail();
+                    Effect = async () =>
+                    {
+                        await DialogBoxFactory.AIDialogBox(name, description).AsTask();
+                        await GameState.ActivePlayer.GoToJail();
+                    };
                     break;
                 case "PayPlayer":
-                    Effect = async () => GameState.ActivePlayer.AddMoney((int)_value);
+                    Effect = async () =>
+                    {
+                        await DialogBoxFactory.AIDialogBox(name, description).AsTask();
+                        GameState.ActivePlayer.AddMoney((int)_value);
+                    };
                     break;
                 default:
                     Effect = async () => { };

@@ -57,14 +57,14 @@ namespace UI.Board
                     startPos = 0;
                     GameObject tile = _tileArray[0];
                     _playersObjects[current_player].transform.position = tile.transform.position;
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(Cons.PlayerWait);
 
                 }
                 else
                 {
                     GameObject tile = _tileArray[startPos + i];
                     _playersObjects[current_player].transform.position = tile.transform.position;
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(Cons.PlayerWait);
 
                 }
 

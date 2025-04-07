@@ -25,7 +25,7 @@ namespace BackEnd.Squares
         {
             if (_deck.Count == 0) return; // Deck with at least one non GetOutOfJail card should not be empty
             var card = _deck.Dequeue();
-            card.Effect();
+            await card.Effect();
             if (card is not GetOutOfJail) _deck.Enqueue(card);
         }
     }
