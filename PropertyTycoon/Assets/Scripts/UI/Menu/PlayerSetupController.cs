@@ -2,41 +2,43 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
-using NUnit.Framework.Internal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace UI.Controllers
+namespace UI.Menu
 {
+    /// <summary>
+    /// Controller used to handle logic & operations involved in setting up players.
+    /// </summary>
     public class PlayerSetupController
     {
         private readonly List<PlayerData> _players;
         private readonly List<string> _defaultNames;
         private readonly Token[] _allTokens;
         private readonly HashSet<Token> _usedTokens;
-        private readonly int _minPlayers;
-        private readonly int _maxPlayers;
         public event Action<PlayerData> OnPlayerRemoved;
         public event Action<PlayerData> OnPlayerAdded;
         
-        
-    
-        public bool CanAddPlayer => _players.Count < _maxPlayers;
-        public bool CanRemovePlayer => _players.Count > _minPlayers;
+        // dynamic boolean flags
+        public bool CanAddPlayer => _players.Count < Cons.MaxPlayers;
+        public bool CanRemovePlayer => _players.Count > Cons.MinPlayers;
         public bool CanSwitchToken => _usedTokens.Count < _allTokens.Length;
 
-        public PlayerSetupController(int minPlayers, int maxPlayers, List<string> defaultNames)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="defaultNames"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public PlayerSetupController(List<string> defaultNames)
         {
             _players = new List<PlayerData>();
             _usedTokens = new HashSet<Token>();
             _allTokens = Resources.LoadAll<Token>("Tokens");
-            _minPlayers = minPlayers;
-            _maxPlayers = maxPlayers;
             _defaultNames = defaultNames;
             
             // error checking: can only be tested at runtime, as the list of names can only be accessed by the instance
             // present in the scene.
-            if (defaultNames.Count < minPlayers)
+            if (defaultNames.Count < Cons.MinPlayers)
             {
                 throw new ArgumentException("List of names shorter than min number of players.");
             }
@@ -47,11 +49,11 @@ namespace UI.Controllers
         /// </summary>
         public void InitialisePlayers()
         {
-            for (var i = 0; i < _minPlayers; i++) { AddPlayer(); }
+            for (var i = 0; i < Cons.MinPlayers; i++) { AddPlayer(); }
         }
 
         /// <summary>
-        /// Add a new PlayerData to the current list, then returns it (to be used by UI).
+        /// Add a new PlayerData to the current list.
         /// </summary>
         /// <returns>Newly created player.</returns>
         /// <exception cref="InvalidOperationException">Thrown if maximum number of player has already been reached.
@@ -116,11 +118,15 @@ namespace UI.Controllers
         public List<PlayerData> GetPlayers() => _players;
         
         /// <summary>
-        /// Get the current list of tokens.
+        /// Get the list of all tokens (used and un-used).
         /// </summary>
         /// <returns>The list of all tokens, used and available.</returns>
         public Token[] GetAllTokens() => _allTokens;
-
+        
+        /// <summary>
+        /// Get the list of currently in-use tokens.
+        /// </summary>
+        /// <returns>The list of used tokens.</returns>
         public Token[] GetUsedTokens() => _usedTokens.ToArray();
     
         /// <summary>

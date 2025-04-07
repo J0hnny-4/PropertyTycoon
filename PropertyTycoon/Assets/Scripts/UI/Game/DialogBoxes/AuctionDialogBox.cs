@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// A fairly complex dialog box, allowing players (all except the current one) to bid on a property/station/utility.
+    /// </summary>
     public class AuctionDialogBox : BaseDialogBox<(int, int)>
     {
         [SerializeField] private VisualTreeAsset playerBidFieldTemplate;
@@ -46,26 +49,27 @@ namespace UI.Game.DialogBoxes
         /// <returns>A 'bid field', comprised of player name and a field for the player's bid.</returns>
         private VisualElement CreateBidField(int playerIndex)
         {
+            // creates UI element
             var tempContainer = new VisualElement();
             playerBidFieldTemplate.CloneTree(tempContainer);
             var playerBidField = tempContainer.ElementAt(0);
             
+            // links bid field to player
             playerBidField.Q<Label>("name").text = GameState.Players[playerIndex].Name;
             var bidField = playerBidField.Q<IntegerField>("bid");
             bidField.userData = playerIndex;
             bidField.RegisterValueChangedCallback(OnBidValueChanged);
             _bids[playerIndex] = bidField;
-
-            var player = GameState.Players[playerIndex];
             
+            var player = GameState.Players[playerIndex];
             // simply hides the current player's bid field, since they decided not to buy the property
             if (player == GameState.ActivePlayer || player.IsBankrupt)
             {
                 playerBidField.style.display = DisplayStyle.None;
                 bidField.SetValueWithoutNotify(0);
             } 
-            else if (player.IsAi) // if player is AI, set a random amount they can afford, then disable their field (to prevent changing it)
-            {
+            // if player is AI, set a random amount they can afford, then disable their field (to prevent other players from changing it)
+            else if (player.IsAi) {
                 bidField.SetValueWithoutNotify(Random.Range(0, player.Money - 1));
                 playerBidField.SetEnabled(false);
             }
@@ -77,34 +81,41 @@ namespace UI.Game.DialogBoxes
         /// Called when a value is updated in a bid field. Clamps the new value between 0 and the amount of money the
         /// player holds minus 1. 
         /// </summary>
-        /// <param name="evt">The event invoked by the change in value.</param>
-        private void OnBidValueChanged(ChangeEvent<int> evt)
+        /// <param name="e">The event invoked by the change in value.</param>
+        private void OnBidValueChanged(ChangeEvent<int> e)
         {
-            var field = (IntegerField)evt.target;
+            var field = (IntegerField)e.target;
             var playerIndex = (int)field.userData;
             var upperBound = GameState.Players[playerIndex].Money - 1;
-            var clampedValue = Math.Clamp(evt.newValue, 0, upperBound);
+            var clampedValue = Math.Clamp(e.newValue, 0, upperBound);
             field.SetValueWithoutNotify(clampedValue);
 
             SetButtonsState();
         }
 
+        /// <summary>
+        /// Enables/disables both 'cancel' and 'confirm' buttons depending on the state of the auction.
+        /// </summary>
         private void SetButtonsState()
         {
-            // "continue" option is only available if a clear, single highest bid is provided
-            // if not, then an agreement has not been reached, meaning the auction is skipped
-            if (GetHighestBid() != _errorValue)
+            if (GetHighestBid() != _errorValue) // "continue" option is only available if a clear, single highest bid is provided
             {
                 ConfirmBtn.SetEnabled(true);
                 CancelBtn.SetEnabled(false);
             }
-            else
+            else // if not, then an agreement has not been reached, meaning the auction can be skipped
             {
                 ConfirmBtn.SetEnabled(false);
                 CancelBtn.SetEnabled(true);
             }
         }
         
+        /// <summary>
+        /// Gets the highest bidder, along with their bid. If multiple players hold the highest bid, the error value is
+        /// returned (-1, -1).
+        /// </summary>
+        /// <returns>The index of the player with the highest bid (value 1), and their bid (value 2). If multiple
+        /// players hold the highest bid, the error value is returned (-1, -1).</returns>
         private (int, int) GetHighestBid()
         {
             var highestBid = -1;
@@ -140,6 +151,10 @@ namespace UI.Game.DialogBoxes
             Close();
         }
 
+        /// <summary>
+        /// Used to check if all players participating in the auction are AI.
+        /// </summary>
+        /// <returns>True if all players participating are AI, false otherwise.</returns>
         private bool AllBiddersAreAI()
         {
             foreach (var bidField in _bidsContainer.Children())

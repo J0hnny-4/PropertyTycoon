@@ -1,11 +1,14 @@
 namespace UI
 {
+    /// <summary>
+    /// Enum used to identify screens belonging to the menu scene.
+    /// Useful for testing.
+    /// </summary>
     public enum MenuScreen {
         MainMenu,
         GameMode,
         PlayerSetup,
-        Settings, 
-        Dice, 
+        Settings,
     }
 
     /// <summary>

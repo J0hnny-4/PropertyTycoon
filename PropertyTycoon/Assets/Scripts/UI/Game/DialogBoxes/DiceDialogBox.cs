@@ -1,11 +1,15 @@
 using System;
 using System.Threading.Tasks;
+using Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// A dialog box prompting the player to roll the dice. 
+    /// </summary>
     public class DiceDialogBox : BaseDialogBox<bool>
     {
         private VisualElement[] _dices;
@@ -33,6 +37,9 @@ namespace UI.Game.DialogBoxes
             _diceIcons = Resources.LoadAll<Texture2D>("Images/Icons/Dice");
         }
 
+        /// <summary>
+        /// Shuffles the dice for a short time, then stops them on the correct (pre-calculated) result.
+        /// </summary>
         private async Task RollDice()
         {
             // shuffles dices around for a bit
@@ -40,12 +47,14 @@ namespace UI.Game.DialogBoxes
                 SetDicesValues(new Tuple<int, int>(Random.Range(1, 7), Random.Range(1, 7)));
                 await Task.Delay(100);
             }
-            
-            // finally, set them to the correct values
-            SetDicesValues(_result);
-            await Task.Delay(1500);
+            SetDicesValues(_result); // finally, set them to the correct values
+            await Task.Delay(Cons.AIDialogBoxDelay);
         }
 
+        /// <summary>
+        /// Set the values shown by the dice.
+        /// </summary>
+        /// <param name="values">A tuple representing the values of both dice.</param>
         private void SetDicesValues(Tuple<int, int> values)
         {
             // adjust values to line up with 0 indexed array
@@ -53,15 +62,18 @@ namespace UI.Game.DialogBoxes
             _dices[1].style.backgroundImage = _diceIcons[values.Item2 - 1]; 
         }
 
+        /// <summary>
+        /// Unused in this case.
+        /// </summary>
         protected override void HandleCancelClicked() { /* unused */ }
 
+        /// <summary>
+        /// Plays the rolling dice animation, then returns (a throw-away value) and closes itself.
+        /// </summary>
         protected override async void HandleConfirmClicked()
         {
-            // prevents from pressing it more than once
-            ConfirmBtn.SetEnabled(false);
-            // waits for animation
-            await RollDice();
-            
+            ConfirmBtn.SetEnabled(false); // prevents from pressing it more than once
+            await RollDice(); // waits for animation
             RaiseOnChoiceMade(true);
             Close();
         }

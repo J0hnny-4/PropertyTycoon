@@ -19,7 +19,7 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
-            await GameState.ActivePlayer.GoToJail();//TODO: Magic number
+            await GameState.ActivePlayer.GoToJail();
         }
     }
 }

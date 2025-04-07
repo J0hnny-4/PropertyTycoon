@@ -4,6 +4,10 @@ using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// A self-closing dialog box, displaying a brief message. Mostly used to show outcomes of actions taken by AI
+    /// players. 
+    /// </summary>
     public class AIDialogBox : BaseDialogBox<bool>
     {
         /// <summary>
@@ -30,7 +34,11 @@ namespace UI.Game.DialogBoxes
             RaiseOnChoiceMade(true);
             Close();
         }
-
+        
+        /// <summary>
+        /// Closes the dialog box after a certain (short) time.
+        /// </summary>
+        /// <returns>A throw-away value.</returns>
         public override async Task<bool> AsTask()
         {
             await Task.Delay(Cons.AIDialogBoxDelay);
