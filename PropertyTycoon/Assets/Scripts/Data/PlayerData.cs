@@ -71,7 +71,7 @@ namespace Data
             else
             {
                 var rand = Random.Range(0, 10);
-                if (rand >= 5)
+                if (rand >= 5 && afford)
                 {
                     payed = true;
                 }

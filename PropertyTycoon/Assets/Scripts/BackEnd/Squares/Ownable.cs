@@ -73,7 +73,7 @@ namespace BackEnd.Squares
                         bought = false;
                     }
 
-                    await DialogBoxFactory.AIDialogBox("Ai Action ", bought ? "Bought property: " + Data.Name : "Ai didn't buy property" + Data.Name).AsTask();
+                    await DialogBoxFactory.AIDialogBox("Ai Action ", bought ? "Bought property: " + Data.Name : "Ai didn't buy property " + Data.Name).AsTask();
                 }
 
             }
