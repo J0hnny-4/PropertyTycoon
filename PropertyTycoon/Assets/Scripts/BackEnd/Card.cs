@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BackEnd
 {
@@ -10,13 +12,28 @@ namespace BackEnd
     {
         public string Name { get; }
         public string Description { get; }
-        public Action Effect { get; }
+        public Func<Task> Effect { get; }
 
-        public Card(string name, string description, Action effect)
+        private object _value;
+
+        public Card(string name, string description, String effect, object value = null)
         {
             this.Name = name;
             this.Description = description;
-            this.Effect = effect;
+            this._value = value;
+
+            switch (effect)
+            {
+                case "GoToJail":
+                    Effect = async () => await GameState.ActivePlayer.GoToJail();
+                    break;
+                case "PayPlayer":
+                    Effect = async () => GameState.ActivePlayer.AddMoney((int)_value);
+                    break;
+                default:
+                    Effect = async () => { };
+                    break;
+            };
         }
     }
 }

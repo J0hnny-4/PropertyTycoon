@@ -52,7 +52,7 @@ namespace DataParsers
 
         int.TryParse(data[i, 3], out var cost);
         int.TryParse(data[i, 4], out var rent);
-
+        
         switch (data[i, 2])
         {
           case ("Action"):
@@ -99,6 +99,14 @@ namespace DataParsers
 
           case ("Station"):
             tiles.Add(new StationData(name, cost, rent));
+            break;
+          
+          case ("Pot Luck"):
+            tiles.Add(new CardSquareData(name));
+            break;
+          
+          case ("Opportunity Knocks"):
+            tiles.Add(new CardSquareData(name));
             break;
 
           default:
