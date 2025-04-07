@@ -1,20 +1,24 @@
 using System.Collections.Generic;
 using BackEnd;
 using Data;
-using UI.Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI.Menu
 {
+    /// <summary>
+    /// Allows to set up:
+    /// - number of players.
+    /// - their names.
+    /// - their tokens.
+    /// - whether they're human or AI.
+    /// </summary>
     public class PlayersSetupScreen : BaseScreen<MenuScreen>
     {
-        [SerializeField] private List<string> defaultNames;
-        [SerializeField] private VisualTreeAsset playerPanelTemplate;
-        [SerializeField] private int minPlayers = 2;
-        [SerializeField] private int maxPlayers = 6;
-        private Dictionary<PlayerData, PlayerPanel> _panels = new ();
+        [SerializeField] private List<string> defaultNames; // list of default names, setup in the editor.
+        [SerializeField] private VisualTreeAsset playerPanelTemplate; // uxml template (UI element) for each player
+        private readonly Dictionary<PlayerData, PlayerPanel> _panels = new ();
         private PlayerSetupController _controller;
         private VisualElement _playersGrid;
         private Button _addPlayerButton;
@@ -23,10 +27,10 @@ namespace UI.Menu
         
         public override void Initialise()
         {
-            // creates controller and listen to changes made by it
-            _controller = new PlayerSetupController(minPlayers, maxPlayers, defaultNames);
+            // creates controller
+            _controller = new PlayerSetupController(defaultNames);
             
-            // get reference to UI elements
+            // gets reference to UI elements
             _readyButton = Root.Q<Button>("ready-button");
             _backButton = Root.Q<Button>("back-button");
             _addPlayerButton = Root.Q<Button>("add-player-button");
@@ -91,15 +95,19 @@ namespace UI.Menu
         }
         
         /// <summary>
-        /// Save created players to the GameState, then proceeds to Game scene.
+        /// Method triggered by the "ready" button. It saves the created players, then moves the user to the game scene.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Click event -- not used.</param>
         private void OnReadyClicked(ClickEvent e)
         {
             GameState.Players = _controller.GetPlayers();
             SceneManager.LoadScene("GameScene");
         }
-
+        
+        /// <summary>
+        /// Method triggered by the "back" button. It takes the user back to the game mode screen.
+        /// </summary>
+        /// <param name="e">Click event -- not used.</param>
         private void OnBackClicked(ClickEvent e)
         {
             UIManager.NavigateTo(MenuScreen.GameMode);

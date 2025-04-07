@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,7 +15,9 @@ public class GameRunner : MonoBehaviour
     private List<Square> _board;
     private PlayerController _controller;
     private int _activePlayerIndex = -1;
-    private bool GameOver => _players.Count(p => !p.IsBankrupt) <= 1;
+    private bool _timeout = false;
+    private void OnTimeUp() => _timeout = true;
+    private bool OnePlayerLeft => _players.Count(p => !p.IsBankrupt) <= 1;
 
     private async void Start()
     {
@@ -27,6 +28,9 @@ public class GameRunner : MonoBehaviour
         
         // Dictionary of decks for CardSquares
         var decks = CardGenerator.GenerateCards();
+
+        // setup listener to ABRIDGED timer (if present)
+        FindFirstObjectByType<AbridgeTimer>().OnTimeUp += OnTimeUp;
 
         foreach (var pd in GameState.Players)
         {
@@ -74,9 +78,9 @@ public class GameRunner : MonoBehaviour
 
         await GameLoop();
 
-        Player winner = null;
-        foreach (var player in _players.Where(player => !player.IsBankrupt)) { winner = player; }
+        var winner = _players.OrderByDescending(p => p.Money).First();
         Debug.Log($"{winner.Name} has won!");
+        GameState.TriggerGameOver(winner.Data);
     }
 
 
@@ -89,24 +93,49 @@ public class GameRunner : MonoBehaviour
         }
     }
 
+
+    private bool GameOver()
+    {
+        // if next player's index is less than the current one, it means we have done a full loop and all players have
+        // taken an equal amount of turns
+        var nextPlayerIndex = GetNextPlayerIndex();
+        return OnePlayerLeft || (_timeout && nextPlayerIndex < _activePlayerIndex);
+    }
+
+    private int GetNextPlayerIndex()
+    {
+        var nextPlayerIndex = _activePlayerIndex;
+        do
+        {
+            nextPlayerIndex = (nextPlayerIndex + 1) % _players.Count;
+        } while (_players[nextPlayerIndex].IsBankrupt);
+        return nextPlayerIndex;
+    }
+
+
     private async Task GameLoop()
     {
-        while (!GameOver)
+        while (!GameOver())
         {
             // get next available player
-            do
-            {
-                _activePlayerIndex = (_activePlayerIndex + 1) % _players.Count;
-            } while (_players[_activePlayerIndex].IsBankrupt);
+            _activePlayerIndex = GetNextPlayerIndex();
             GameState.ActivePlayerIndex = _activePlayerIndex;
             var player = _players[_activePlayerIndex];
 
             // handle player already in jail
             if (player.TurnsLeftInJail > 0)
             {
-                await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
-                player.HandleJAil();
-                continue;
+                if (player is HumanPlayer)
+                {
+                    await DialogBoxFactory.PlayerInJailDialogBox(player.Name, player.TurnsLeftInJail).AsTask();
+                    player.HandleJAil();
+                    continue;
+                }
+                else
+                {
+                    await DialogBoxFactory.AIDialogBox("Ai in Jail", "Ai has " + player.TurnsLeftInJail + "left in Jail!").AsTask();
+                    continue;
+                }
             }
 
             // main loop
@@ -114,7 +143,20 @@ public class GameRunner : MonoBehaviour
             {
                 player.RollDice();
                 Debug.Log($"{player.Name} rolled {player.LastRoll}");
-                await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                if (player is HumanPlayer)
+                {
+                    await DialogBoxFactory.DiceDialogBox(player.Name, player.LastRoll).AsTask();
+                }
+                else
+                {
+                    await DialogBoxFactory.AIDialogBox("AI Rolled", "Ai rolled: " + player.LastRoll).AsTask();
+                }
+
+                if (player.DoublesRolled == Cons.DoublesToJail)
+                {
+                    await player.Data.GoToJail();
+                    break;
+                }
 
                 var startPos = _players[_activePlayerIndex].Position;
                 await player.Move();
@@ -123,6 +165,7 @@ public class GameRunner : MonoBehaviour
                 StartCoroutine(_controller.MovePlayer(startPos, endPos));
                 await PauseAndWait();
 
+
                 await _board[player.Position].PlayerLands();
 
             } while (player.DoublesRolled > 0 && !player.IsBankrupt && player.TurnsLeftInJail == 0);
@@ -130,15 +173,11 @@ public class GameRunner : MonoBehaviour
             if (player.IsBankrupt)
             {
                 await DialogBoxFactory.BankruptcyDialogBox(player.Name).AsTask();
-                foreach (var tileNo in player.Properties)
-                {
-                    ((OwnableData)GameState.Board[tileNo]).Owner = null;
-                }
-                player.Properties.Clear();
             }
-            else
+            else if (player is HumanPlayer)
             {
-                await PauseAndWait(); // game stops until end-turn button is pressed
+                GameState.TriggerOnActionPhase();
+                await PauseAndWait();// game stops until end-turn button is pressed
             }
         }
     }
@@ -154,6 +193,5 @@ public class GameRunner : MonoBehaviour
             var property = (Ownable)_board[tileNo];
             property.Reset();
         }
-
     }
 }

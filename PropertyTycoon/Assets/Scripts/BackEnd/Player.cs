@@ -102,7 +102,6 @@ namespace BackEnd
             {
                 TurnsLeftInJail -= 1;
             }
-
         }
 
         /// <summary>
@@ -112,12 +111,6 @@ namespace BackEnd
         /// <returns></returns>
         public async Task Move()
         {
-            if (DoublesRolled == 3) //TODO magic number
-            {
-                await Data.GoToJail();
-                return;
-            }
-
             var roll = LastRoll.Item1 + LastRoll.Item2;
 
             //TODO Separate method or two for actually setting player position may be in order

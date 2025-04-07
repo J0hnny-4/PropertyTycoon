@@ -1,7 +1,7 @@
 #background {
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #dialog-box {
@@ -17,11 +17,6 @@
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-}
-
-#dialog-box.small {
-    height: 300px;
-    width: 600px;
 }
 
 #dialog-box > #title-bar {
@@ -146,4 +141,24 @@
     width: 150px;
     height: 150px;
     margin: var(--spacing-xl);
+}
+
+
+/* simple confirmation (yes/no) boxes */
+
+#dialog-box.small {
+    height: 400px;
+    width: 800px;
+}
+
+#dialog-box.small > #content > #left-panel {
+    display: none;
+}
+
+#dialog-box.small > #content > #right-panel {
+    width: 100%;
+}
+
+#dialog-box.small > #content > #right-panel > #text {
+    -unity-text-align: middle-center;
 }

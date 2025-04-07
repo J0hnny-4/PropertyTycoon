@@ -6,17 +6,68 @@ using UnityEngine.UIElements;
 
 namespace UI.Game
 {
+    /// <summary>
+    /// Factory class to easily create a wide variety of dialog boxes.
+    /// </summary>
     public class DialogBoxFactory : MonoBehaviour
     {
         private static readonly GameObject SimpleDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/SimpleDialogBox");
         private static readonly GameObject AuctionDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AuctionDialogBox");
         private static readonly GameObject DiceDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/DiceDialogBox");
-
+        private static readonly GameObject ConfirmationDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/ConfirmationDialogBox");
+        private static readonly GameObject AIDialogBoxPrefab = Resources.Load<GameObject>("Prefabs/UI/AIDialogBox");
+        
+        /// <summary>
+        /// Helper method to create a simple, non customised dialog box. This dialog box is used as base and
+        /// further customised by other methods.
+        /// </summary>
+        /// <returns>A plain, non customised simple dialog box.</returns>
         private static SimpleDialogBox MakeSimpleDialogBox()
         {
             var dialogObject = Instantiate(SimpleDialogBoxPrefab);
             var simpleDialogBox = dialogObject.GetComponent<SimpleDialogBox>();
             return simpleDialogBox;
+        }
+
+        /// <summary>
+        /// Helper method to create a simple confirmation (yes/no) dialog box. This dialog box is used as base and
+        /// further customised by other methods.
+        /// </summary>
+        /// <returns>A plain, non customised confirmation dialog box.</returns>
+        private static SimpleDialogBox MakeConfirmationDialogBox()
+        {
+            var dialogObject = Instantiate(ConfirmationDialogBoxPrefab);
+            var simpleDialogBox = dialogObject.GetComponent<SimpleDialogBox>();
+            return simpleDialogBox;
+        }
+
+        /// <summary>
+        /// Creates a confirmation (confirm/cancel) dialog box.
+        /// </summary>
+        /// <param name="title">The title shown by the dialog box.</param>
+        /// <param name="text">A brief description of what the player is prompted to confirm.</param>
+        /// <returns>A confirmation dialog box, with the options to confirm or cancel.</returns>
+        public static SimpleDialogBox ConfirmDialogBox(string title, string text)
+        {
+            var dialogBox = MakeConfirmationDialogBox();
+            dialogBox.Initialise(title, text, confirmText: "Confirm", cancelText: "Cancel");
+            return dialogBox;
+        }
+
+        /// <summary>
+        /// A temporary (self-closing) dialog box used to display a brief message. Mostly used to show outcomes of
+        /// actions taken by AI players.
+        /// </summary>
+        /// <param name="title">The title shown by the dialog box.</param>
+        /// <param name="text">A brief message shown by the dialog box.</param>
+        /// <returns>A simple pop-up like dialog box, with no buttons. It closes automatically after a short
+        /// time.</returns>
+        public static AIDialogBox AIDialogBox(string title, string text)
+        {
+            var dialogObject = Instantiate(AIDialogBoxPrefab);
+            var dialogBox = dialogObject.GetComponent<AIDialogBox>();
+            dialogBox.Initialise(title, text);
+            return dialogBox;
         }
 
         /// <summary>
@@ -45,7 +96,14 @@ namespace UI.Game
             dialogBox.Initialise("Payment Due", text, image, confirmText: "Pay");
             return dialogBox;
         }
-
+        
+        /// <summary>
+        /// Creates a 'Dice' dialog box.
+        /// </summary>
+        /// <param name="playerName">Name of the player who's rolling the dice.</param>
+        /// <param name="expectedResult">The pre-calculate result of the dice roll.</param>
+        /// <returns>A simple dialog box, showing two dice shuffling and eventually landing on the expected
+        /// result.</returns>
         public static DiceDialogBox DiceDialogBox(string playerName, Tuple<int, int> expectedResult)
         {
             var dialogObject = Instantiate(DiceDialogBoxPrefab);
@@ -72,6 +130,11 @@ namespace UI.Game
             return dialogBox;
         }
 
+        /// <summary>
+        /// Creates a 'Bankruptcy' dialog box. 
+        /// </summary>
+        /// <param name="playerName">Name of the player going bankrupt.</param>
+        /// <returns>A simple dialog box informing that a player has been eliminated.</returns>
         public static SimpleDialogBox BankruptcyDialogBox(string playerName)
         {
             var dialogBox = MakeSimpleDialogBox();

@@ -4,6 +4,7 @@ using Codice.Client.BaseCommands;
 using Data;
 using UI.Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BackEnd.Squares
 {
@@ -56,9 +57,27 @@ namespace BackEnd.Squares
             var bought = false;
             if (player.Money > Cost)
             {
-                bought = await DialogBoxFactory.PurchaseDialogBox(Data as OwnableData).AsTask();
+                if (!player.IsAi)
+                {
+                    bought = await DialogBoxFactory.PurchaseDialogBox(Data as OwnableData).AsTask();
+                }
+                else
+                {
+                    var des = Random.Range(0, 10);
+                    if (des >= 5)
+                    {
+                        bought = true;
+                    }
+                    else
+                    {
+                        bought = false;
+                    }
+
+                    await DialogBoxFactory.AIDialogBox("Ai Action ", bought ? "Bought property: " + Data.Name : "Ai didn't buy property" + Data.Name).AsTask();
+                }
+
             }
-            
+
             if (bought) // if player bought the property, assign them as owners
             {
                 GameState.ActivePlayer.TakeMoney(Cost);
@@ -79,12 +98,22 @@ namespace BackEnd.Squares
             var (winner, bid) = await DialogBoxFactory.AuctionDialogBox(Data as OwnableData).AsTask();
 
             // -1 represents auction being skipped
-            if (winner == -1) { return; }
+            if (winner == -1)
+            {
+                await DialogBoxFactory.AIDialogBox(
+                    "Auction Failed", 
+                    "No one bought the property.").AsTask();
+                return;
+            }
 
             // bid is guaranteed to be less than the amount held by the player
-            GameState.Players[winner].TakeMoney(bid);
+            var player = GameState.Players[winner];
+            await DialogBoxFactory.AIDialogBox(
+                "Auction Success", 
+                $"player {player.Name} won the auction!").AsTask();
+            player.TakeMoney(bid);
             Owner = winner;
-            GameState.Players[winner].AddProperty(Index);
+            player.AddProperty(Index);
         }
 
         /// <summary>

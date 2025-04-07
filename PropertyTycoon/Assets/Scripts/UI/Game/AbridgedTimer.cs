@@ -37,6 +37,7 @@ namespace UI.Game
             
             // setup timer
             StarTimer();
+            GameState.OnGameOver += _ => StopTimer();
         }
         
         /// <summary>
@@ -44,7 +45,6 @@ namespace UI.Game
         /// </summary>
         private void StarTimer()
         {
-            Debug.Log("Timer started");
             if (IsRunning) { Debug.LogWarning("Timer is already running."); }
             _countdownCoroutine = StartCoroutine(RunTimer());
             _hourglassIcon.schedule.Execute(SpinHourglass).Until(() => !IsRunning).Every(spinFrequency);
@@ -55,14 +55,18 @@ namespace UI.Game
         /// </summary>
         private void StopTimer()
         {
-            if (!IsRunning) { Debug.LogWarning("Timer is already stopped."); }
+            if (!IsRunning)
+            {
+                Debug.LogWarning("Timer is already stopped.");
+                return;
+            }
             StopCoroutine(_countdownCoroutine);
             _countdownCoroutine = null;
         }
 
         /// <summary>
         /// Coroutine for updating countdown. It decrements the timer and updates the countdown label.<br/>
-        ///  Once the timer reaches zero, the event <c>OnTimeUp</c> is invoked.
+        /// Once the timer reaches zero, the event <c>OnTimeUp</c> is invoked.
         /// </summary>
         private IEnumerator RunTimer()
         {
@@ -78,9 +82,6 @@ namespace UI.Game
         /// <summary>
         /// Spins the hourglass 180 degrees.
         /// </summary>
-        private void SpinHourglass()
-        {
-            _hourglassIcon.ToggleInClassList("flip");
-        }
+        private void SpinHourglass() => _hourglassIcon.ToggleInClassList("flip");
     }
 }

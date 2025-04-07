@@ -2,6 +2,9 @@ using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// A simple dialog box, used mostly to display information to the player and prompting for a yes/no answer.
+    /// </summary>
     public class SimpleDialogBox : BaseDialogBox<bool>
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace UI.Game.DialogBoxes
         /// 
         public void Initialise(string title, 
             string text,
-            VisualElement image,
+            VisualElement image = null,
             string cancelText = null,
             string confirmText = null,
             bool closable = false
@@ -26,9 +29,7 @@ namespace UI.Game.DialogBoxes
             if (cancelText != null) { SetCancelButton(cancelText); }
             if (confirmText != null) { SetConfirmButton(confirmText); }
             if (closable) { AllowClosing(false); }
-            
-            
-            LeftPanel.Add(image);
+            if (image != null) { LeftPanel.Add(image); }
             RightPanel.Q<Label>("text").text = text;
         }
 

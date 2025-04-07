@@ -1,13 +1,16 @@
 using BackEnd;
-using Codice.Client.Commands.WkTree;
 using UnityEngine.Events;
 using UI.Game;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEditor;
+using System;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace Data
 {
-    using System;
-    using System.Collections.Generic;
+
 
     /// <summary>
     /// A class to store the data of a player in the game.
@@ -60,16 +63,42 @@ namespace Data
             DoublesRolled = 0;
             OnGoToJail?.Invoke();
             var afford = Money >= 50;
-            var payed = await DialogBoxFactory.JailLandingDialogBox(afford).AsTask();
+            var payed = false;
+            if (!this.IsAi)
+            {
+                payed = await DialogBoxFactory.JailLandingDialogBox(afford).AsTask();
+            }
+            else
+            {
+                var rand = Random.Range(0, 10);
+                if (rand >= 5)
+                {
+                    payed = true;
+                }
+                else
+                {
+                    payed = false;
+                }
+                await DialogBoxFactory.AIDialogBox("Ai Jail", payed ? "Ai payed to get out of jail!" : "Ai didn't pay to get out of jail!").AsTask();
+
+            }
             if (payed)
             {
-                TakeMoney(50);
+                GameState.FreeParkingMoney += TakeMoney(50);
                 TurnsLeftInJail = 0;
             }
             else
             {
                 TurnsLeftInJail = 3;
             }
+            OnStateUpdated?.Invoke();
+        }
+
+        public void Forfeit()
+        {
+            Money = 0;
+            OnStateUpdated?.Invoke();
+            OnBankrupted?.Invoke(this);
         }
 
         /// <summary>

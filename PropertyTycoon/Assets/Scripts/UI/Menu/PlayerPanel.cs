@@ -1,9 +1,11 @@
 using Data;
-using UI.Controllers;
 using UnityEngine.UIElements;
 
 namespace UI.Menu
 {
+    /// <summary>
+    /// Panel displaying information about a player. It allows to customise the player.
+    /// </summary>
     public class PlayerPanel : VisualElement
     {
         private readonly PlayerSetupController _controller;
@@ -23,10 +25,9 @@ namespace UI.Menu
         /// <param name="controller">Reference to controller.</param>
         public PlayerPanel(VisualTreeAsset template, PlayerData playerData, PlayerSetupController controller)
         {
-            
-            // clone template & set its class
+            // clone template & set its class (for styling purpose)
             template.CloneTree(this);
-            this.AddToClassList("players-grid-cell");
+            AddToClassList("players-grid-cell");
             
             // get reference to UI elements
             _removePlayerButton = this.Q<Button>("remove-player-button");
@@ -71,13 +72,27 @@ namespace UI.Menu
             _leftArrowButton.SetEnabled(_controller.CanSwitchToken);
             _rightArrowButton.SetEnabled(_controller.CanSwitchToken);
         }
+        
+        /// <summary>
+        /// Method triggered when the 'name' text field is updated. It updates the player name accordingly.
+        /// </summary>
+        /// <param name="e">Event carrying the new (name) value.</param>
+        private void UpdatePlayerName(ChangeEvent<string> e) => _playerData.Name = e.newValue;
 
-        private void UpdatePlayerName(ChangeEvent<string> evt) => _playerData.Name = evt.newValue;
+        /// <summary>
+        /// Method triggered when the 'ai' toggle is updated. It updates the player 'is AI' value accordingly.
+        /// </summary>
+        /// <param name="e">Event carrying the new (is AI) value.</param>
+        private void UpdatePlayerAI(ChangeEvent<bool> e) => _playerData.IsAi = e.newValue;
 
-        private void UpdatePlayerAI(ChangeEvent<bool> evt) => _playerData.IsAi = evt.newValue;
-
+        /// <summary>
+        /// Shorthand method, calls UpdateToken moving forward.
+        /// </summary>
         private void MoveToPreviousToken() => UpdateToken(false);
 
+        /// <summary>
+        /// Shorthand method, calls UpdateToken moving backward.
+        /// </summary>
         private void MoveToNextToken() => UpdateToken(true);
         
         /// <summary>
@@ -93,7 +108,7 @@ namespace UI.Menu
         /// <summary>
         /// Sends remove player command to controller.
         /// </summary>
-        /// <param name="e">IGNORE - Click event, passed by default.</param>
+        /// <param name="e">Click event -- not used.</param>
         private void HandleRemoveClicked(ClickEvent e) => _controller.RemovePlayer(_playerData);
     }
 }

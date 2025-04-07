@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Data;
+using UI.Game;
 
 namespace BackEnd.Squares
 {
@@ -18,6 +19,9 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
+            await DialogBoxFactory.ConfirmDialogBox(
+                "Free Parking",
+                $"You landed on free parking! You collect {GameState.FreeParkingMoney}.").AsTask();
             GameState.ActivePlayer.AddMoney(GameState.FreeParkingMoney);
             GameState.FreeParkingReset();
         }
