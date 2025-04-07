@@ -2,6 +2,9 @@ using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// A simple dialog box, used mostly to display information to the player and prompting for a yes/no answer.
+    /// </summary>
     public class SimpleDialogBox : BaseDialogBox<bool>
     {
         /// <summary>

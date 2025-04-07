@@ -5,6 +5,13 @@ using UnityEngine.UIElements;
 
 namespace UI.Game.DialogBoxes
 {
+    /// <summary>
+    /// The base from which all dialog boxes derive from. It contains a wide variety of components used (buttons, title,
+    /// panels for text and images, etc.) by its derivations. If a derived class does not use a certain component, it is
+    /// simply hidden/disabled.
+    /// This class offers a way to get input from the player and return it as value, to be processed by the back-end.
+    /// </summary>
+    /// <typeparam name="T">The type of value processed and returnes, dependant by the dialog box.</typeparam>
     public abstract class BaseDialogBox<T> : MonoBehaviour
     {
         protected VisualElement Background;
@@ -24,6 +31,7 @@ namespace UI.Game.DialogBoxes
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             
+            // gets reference to UI elements
             Background = root.Q<VisualElement>("background");
             TitleLabel = root.Q<Label>("title");
             LeftPanel = root.Q<VisualElement>("left-panel");
@@ -37,11 +45,15 @@ namespace UI.Game.DialogBoxes
             ConfirmBtn.visible = false;
             CancelBtn.visible = false;
 
+            // registers buttons callbacks
             CloseBtn.clicked += HandleCloseClicked;
             CancelBtn.clicked += HandleCancelClicked;
             ConfirmBtn.clicked += HandleConfirmClicked;
         }
 
+        /// <summary>
+        /// Used to un-register listeners.
+        /// </summary>
         protected virtual void CleanUp()
         {
             CloseBtn.clicked -= Close;
@@ -86,18 +98,41 @@ namespace UI.Game.DialogBoxes
             button.visible = true;
         }
         
+        /// <summary>
+        /// Helper method, calls SetButton targeting the 'cancel' button.
+        /// </summary>
+        /// <param name="text">Text displayed on the button.</param>
         protected void SetCancelButton(string text) => SetButton(CancelBtn, text);
+        
+        /// <summary>
+        /// Helper method, calls SetButton targeting the 'confirm' button.
+        /// </summary>
+        /// <param name="text">Text displayed on the button.</param>
         protected void SetConfirmButton(string text) => SetButton(ConfirmBtn, text);
         
+        /// <summary>
+        /// Method triggered by the 'cancel' button.
+        /// </summary>
         protected abstract void HandleCancelClicked();
+        
+        /// <summary>
+        /// Method triggered by the 'confirm' button.
+        /// </summary>
         protected abstract void HandleConfirmClicked();
 
+        /// <summary>
+        /// Method triggered by the 'close' button.
+        /// </summary>
         protected virtual void HandleCloseClicked()
         {
             RaiseOnChoiceMade(ReturnValueOnClose);
             Close();
         }
         
+        /// <summary>
+        /// Helper method to raise the OnChoiceMade event.
+        /// </summary>
+        /// <param name="value">Value corresponding to the choice made by the player.</param>
         protected void RaiseOnChoiceMade(T value) => OnChoiceMade?.Invoke(value);
 
         /// <summary>
