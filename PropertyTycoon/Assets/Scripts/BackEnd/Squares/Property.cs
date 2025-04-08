@@ -53,9 +53,17 @@ namespace BackEnd.Squares
             var rentDue = Rent[Houses];
             if (Houses == 0 && OwnerHasSet) rentDue *= Cons.ColorSetMultiplier;
             
-            // todo add bankruptcy state
             // gets current player and charges them
-            await DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
+            if (GameState.ActivePlayer.IsAi)
+            {
+                await DialogBoxFactory.AIDialogBox(
+                    "Payment due",
+                    $"You landed on {Data.Name}.\nYou need to pay ${rentDue} in rent.").AsTask();
+            }
+            else
+            {
+                await DialogBoxFactory.PaymentDialogBox(Data, rentDue).AsTask();
+            }
             var amountPaid = GameState.ActivePlayer.TakeMoney(rentDue);
             owner.AddMoney(amountPaid);
         }

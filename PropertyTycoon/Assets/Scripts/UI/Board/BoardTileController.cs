@@ -85,15 +85,15 @@ namespace UI.Board
                 Renderer rend = utility.GetComponent<Renderer>();
                 rend.material.mainTexture = Resources.Load<Texture>(_utilPath);
             }
-            else if (_data[idx] is OwnableData own)
+            else if (_data[idx] is CardSquareData card)
             {
-                if (own.Name == "Pot Luck")
+                if (card.Name == "Pot Luck")
                 {
                     GameObject pot = planes[idx];
                     Renderer rend = pot.GetComponent<Renderer>();
                     rend.material.mainTexture = Resources.Load<Texture>(_potPath);
                 }
-                else if (own.Name == "Opportunity Knocks")
+                else if (card.Name == "Opportunity Knocks")
                 {
                     GameObject knocks = planes[idx];
                     Renderer rend = knocks.GetComponent<Renderer>();

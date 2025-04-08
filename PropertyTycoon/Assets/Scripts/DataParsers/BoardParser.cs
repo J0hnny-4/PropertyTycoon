@@ -25,7 +25,7 @@ namespace DataParsers
 
     private static void Parse()
     {
-      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath + "/Data/Property Table.xml");
+      DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath + "/Property Table.xml");
       //Sets the length of the array depending on the attributes loaded
       data = new string[propertyList.Rows.Count, propertyList.Columns.Count];
       int row = 0;
@@ -94,25 +94,17 @@ namespace DataParsers
             break;
 
           case ("Go to jail"):
-            tiles.Add(new SquareData(name)); //todo: Update to suitable type
+            tiles.Add(new SquareData(name));
             break;
 
           case ("Take card"):
-            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
+            tiles.Add(new CardSquareData(name));
             break;
 
           case ("Station"):
             tiles.Add(new StationData(name, cost, rent));
             break;
           
-          case ("Pot Luck"):
-            tiles.Add(new CardSquareData(name));
-            break;
-          
-          case ("Opportunity Knocks"):
-            tiles.Add(new CardSquareData(name));
-            break;
-
           default:
             Debug.LogError($"Unknown tile type {data[i, 2]}");
             break;
