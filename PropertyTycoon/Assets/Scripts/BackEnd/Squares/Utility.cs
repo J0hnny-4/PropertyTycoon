@@ -24,8 +24,17 @@ namespace BackEnd.Squares
             var noOfUtilitiesOwned = ownedProperties.Count(tileNo => GameState.Board[tileNo] is UtilityData);
             var multiplier = Cons.UtilitiesMultiplier[noOfUtilitiesOwned] - 1; // - 1 to account for 0 indexed array
             var amountOwed = multiplier * (GameState.ActivePlayer.LastRoll.Item1 + GameState.ActivePlayer.LastRoll.Item2);
-            
-            await DialogBoxFactory.PaymentDialogBox(Data, amountOwed).AsTask();
+
+            if (GameState.ActivePlayer.IsAi)
+            {
+                await DialogBoxFactory.AIDialogBox(
+                    "Payment due",
+                    $"You landed on {Data.Name}.\nYou need to pay ${amountOwed} in rent.").AsTask();
+            }
+            else
+            {
+                await DialogBoxFactory.PaymentDialogBox(Data, amountOwed).AsTask();
+            }
             var amountPaid = GameState.ActivePlayer.TakeMoney(amountOwed);
             owner.AddMoney(amountPaid);
         }

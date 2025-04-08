@@ -19,7 +19,7 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
-            await DialogBoxFactory.ConfirmDialogBox(
+            await DialogBoxFactory.AIDialogBox(
                 "Free Parking",
                 $"You landed on free parking! You collect {GameState.FreeParkingMoney}.").AsTask();
             GameState.ActivePlayer.AddMoney(GameState.FreeParkingMoney);

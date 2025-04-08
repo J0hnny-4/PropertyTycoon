@@ -23,7 +23,7 @@ namespace DataParsers
 
     private static void Parse()
     {
-      
+
       DataTable propertyList = LoadDataTableFromXml();
       //Sets the length of the array depending on the attributes loaded
       data = new string[propertyList.Rows.Count, propertyList.Columns.Count];
@@ -41,20 +41,20 @@ namespace DataParsers
 
     public static List<SquareData> TileCreator()
     {
-       //Create list of squaredata to store each board spot
+      //Create list of squaredata to store each board spot
       Parse();
       List<SquareData> tiles = new List<SquareData>();
 
       //Loop with switch statement within. Dictates what type of square should be created and stored within the list.
       for (int i = 0; i < 40; i++)
       {
-       //Convert String and other data type to int
+        //Convert String and other data type to int
         string name = data[i, 0];
         int temp;
 
         int.TryParse(data[i, 3], out var cost);
         int.TryParse(data[i, 4], out var rent);
-        
+
         switch (data[i, 2])
         {
           case ("Action"):
@@ -93,23 +93,15 @@ namespace DataParsers
             break;
 
           case ("Go to jail"):
-            tiles.Add(new SquareData(name)); //todo: Update to suitable type
+            tiles.Add(new SquareData(name));
             break;
 
           case ("Take card"):
-            tiles.Add(new OwnableData(name, cost)); //todo: Update to suitable type
+            tiles.Add(new CardSquareData(name));
             break;
 
           case ("Station"):
             tiles.Add(new StationData(name, cost, rent));
-            break;
-          
-          case ("Pot Luck"):
-            tiles.Add(new CardSquareData(name));
-            break;
-          
-          case ("Opportunity Knocks"):
-            tiles.Add(new CardSquareData(name));
             break;
 
           default:

@@ -18,7 +18,14 @@ namespace BackEnd.Squares
         /// </summary>
         public override async Task PlayerLands()
         {
-            await DialogBoxFactory.PaymentDialogBox(Data, Amount).AsTask();
+            if (GameState.ActivePlayer.IsAi)
+            {
+                await DialogBoxFactory.AIDialogBox("Tax", $"You have been charged ${Amount}.").AsTask();
+            }       
+            else
+            {
+                await DialogBoxFactory.PaymentDialogBox(Data, Amount).AsTask();
+            }
             GameState.FreeParkingMoney += GameState.ActivePlayer.TakeMoney(Amount);
         }
     }
