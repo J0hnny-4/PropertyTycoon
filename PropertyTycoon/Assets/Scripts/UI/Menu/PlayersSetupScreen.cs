@@ -14,7 +14,7 @@ namespace UI.Menu
     /// - their tokens.
     /// - whether they're human or AI.
     /// </summary>
-    public class PlayersSetupScreen : BaseScreen<MenuScreen>
+    public class PlayersSetupScreen : BaseScreen
     {
         [SerializeField] private List<string> defaultNames; // list of default names, setup in the editor.
         [SerializeField] private VisualTreeAsset playerPanelTemplate; // uxml template (UI element) for each player
@@ -27,6 +27,9 @@ namespace UI.Menu
         
         public override void Initialise()
         {
+            // sets screen type
+            Type = ScreenType.PlayerSetup;
+            
             // creates controller
             _controller = new PlayerSetupController(defaultNames);
             
@@ -110,7 +113,7 @@ namespace UI.Menu
         /// <param name="e">Click event -- not used.</param>
         private void OnBackClicked(ClickEvent e)
         {
-            UIManager.NavigateTo(MenuScreen.GameMode);
+            NavManager.NavigateTo(ScreenType.PlayerSetup);
         }
     }
 }

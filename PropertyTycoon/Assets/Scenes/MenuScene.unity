@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 173501946}
   - component: {fileID: 173501945}
   m_Layer: 0
-  m_Name: UI Manager
+  m_Name: NavigationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 173501944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 720283e80e0c439e9252ec5e1cf62829, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d6347e98bdc4123a65472bc6bab25e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultScreen: 0
@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12eec7f97239ff3df82afe7205690bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 3
 --- !u!82 &221729603
 AudioSource:
   m_ObjectHideFlags: 0
@@ -439,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e919db8aee4d08b6db453a4cb06784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 2
   defaultNames:
   - Seg Faultman
   - Al Gorithm
@@ -454,8 +452,6 @@ MonoBehaviour:
   - Paige Turner
   - Fizz McBuzz
   playerPanelTemplate: {fileID: 9197481963319205126, guid: 90c05f1ed047c7255beb1494a3f3b70a, type: 3}
-  minPlayers: 2
-  maxPlayers: 6
 --- !u!1 &628625681
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d4d7f38276458b95cdaf5e5fbdee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 1
   gameModePanelTemplate: {fileID: 9197481963319205126, guid: 83858e833623f5c5e9c309dceb95f4b2, type: 3}
   gameModesData:
   - {fileID: 11400000, guid: f1621153366af7fe4902bbee047172ae, type: 2}
@@ -681,7 +676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a4fd6f9fe2449fa9b5f41d41859319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 0
 --- !u!1 &1724912212
 GameObject:
   m_ObjectHideFlags: 0

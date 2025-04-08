@@ -696,10 +696,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 403206296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9aa73a933074dbcdb3d23c2d6d2df77, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d6347e98bdc4123a65472bc6bab25e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultScreen: 0
+  defaultScreen: 4
 --- !u!114 &403206300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,7 +1256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65c39fb9f6317cf84dd832fbb4fcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 1
 --- !u!1001 &838558797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2775,7 +2774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806071b2897c481587ca0a50e78c8357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenType: 0
   playerTemplate: {fileID: 9197481963319205126, guid: 94f89bb3f4fa1395db592a97eb11d62d, type: 3}
 --- !u!1001 &1813012455
 PrefabInstance:

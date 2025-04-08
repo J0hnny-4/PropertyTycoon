@@ -9,7 +9,7 @@ namespace UI.Game
     /// <summary>
     /// Shows the winner's name, and allows the user to return to the menu or quit the game.
     /// </summary>
-    public class GameOverScreen : BaseScreen<GameScreen>
+    public class GameOverScreen : BaseScreen
     {
         private Button _menuButton;
         private Button _quitButton;
@@ -17,6 +17,9 @@ namespace UI.Game
 
         public override void Initialise()
         {
+            // sets screen type
+            Type = ScreenType.GameOver;
+            
             // get reference to UI elements
             _menuButton = Root.Q<Button>("menu-button");
             _quitButton = Root.Q<Button>("quit-button");

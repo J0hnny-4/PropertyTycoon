@@ -10,7 +10,7 @@ namespace UI.Game
     /// - players elements (displaying info about each player).
     /// - owned cards area (showing properties owned by the current player).
     /// </summary>
-    public class MainGameScreen : BaseScreen<GameScreen>
+    public class MainGameScreen : BaseScreen
     {
         [SerializeField] private VisualTreeAsset playerTemplate; // uxml template (UI element) for the player element
         private OwnedCardsController _ownedCardsController;
@@ -22,6 +22,9 @@ namespace UI.Game
 
         public override void Initialise()
         {
+            // sets screen type
+            Type = ScreenType.MainGame;
+            
             // setup owned cards controller & player elements
             _ownedCardsController = new OwnedCardsController(Root.Q<VisualElement>("owned-cards-container"));
 
