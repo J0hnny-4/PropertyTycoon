@@ -54,6 +54,9 @@ namespace UI.Menu
             UpdateButtonsState();
         }
 
+        /// <summary>
+        /// Removes event listeners.
+        /// </summary>
         public void CleanUp()
         {
             _playerName.UnregisterCallback<ChangeEvent<string>>(UpdatePlayerName);

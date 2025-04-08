@@ -10,7 +10,7 @@ namespace UI.Menu
     /// <summary>
     /// Controller used to handle logic & operations involved in setting up players.
     /// </summary>
-    public class PlayerSetupController
+    public class  PlayerSetupController
     {
         private readonly List<PlayerData> _players;
         private readonly List<string> _defaultNames;
@@ -23,6 +23,7 @@ namespace UI.Menu
         public bool CanAddPlayer => _players.Count < Cons.MaxPlayers;
         public bool CanRemovePlayer => _players.Count > Cons.MinPlayers;
         public bool CanSwitchToken => _usedTokens.Count < _allTokens.Length;
+        public int PlayersCount => _players.Count;
 
         /// <summary>
         /// Constructor.
@@ -128,11 +129,5 @@ namespace UI.Menu
         /// </summary>
         /// <returns>The list of used tokens.</returns>
         public Token[] GetUsedTokens() => _usedTokens.ToArray();
-    
-        /// <summary>
-        /// Returns the current number of players.
-        /// </summary>
-        public int PlayersCount => _players.Count;
-        
     }
 }
