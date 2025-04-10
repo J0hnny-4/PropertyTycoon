@@ -12,6 +12,11 @@ namespace DataParsers
   {
     private static string[,] data;
 
+    /// <summary>
+    /// Loads the xml file via the path into an XML document and then stores the string into a dataset
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns= "dataSet.Tables"> Table form of a dataset </returns>
     private static DataTable LoadDataTableFromXml(string path)
     {
       //Creates object xml and loads the path passed through the initial call
@@ -23,6 +28,10 @@ namespace DataParsers
       return dataSet.Tables[0];
     }
 
+    
+    /// <summary>
+    /// Sets the size of the array and stores the datatable into the premade 2d array Data
+    /// </summary>
     private static void Parse()
     {
       DataTable propertyList = LoadDataTableFromXml(Application.streamingAssetsPath + "/Property Table.xml");
@@ -40,6 +49,11 @@ namespace DataParsers
       }
     }
 
+    /// <summary>
+    /// Reads the 3rd Column on the 2d Array and creates an object and stores it within a list
+    /// and the it will return the list to the gameboard
+    /// </summary>
+    /// <returns = "tiles"> Tile list which is used by the gameboard</returns>
     public static List<SquareData> TileCreator()
     {
        //Create list of squaredata to store each board spot
