@@ -107,7 +107,7 @@ namespace BackEnd.Squares
             var player = GameState.Players[winner];
             await DialogBoxFactory.AIDialogBox(
                 "Auction Success", 
-                $"player {player.Name} won the auction!").AsTask();
+                $"{player.Name} won the auction!").AsTask();
             player.TakeMoney(bid);
             Owner = winner;
             player.AddProperty(Index);

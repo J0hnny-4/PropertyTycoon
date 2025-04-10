@@ -9,7 +9,7 @@ namespace UI.Menu
     /// <summary>
     /// Allows the user to choose the game mode to play.
     /// </summary>
-    public class GameModeScreen : BaseScreen<MenuScreen>
+    public class GameModeScreen : BaseScreen
     {
         [SerializeField] private VisualTreeAsset gameModePanelTemplate; // uxml template (UI element) for the game mode
         [SerializeField] private List<GameModeData> gameModesData; // data about each game mode
@@ -20,6 +20,9 @@ namespace UI.Menu
 
         public override void Initialise()
         {
+            // sets screen type
+            Type = ScreenType.GameMode;
+            
             // get reference to UI elements
             _continueButton = Root.Q<Button>("continue-button");
             _backButton = Root.Q<Button>("back-button");
@@ -90,13 +93,13 @@ namespace UI.Menu
         private void OnContinueClicked(ClickEvent e)
         {
             GameState.GameMode = _selectedPanel.GameMode;
-            UIManager.NavigateTo(MenuScreen.PlayerSetup);
+            NavManager.NavigateTo(ScreenType.PlayerSetup);
         }
         
         /// <summary>
         /// Method triggered by the "back" button. It takes the user back to the main screen.
         /// </summary>
         /// <param name="e">Click event -- not used.</param>
-        private void OnBackClicked(ClickEvent e) => UIManager.NavigateTo(MenuScreen.MainMenu);
+        private void OnBackClicked(ClickEvent e) => NavManager.NavigateTo(ScreenType.MainMenu);
     }
 }

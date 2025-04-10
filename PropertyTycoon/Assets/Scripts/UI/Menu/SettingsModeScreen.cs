@@ -6,7 +6,7 @@ namespace UI.Menu
     /// <summary>
     /// Allows the user to change game settings.
     /// </summary>
-    public class SettingsScreen : BaseScreen<MenuScreen>
+    public class SettingsScreen : BaseScreen
     {
         private Button _backButton;
         private Slider _volumeSlider;
@@ -14,6 +14,9 @@ namespace UI.Menu
         
         public override void Initialise()
         {
+            // sets screen type
+            Type = ScreenType.Settings;
+            
             _backButton = Root.Q<Button>("BackButton");
             _volumeSlider = Root.Q<Slider>("Volume");
             _mixer = GetComponent<AudioSource>();
@@ -31,7 +34,7 @@ namespace UI.Menu
         /// Method triggered by the "back" button. It takes the user back to the main menu screen.
         /// </summary>
         /// <param name="e">Click event -- not used.</param>
-        private void OnBackButtonClicked(ClickEvent e) => UIManager.NavigateTo(MenuScreen.MainMenu);
+        private void OnBackButtonClicked(ClickEvent e) => NavManager.NavigateTo(ScreenType.MainMenu);
         
         /// <summary>
         /// Method triggered when the 'volume' slider is updated. It updates the volume name accordingly.
