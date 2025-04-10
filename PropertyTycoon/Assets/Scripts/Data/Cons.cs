@@ -12,7 +12,7 @@ namespace Data
         public static TimeSpan TimeLimit = DevMode ? TimeSpan.FromMinutes(1) : TimeSpan.FromHours(1); // default abridged value
         public const int AIDialogBoxDelay = DevMode ? 500 : 3000; // milliseconds
         public const float PlayerWait = DevMode ? 0.1f : 0.5f; // seconds 
-        public const int StartingMoney = 500;
+        public const int StartingMoney = 1500;
         public const int MinPlayers = 2;
         public const int MaxPlayers = 6;
 
