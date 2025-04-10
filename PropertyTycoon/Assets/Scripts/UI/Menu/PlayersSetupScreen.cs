@@ -113,7 +113,7 @@ namespace UI.Menu
         /// <param name="e">Click event -- not used.</param>
         private void OnBackClicked(ClickEvent e)
         {
-            NavManager.NavigateTo(ScreenType.PlayerSetup);
+            NavManager.NavigateTo(ScreenType.GameMode);
         }
     }
 }

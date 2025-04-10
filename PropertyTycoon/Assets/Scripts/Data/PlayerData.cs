@@ -89,7 +89,7 @@ namespace Data
             }
             else
             {
-                TurnsLeftInJail = 3;
+                TurnsLeftInJail = Cons.JailTurns;
             }
             OnStateUpdated?.Invoke();
         }
