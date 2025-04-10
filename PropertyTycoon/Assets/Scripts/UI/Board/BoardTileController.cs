@@ -26,7 +26,10 @@ namespace UI.Board
         private string _taxPath;
 
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        ///<summary>
+        /// Runs on start and adds all tile textures on 
+        /// to the tiles 
+        /// </summary> 
         void Start()
         {
             _data = GameState.Board;
@@ -61,7 +64,10 @@ namespace UI.Board
             var playercontroller = gameObject.GetComponent<PlayerController>();
             playercontroller.Initialize();
         }
-
+        ///<summary>
+        ///gets the index which it is passed and sets the childs
+        ///tile to the colour which is passed by the parser 
+        ///</summary> 
         private void UpdateTiles(int idx)
         {
 
@@ -108,7 +114,10 @@ namespace UI.Board
             }
         }
 
-
+        ///<summary>
+        ///Gets the index passed to it and the name associated with it 
+        ///and finds the texture based on the name 
+        ///</summary> 
         private void CreateCornerTiles(int idx, string cornerName)
         {
             print(idx + cornerName);
@@ -119,7 +128,9 @@ namespace UI.Board
 
         }
 
-
+        ///<summary>
+        ///Creates a array of the tiles on the board and retuns it 
+        ///</summary>
         private List<GameObject> CreateArray()
         {
             List<GameObject> tiles = new List<GameObject>();
